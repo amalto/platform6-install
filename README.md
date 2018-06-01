@@ -52,7 +52,7 @@ __Step 4__
 
 Run the script `start_platform6.sh`/`start_platform6.bat`.
 
-It will start the Platform 6 container
+It will start the Platform 6 container.
 Run the script `logs_platform6.bat`/`logs_platform6.bat` to see the logs of the instance.
 
 To stop your Platform 6 instance, run the script `force_stop_platform6.sh`/`force_stop_platform6.bat`.
