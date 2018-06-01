@@ -24,7 +24,7 @@ services:
 
   platform6:
     container_name: platform6
-    image: amalto/platform6:5.15.1
+    image: amalto/platform6:5.15.5
     depends_on:
       - pgsql
     volumes:
