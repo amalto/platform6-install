@@ -1,0 +1,16 @@
+version: '3.2'
+
+volumes:
+  data:
+  psql:
+services:
+  platform6-data:
+    container_name: platform6-data
+    image: amalto/platform6-data:dev
+    volumes:
+     - data:/data
+     - psql:/psql
+    entrypoint: /tmp/init-data.sh
+    environment:
+     - INSTANCE_ID="platform6-developer-x"
+    stdin_open: true

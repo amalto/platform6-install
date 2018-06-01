@@ -1,1 +1,1 @@
-# platform6-install
+# Platform 6 install
