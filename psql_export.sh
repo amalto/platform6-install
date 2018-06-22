@@ -1,17 +1,9 @@
 #!/bin/bash
 #set -x
 
-docker-compose -f start.yaml -p platform6 stop platform6
-
-cd reference_data
-rm -rf psql.data.old
-mv psql.data psql.data.old
-
-docker cp pgsql:/opt/psql.data .
-
-rm -f psql.data/postmaster.pid
-
-cd ..
-docker-compose -f start.yaml -p platform6 down
+rm -r ./reference_data/psql.data.backup
+docker run -d --rm --name psql-export -v platform6_psql:/opt/psql.data alpine sleep 3600
+docker cp psql-export:/opt/psql.data ./reference_data/psql.data.backup
+docker stop psql-export
 
 echo "### Export Complete."

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.pidx.org/schemas/v1.01" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pidx="http://www.pidx.org/schemas/v1.01" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.01">
+	<annotation>
+		<documentation>
+					Schema Name:		FieldTicketResponse
+					Schema Purpose:
+					Document ID:		01-172-10-25-2002 
+					
+					© PIDX, Inc. 2011 
+					Use of this copyrighted material is subject to the PIDX End User License Agreement available at
+					www.pidx.org/license. Each user agrees to such End User License Agreement by making any use
+					of the copyrighted material.
+					
+					This document was prepared and is maintained in accordance with the PIDX Procedures for Standards
+					Development, a copy of which is available at www.pidx.org/procedures, and the PIDX Antitrust Guidelines, 
+					a copy of which is available at www.pidx.org/antitrust.
+					
+					Schema Version Number:	1.01 
+					Version Date: 				2011-11-11
+					Change Management Log:
+					Version		Person							Date			Description
+					1.0			Com.Pro.Serv. Task Group		2002-02-14		Version 1.0
+					1.01		PIDX BMWG						2011-11-11		Transfer to PIDX, Inc.					
+		</documentation>
+	</annotation>
+	<include schemaLocation="PIDXLib.xsd"/>
+	<element name="FieldTicketResponse">
+		<complexType>
+			<sequence>
+				<element ref="pidx:FieldTicketResponseProperties"/>
+				<element ref="pidx:FieldTicketResponseDetails"/>
+				<element ref="pidx:FieldTicketResponseSummary"/>
+			</sequence>
+			<attribute ref="pidx:transactionPurposeIndicator" use="required"/>
+			<attribute ref="pidx:version" use="required"/>
+		</complexType>
+	</element>
+	<element name="FieldTicketResponseDetails">
+		<complexType>
+			<sequence>
+				<element ref="pidx:FieldTicketResponseLineItem" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="FieldTicketResponseLineItem">
+		<complexType>
+			<sequence>
+				<element ref="pidx:LineItemNumber"/>
+				<element ref="pidx:LineStatusCode"/>
+				<element ref="pidx:LineResponseReasonCode"/>
+				<element ref="pidx:LineItemInformation"/>
+				<element ref="pidx:FieldTicketQuantity"/>
+				<element ref="pidx:ChangeDescription" minOccurs="0"/>
+				<element ref="pidx:PurchaseOrderLineItemNumber" minOccurs="0"/>
+				<element ref="pidx:PurchaseOrderInformation" minOccurs="0"/>
+				<element ref="pidx:PersonnelInformation" minOccurs="0"/>
+				<element ref="pidx:CommodityCode" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:PartnerInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:JobLocationInformation" minOccurs="0"/>
+				<element ref="pidx:Pricing" minOccurs="0"/>
+				<element ref="pidx:AllowanceOrCharge" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Tax" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:ShippingAmount" minOccurs="0"/>
+				<element ref="pidx:LineItemTotal" minOccurs="0"/>
+				<element ref="pidx:ServiceDateTime" minOccurs="0" maxOccurs="unbounded"/>
+				<sequence minOccurs="0" maxOccurs="unbounded">
+					<element ref="pidx:EquipmentIdentifier" minOccurs="0"/>
+					<element ref="pidx:EquipmentDescription" minOccurs="0"/>
+				</sequence>
+				<element ref="pidx:CountryOfOrigin" minOccurs="0"/>
+				<element ref="pidx:CountryOfFinalDestination" minOccurs="0"/>
+				<element ref="pidx:TransportInformation" minOccurs="0"/>
+				<element ref="pidx:SpecialInstructions" minOccurs="0" maxOccurs="unbounded"/>
+				<sequence minOccurs="0" maxOccurs="unbounded">
+					<element ref="pidx:PackagingCharacteristicCode" minOccurs="0"/>
+					<element ref="pidx:PackagingCharacteristicDescription" minOccurs="0"/>
+				</sequence>
+				<element ref="pidx:ReferenceInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Attachment" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Comment" minOccurs="0"/>
+				<element ref="pidx:FieldTicketResponseSubLineItem" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="FieldTicketResponseProperties">
+		<complexType>
+			<sequence>
+				<element ref="pidx:FieldTicketResponseNumber"/>
+				<element ref="pidx:FieldTicketResponseDate"/>
+				<element ref="pidx:PartnerInformation" minOccurs="2" maxOccurs="unbounded"/>
+				<element ref="pidx:FieldTicketInformation"/>
+				<element ref="pidx:ApproverName" minOccurs="0"/>
+				<element ref="pidx:ApprovalDate" minOccurs="0"/>
+				<element ref="pidx:RevisionNumber" minOccurs="0"/>
+				<element ref="pidx:PurchaseOrderInformation" minOccurs="0"/>
+				<element ref="pidx:PurchaseOrderLineItemNumber" minOccurs="0"/>
+				<element ref="pidx:PrimaryCurrency" minOccurs="0"/>
+				<element ref="pidx:SecondCurrency" minOccurs="0"/>
+				<element ref="pidx:LanguageCode" minOccurs="0"/>
+				<element ref="pidx:JobLocationInformation" minOccurs="0"/>
+				<element ref="pidx:JobSummary" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:ServiceDateTime" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:CountryOfOrigin" minOccurs="0"/>
+				<element ref="pidx:CountryOfFinalDestination" minOccurs="0"/>
+				<element ref="pidx:TransportInformation" minOccurs="0"/>
+				<element ref="pidx:PaymentTerms" minOccurs="0"/>
+				<element ref="pidx:SpecialInstructions" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:ReferenceInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Attachment" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Comment" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="FieldTicketResponseSubLineItem">
+		<complexType>
+			<sequence>
+				<element ref="pidx:SubLineItemNumber"/>
+				<element ref="pidx:LineStatusCode"/>
+				<element ref="pidx:LineResponseReasonCode"/>
+				<element ref="pidx:LineItemInformation"/>
+				<element ref="pidx:FieldTicketQuantity"/>
+				<element ref="pidx:ChangeDescription" minOccurs="0"/>
+				<element ref="pidx:PurchaseOrderSubLineItemNumber" minOccurs="0"/>
+				<element ref="pidx:PurchaseOrderInformation" minOccurs="0"/>
+				<element ref="pidx:PersonnelInformation" minOccurs="0"/>
+				<element ref="pidx:CommodityCode" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:PartnerInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:JobLocationInformation" minOccurs="0"/>
+				<element ref="pidx:Pricing" minOccurs="0"/>
+				<element ref="pidx:AllowanceOrCharge" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Tax" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:ShippingAmount" minOccurs="0"/>
+				<element ref="pidx:LineItemTotal" minOccurs="0"/>
+				<element ref="pidx:ServiceDateTime" minOccurs="0" maxOccurs="unbounded"/>
+				<sequence minOccurs="0" maxOccurs="unbounded">
+					<element ref="pidx:EquipmentIdentifier" minOccurs="0"/>
+					<element ref="pidx:EquipmentDescription" minOccurs="0"/>
+				</sequence>
+				<element ref="pidx:CountryOfOrigin" minOccurs="0"/>
+				<element ref="pidx:CountryOfFinalDestination" minOccurs="0"/>
+				<element ref="pidx:TransportInformation" minOccurs="0"/>
+				<element ref="pidx:PaymentTerms" minOccurs="0"/>
+				<element ref="pidx:SpecialInstructions" minOccurs="0" maxOccurs="unbounded"/>
+				<sequence minOccurs="0" maxOccurs="unbounded">
+					<element ref="pidx:PackagingCharacteristicCode" minOccurs="0"/>
+					<element ref="pidx:PackagingCharacteristicDescription" minOccurs="0"/>
+				</sequence>
+				<element ref="pidx:ReferenceInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Attachment" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Comment" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="FieldTicketResponseSummary">
+		<complexType>
+			<sequence>
+				<element ref="pidx:TotalLineItems"/>
+				<element ref="pidx:AllowanceOrCharge" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:ShippingAmount" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Tax" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:SubTotalAmount" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:FieldTicketTotal" minOccurs="0"/>
+				<element ref="pidx:TermsDiscountAmount" minOccurs="0"/>
+				<element ref="pidx:DiscountedAmountDue" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

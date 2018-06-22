@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.pidx.org/schemas/v1.01" xmlns:pidx="http://www.pidx.org/schemas/v1.01" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.01">
+	<annotation>
+		<documentation>
+					Schema Name:		CementingTemplate
+					Schema Purpose:
+					Document ID:		01-415-10-25-2002 
+					
+					© PIDX, Inc. 2011 
+					Use of this copyrighted material is subject to the PIDX End User License Agreement available at
+					www.pidx.org/license. Each user agrees to such End User License Agreement by making any use
+					of the copyrighted material.
+					
+					This document was prepared and is maintained in accordance with the PIDX Procedures for Standards
+					Development, a copy of which is available at www.pidx.org/procedures, and the PIDX Antitrust Guidelines, 
+					a copy of which is available at www.pidx.org/antitrust.
+					
+					Schema Version Number:	1.01 
+					Version Date: 				2011-11-11
+					Change Management Log:
+					Version		Person							Date			Description
+					1.0			Com.Pro.Serv. Task Group		2002-02-14		Version 1.0
+					1.01		PIDX BMWG						2011-11-11		Transfer to PIDX, Inc.					
+		</documentation>
+	</annotation>
+	<include schemaLocation="PIDXLib.xsd"/>
+	<element name="BargeRequiredFlag" type="boolean"/>
+	<element name="BottomHoleCirculationTemperature" type="pidx:MeasurementComplexType"/>
+	<element name="BottomHoleStaticTemperature" type="pidx:MeasurementComplexType"/>
+	<element name="CasingGrade" type="string"/>
+	<element name="CasingInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:CasingSize"/>
+				<element ref="pidx:CasingGrade" minOccurs="0"/>
+				<element ref="pidx:CasingWeight" minOccurs="0"/>
+				<element ref="pidx:PreviousCasingSize" minOccurs="0"/>
+				<element ref="pidx:PreviousCasingWeight" minOccurs="0"/>
+				<element ref="pidx:PreviousCasingMeasureDepth" minOccurs="0"/>
+				<element ref="pidx:PreviousCasingTrueVerticalDepth" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="CasingSize" type="pidx:MeasurementComplexType"/>
+	<element name="CasingWeight" type="pidx:MeasurementComplexType"/>
+	<element name="CementAboveLiner" type="pidx:MeasurementComplexType"/>
+	<element name="CementDescription" type="string"/>
+	<element name="CementDetail">
+		<complexType>
+			<sequence>
+				<element ref="pidx:PreflushSpaceDensity" minOccurs="0"/>
+				<sequence minOccurs="0">
+					<element ref="pidx:DesiredPreflushSpacer"/>
+					<element ref="pidx:Description" minOccurs="0"/>
+				</sequence>
+				<element ref="pidx:PercentExcess" minOccurs="0"/>
+				<element ref="pidx:Lead" minOccurs="0"/>
+				<element ref="pidx:Tail" minOccurs="0"/>
+				<element ref="pidx:CementTopNominal" minOccurs="0"/>
+				<element ref="pidx:CementHeight" minOccurs="0"/>
+				<element ref="pidx:CementAboveLiner" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="CementHeight" type="pidx:MeasurementComplexType"/>
+	<element name="CementingTemplate">
+		<complexType>
+			<sequence>
+				<element ref="pidx:TemplateProperties"/>
+				<element ref="pidx:CementingTemplateDetail"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="CementingTemplateDetail">
+		<complexType>
+			<sequence>
+				<element ref="pidx:JobType"/>
+				<element ref="pidx:WellDetail"/>
+				<element ref="pidx:CasingInformation"/>
+				<element ref="pidx:BargeRequiredFlag" minOccurs="0"/>
+				<element ref="pidx:JobDescription" minOccurs="0"/>
+				<element ref="pidx:OneWayMileage" minOccurs="0"/>
+				<element ref="pidx:MudDetail" minOccurs="0"/>
+				<element ref="pidx:CementDetail" minOccurs="0"/>
+				<element ref="pidx:Comment" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="CementTopNominal" type="pidx:MeasurementComplexType"/>
+	<element name="DesiredFill" type="pidx:MeasurementComplexType"/>
+	<element name="DesiredPreflushSpacer">
+		<simpleType>
+			<restriction base="NMTOKEN">
+				<enumeration value="None"/>
+				<enumeration value="Preflush"/>
+				<enumeration value="Flush"/>
+				<enumeration value="Spacer"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="H2SInHoleFlag" type="boolean"/>
+	<element name="JobType">
+		<simpleType>
+			<restriction base="NMTOKEN">
+				<enumeration value="SurfaceCasing"/>
+				<enumeration value="ConductorCasing"/>
+				<enumeration value="Intermediate"/>
+				<enumeration value="Liner"/>
+				<enumeration value="Production"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="Lead">
+		<complexType>
+			<sequence>
+				<element ref="pidx:PercentExcess" minOccurs="0"/>
+				<element ref="pidx:DesiredFill" minOccurs="0"/>
+				<element ref="pidx:CementDescription" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="LinerTopDepth" type="pidx:MeasurementComplexType"/>
+	<element name="MudDetail">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MudType" minOccurs="0"/>
+				<element ref="pidx:MudWeight" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="MudType" type="string"/>
+	<element name="MudWeight" type="pidx:MeasurementComplexType"/>
+	<element name="OneWayMileage" type="pidx:MeasurementComplexType"/>
+	<element name="OpenHoleSize" type="pidx:MeasurementComplexType"/>
+	<element name="PercentExcess" type="decimal"/>
+	<element name="PercentH2SInHole" type="decimal"/>
+	<element name="PreflushSpaceDensity" type="pidx:MeasurementComplexType"/>
+	<element name="PreviousCasingMeasureDepth" type="pidx:MeasurementComplexType"/>
+	<element name="PreviousCasingSize" type="pidx:MeasurementComplexType"/>
+	<element name="PreviousCasingTrueVerticalDepth" type="pidx:MeasurementComplexType"/>
+	<element name="PreviousCasingWeight" type="pidx:MeasurementComplexType"/>
+	<element name="ResponseDate" type="date"/>
+	<element name="ShoeJointLength" type="pidx:MeasurementComplexType"/>
+	<element name="Tail">
+		<complexType>
+			<sequence>
+				<element ref="pidx:PercentExcess" minOccurs="0"/>
+				<element ref="pidx:DesiredFill" minOccurs="0"/>
+				<element ref="pidx:CementDescription" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="TemplateIssuedDate" type="date"/>
+	<element name="TemplateNumber" type="string"/>
+	<element name="TemplateProperties">
+		<complexType>
+			<sequence>
+				<element ref="pidx:TemplateNumber"/>
+				<element ref="pidx:TemplateIssuedDate"/>
+				<element ref="pidx:CommodityCode"/>
+				<element ref="pidx:ReferenceInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:ResponseDate" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="TemplateResponseDueDate" type="date"/>
+	<element name="TotalDepth" type="pidx:MeasurementComplexType"/>
+	<element name="WaterDepthNominal" type="pidx:MeasurementComplexType"/>
+	<element name="WellDetail">
+		<complexType>
+			<sequence>
+				<element ref="pidx:TotalDepth"/>
+				<element ref="pidx:OpenHoleSize"/>
+				<element ref="pidx:ShoeJointLength" minOccurs="0"/>
+				<element ref="pidx:BottomHoleStaticTemperature" minOccurs="0"/>
+				<element ref="pidx:LinerTopDepth" minOccurs="0"/>
+				<element ref="pidx:WaterDepthNominal" minOccurs="0"/>
+				<element ref="pidx:BottomHoleCirculationTemperature" minOccurs="0"/>
+				<element ref="pidx:H2SInHoleFlag" minOccurs="0"/>
+				<element ref="pidx:PercentH2SInHole" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="MeasurementComplexType">
+		<sequence>
+			<element ref="pidx:Measurement"/>
+			<element ref="pidx:UnitOfMeasureCode"/>
+		</sequence>
+	</complexType>
+</schema>

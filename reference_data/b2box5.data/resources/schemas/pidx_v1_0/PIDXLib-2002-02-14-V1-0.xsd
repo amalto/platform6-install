@@ -1,0 +1,1514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.0.1 U (http://www.xmlspy.com) by Vinod Bajjuri (PricewaterhouseCoopers) -->
+<schema targetNamespace="http://www.api.org/pidXML/v1.0" xmlns:pidx="http://www.api.org/pidXML/v1.0" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<annotation>
+		<documentation>
+					Schema Name: 	 			PIDXLib
+					Schema Purpose: 			Reusable Component Library
+					Copyright:  					American Petroleum Institute (API)
+												Petroleum Industry Data Exchange (PIDX)
+												2002		
+					Schema Version Number: 	1.0
+					Version Date: 				2002-02-14
+					Change Management Log:
+					Version	Person							Date		Description
+					1.0		Com.Pro.Serv. Task Group		2002-02-14	Version 1.0
+		</documentation>
+	</annotation>
+	<element name="AcknowledgementType" type="string"/>
+	<element name="AddressInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:POBoxNumber" minOccurs="0"/>
+				<element ref="pidx:BuildingHouseNumber" minOccurs="0"/>
+				<element ref="pidx:StreetName" minOccurs="0"/>
+				<element ref="pidx:AddressLine" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:CityName" minOccurs="0"/>
+				<element ref="pidx:StateProvince" minOccurs="0"/>
+				<element ref="pidx:PostalCode" minOccurs="0"/>
+				<element ref="pidx:PostalCountry" minOccurs="0"/>
+				<element ref="pidx:CountyName" minOccurs="0"/>
+				<element ref="pidx:LocationIdentifier" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="AddressLine" type="string"/>
+	<element name="AllowanceOrCharge">
+		<complexType>
+			<sequence>
+				<choice>
+					<element ref="pidx:AllowanceOrChargeTotalAmount" minOccurs="0"/>
+					<element ref="pidx:AllowanceOrChargeRate" minOccurs="0"/>
+					<element ref="pidx:AllowanceOrChargePercent" minOccurs="0"/>
+				</choice>
+				<element ref="pidx:AllowanceOrChargeNumber" minOccurs="0"/>
+				<element ref="pidx:AllowanceOrChargeTypeCode" minOccurs="0"/>
+				<element ref="pidx:MethodOfHandlingCode" minOccurs="0"/>
+				<element ref="pidx:AllowanceOrChargeDescription" minOccurs="0"/>
+				<element ref="pidx:AllowanceOrChargeQuantity" minOccurs="0"/>
+			</sequence>
+			<attribute name="allowanceOrChargeIndicator" use="required">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="Allowance"/>
+						<enumeration value="Charge"/>
+						<enumeration value="Other"/>
+					</restriction>
+				</simpleType>
+			</attribute>
+		</complexType>
+	</element>
+	<element name="AllowanceOrChargeDescription" type="string"/>
+	<element name="AllowanceOrChargeNumber" type="string"/>
+	<element name="AllowanceOrChargePercent">
+		<complexType>
+			<simpleContent>
+				<extension base="decimal">
+					<attribute name="percentIndicator" type="string" use="optional"/>
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+	<element name="AllowanceOrChargeQuantity">
+		<complexType>
+			<sequence>
+				<element ref="pidx:Quantity"/>
+				<element ref="pidx:UnitOfMeasureCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="AllowanceOrChargeRate">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:UnitOfMeasureCode"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="AllowanceOrChargeTotalAmount">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="AllowanceOrChargeTypeCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Freight"/>
+				<enumeration value="FuelSurcharge"/>
+				<enumeration value="SpecialHandlingService"/>
+				<enumeration value="Discount"/>
+				<enumeration value="FlatRate"/>
+				<enumeration value="EngineeringCharge"/>
+				<enumeration value="InvoiceAdjustment"/>
+				<enumeration value="InsuranceSurcharge"/>
+				<enumeration value="OneTimeLicenseFee"/>
+				<enumeration value="Royalties"/>
+				<enumeration value="MiscellaneousCharge"/>
+				<enumeration value="PostageCharge"/>
+				<enumeration value="TrailerRentalCharge"/>
+				<enumeration value="TransportationDirectBilling"/>
+				<enumeration value="TransportationVendorProvided"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="AlternativeCommunicationMethod">
+		<complexType>
+			<simpleContent>
+				<extension base="string">
+					<attribute name="alternativeCommunicationMethodIndicator" use="required">
+						<simpleType>
+							<restriction base="string">
+								<enumeration value="AUTOVON"/>
+								<enumeration value="EDIAccessNumber"/>
+								<enumeration value="FederalTelecommunicationsSystem"/>
+								<enumeration value="IPAddress"/>
+								<enumeration value="PacketSwitching"/>
+								<enumeration value="PrinterID"/>
+								<enumeration value="StationCode"/>
+								<enumeration value="Telemail"/>
+								<enumeration value="Telex"/>
+								<enumeration value="TWX"/>
+								<enumeration value="Other"/>
+							</restriction>
+						</simpleType>
+					</attribute>
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+	<element name="ApprovalDate" type="date"/>
+	<element name="ApproverName" type="string"/>
+	<element name="Attachment">
+		<complexType>
+			<sequence>
+				<element ref="pidx:AttachmentPurposeCode"/>
+				<element ref="pidx:FileName" minOccurs="0"/>
+				<element ref="pidx:AttachmentTitle" minOccurs="0"/>
+				<element ref="pidx:AttachmentDescription" minOccurs="0"/>
+				<element ref="pidx:FileType" minOccurs="0"/>
+				<element ref="pidx:AttachmentLocation" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="AttachmentDescription" type="string"/>
+	<element name="AttachmentLocation" type="string"/>
+	<element name="AttachmentPurposeCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Template"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="AttachmentTitle" type="string"/>
+	<element name="BasisDescription" type="string"/>
+	<element name="Block">
+		<complexType>
+			<sequence>
+				<element ref="pidx:BlockName" minOccurs="0"/>
+				<element ref="pidx:OCSGNumber" minOccurs="0"/>
+				<element ref="pidx:StateLease" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="BlockName" type="string"/>
+	<element name="BuildingHouseNumber" type="string"/>
+	<element name="CardAuthorizationCode" type="string"/>
+	<element name="CardHolderName" type="string"/>
+	<element name="CardReferenceNumber" type="string"/>
+	<element name="CarrierEquipmentCode" type="string"/>
+	<element name="ChangeDescription" type="string"/>
+	<element name="ChangeOrderInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:OrderChangeNumber"/>
+				<element ref="pidx:OrderChangeDate"/>
+				<element ref="pidx:PurchaseOrderTypeCode" minOccurs="0"/>
+				<element ref="pidx:SalesOrderNumber" minOccurs="0"/>
+				<element ref="pidx:SequenceNumber" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="CityName" type="string"/>
+	<element name="CloseDate" type="date"/>
+	<element name="Comment" type="string"/>
+	<element name="CommodityCode">
+		<complexType>
+			<simpleContent>
+				<extension base="string">
+					<attribute name="agencyIndicator" type="string" use="optional"/>
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+	<element name="CommodityDescription" type="string"/>
+	<element name="CompanyName" type="string"/>
+	<element name="ContactDescription" type="string"/>
+	<element name="ContactIdentifier">
+		<complexType>
+			<simpleContent>
+				<extension base="string">
+					<attribute name="contactIdentifierIndicator" use="optional">
+						<simpleType>
+							<restriction base="string">
+								<enumeration value="AssignedByBuyer"/>
+								<enumeration value="AssignedBySeller"/>
+								<enumeration value="EmployeeID"/>
+								<enumeration value="Other"/>
+							</restriction>
+						</simpleType>
+					</attribute>
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+	<element name="ContactInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:ContactIdentifier" minOccurs="0"/>
+				<element ref="pidx:ContactName" minOccurs="0"/>
+				<element ref="pidx:ContactDescription" minOccurs="0"/>
+				<element ref="pidx:Telephone" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:EmailAddress" minOccurs="0"/>
+				<element ref="pidx:AlternativeCommunicationMethod" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+			<attribute name="contactInformationIndicator" use="required">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="BuyerDepartment"/>
+						<enumeration value="DeliveryContact"/>
+						<enumeration value="DesignEngineer"/>
+						<enumeration value="Engineer"/>
+						<enumeration value="EnteredBy"/>
+						<enumeration value="FieldRepresentative"/>
+						<enumeration value="OfficeRepresentative"/>
+						<enumeration value="OrderContact"/>
+						<enumeration value="PurchasingAgent"/>
+						<enumeration value="QuotePreparer"/>
+						<enumeration value="QuoteRequestor"/>
+						<enumeration value="RFQContact"/>
+						<enumeration value="SalesRepresentative"/>
+						<enumeration value="ServiceCoordinator"/>
+						<enumeration value="TechnicalMarketingRepresentative"/>
+						<enumeration value="Other"/>
+					</restriction>
+				</simpleType>
+			</attribute>
+		</complexType>
+	</element>
+	<element name="ContactName" type="string"/>
+	<element name="CountryCode" type="string"/>
+	<element name="CountryOfFinalDestination">
+		<complexType>
+			<sequence>
+				<element ref="pidx:CountryCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="CountryOfOrigin">
+		<complexType>
+			<sequence>
+				<element ref="pidx:CountryCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="CountyName" type="string"/>
+	<element name="CreditCardExpirationDate" type="date"/>
+	<element name="CreditCardInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:CreditCardNumber"/>
+				<element ref="pidx:CardHolderName" minOccurs="0"/>
+				<element ref="pidx:CreditCardType" minOccurs="0"/>
+				<element ref="pidx:CreditCardExpirationDate" minOccurs="0"/>
+				<element ref="pidx:CardAuthorizationCode" minOccurs="0"/>
+				<element ref="pidx:CardReferenceNumber" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="CreditCardNumber" type="integer"/>
+	<element name="CreditCardType" type="string"/>
+	<element name="CurrencyCode" type="string"/>
+	<element name="DateOfRateOfExchange" type="date"/>
+	<element name="DaysDue" type="integer"/>
+	<element name="Deferred">
+		<complexType>
+			<sequence>
+				<element ref="pidx:DeferredAmount" minOccurs="0"/>
+				<element ref="pidx:DeferredDueDate" minOccurs="0"/>
+				<element ref="pidx:PercentDeferredPayable" minOccurs="0"/>
+				<element ref="pidx:Description" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="DeferredAmount">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="DeferredDueDate" type="date"/>
+	<element name="Description" type="string"/>
+	<element name="DiscountAmount">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="DiscountedAmountDue">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="Discounts">
+		<complexType>
+			<sequence>
+				<choice maxOccurs="2">
+					<element ref="pidx:DaysDue"/>
+					<element ref="pidx:DiscountsDueDate"/>
+				</choice>
+				<element ref="pidx:PercentDiscount" minOccurs="0"/>
+				<element ref="pidx:DiscountAmount" minOccurs="0"/>
+				<element ref="pidx:Description" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="DiscountsDueDate" type="date"/>
+	<element name="EffectiveDates">
+		<complexType>
+			<sequence>
+				<element ref="pidx:FromDate"/>
+				<element ref="pidx:ToDate"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="EmailAddress" type="string"/>
+	<element name="EquipmentDescription" type="string"/>
+	<element name="EquipmentIdentifier" type="string"/>
+	<element name="errorClassification">
+		<complexType>
+			<sequence>
+				<element ref="pidx:GlobalMessageExceptionCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="errorDescription">
+		<complexType>
+			<sequence>
+				<element ref="pidx:FreeFormText"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="ExceptionDescription">
+		<complexType>
+			<sequence>
+				<element ref="pidx:errorClassification"/>
+				<element ref="pidx:errorDescription"/>
+				<element ref="pidx:offendingMessageComponent" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="ExchangeRate" type="decimal"/>
+	<element name="FieldName" type="string"/>
+	<element name="FieldTicketDate" type="date"/>
+	<element name="FieldTicketInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:FieldTicketNumber"/>
+				<element ref="pidx:FieldTicketDate" minOccurs="0"/>
+				<element ref="pidx:RevisionNumber" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="FieldTicketLineItemNumber" type="string"/>
+	<element name="FieldTicketNumber" type="string"/>
+	<element name="FieldTicketQuantity">
+		<complexType>
+			<sequence>
+				<element ref="pidx:Quantity"/>
+				<element ref="pidx:UnitOfMeasureCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="FieldTicketResponseDate" type="date"/>
+	<element name="FieldTicketResponseNumber" type="string"/>
+	<element name="FieldTicketSubLineItemNumber" type="string"/>
+	<element name="FieldTicketTotal">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="FileName" type="string"/>
+	<element name="FileType" type="string"/>
+	<element name="FreeFormText">
+		<complexType>
+			<simpleContent>
+				<extension base="string">
+					<attribute name="language" type="string"/>
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+	<element name="FromDate" type="date"/>
+	<element name="GeographicalInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:FieldName" minOccurs="0"/>
+				<sequence minOccurs="0">
+					<element ref="pidx:Section"/>
+					<element ref="pidx:Township"/>
+					<element ref="pidx:Range"/>
+				</sequence>
+				<element ref="pidx:Region" minOccurs="0"/>
+				<element ref="pidx:Block" minOccurs="0"/>
+				<element ref="pidx:GPSCoordinates" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="GlobalExceptionTypeCode" type="string"/>
+	<element name="GlobalMessageComponentCode" type="string"/>
+	<element name="GlobalMessageExceptionCode" type="string"/>
+	<element name="GPSCoordinates">
+		<complexType>
+			<sequence>
+				<element ref="pidx:Latitude"/>
+				<element ref="pidx:Longitude"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="HazardousMaterialClassCode">
+		<complexType>
+			<simpleContent>
+				<extension base="string">
+					<attribute name="hazardousMaterialIndicator" type="string" use="required"/>
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+	<element name="HazardousMaterialDescription" type="string"/>
+	<element name="HazardousMaterials">
+		<complexType>
+			<sequence>
+				<choice>
+					<element ref="pidx:SpecialHandlingCode" minOccurs="0"/>
+					<element ref="pidx:HazardousMaterialDescription" minOccurs="0"/>
+				</choice>
+				<element ref="pidx:HazardousMaterialClassCode" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="Intrastat">
+		<complexType>
+			<sequence>
+				<element ref="pidx:CommodityCode" minOccurs="0"/>
+				<element ref="pidx:CommodityDescription" minOccurs="0"/>
+				<element ref="pidx:TransactionNature" minOccurs="0"/>
+				<element ref="pidx:SupplementaryUnits" minOccurs="0"/>
+				<element ref="pidx:CountryOfFinalDestination" minOccurs="0"/>
+				<element ref="pidx:TransportMethodCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="InvoiceDate" type="date"/>
+	<element name="InvoiceInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:InvoiceNumber"/>
+				<element ref="pidx:InvoiceDate" minOccurs="0"/>
+				<element ref="pidx:InvoiceTypeCode" minOccurs="0"/>
+				<element ref="pidx:RevisionNumber" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="InvoiceNumber" type="string"/>
+	<element name="InvoiceQuantity">
+		<complexType>
+			<sequence>
+				<element ref="pidx:Quantity"/>
+				<element ref="pidx:UnitOfMeasureCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="InvoiceResponseDate" type="date"/>
+	<element name="InvoiceResponseNumber" type="string"/>
+	<element name="InvoiceTotal">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="InvoiceTypeCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="CreditMemo"/>
+				<enumeration value="DebitMemo"/>
+				<enumeration value="ProductOrService"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="ItemDetailChangeCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Add"/>
+				<enumeration value="Delete"/>
+				<enumeration value="ModifyPrice"/>
+				<enumeration value="ModifyQuantity"/>
+				<enumeration value="ModifyLocation"/>
+				<enumeration value="ModifyPartner"/>
+				<enumeration value="ModifyPaymentTerms"/>
+				<enumeration value="ModifyTransportInformation"/>
+				<enumeration value="ModifyScheduleDates"/>
+				<enumeration value="ModifyOther"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="JobDescription" type="string"/>
+	<element name="JobLocationClassCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="FederalWaters"/>
+				<enumeration value="InlandWaters"/>
+				<enumeration value="Land"/>
+				<enumeration value="StateWaters"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="JobLocationDescription" type="string"/>
+	<element name="JobLocationIdentifier">
+		<complexType>
+			<simpleContent>
+				<extension base="string">
+					<attribute name="jobLocationIdentifierIndicator" use="optional">
+						<simpleType>
+							<restriction base="string">
+								<enumeration value="ChemicalPlant"/>
+								<enumeration value="CoalDe-Gas"/>
+								<enumeration value="CogenerationPlant"/>
+								<enumeration value="Construction"/>
+								<enumeration value="Dock"/>
+								<enumeration value="GasPlant"/>
+								<enumeration value="IndustrialServiceMiscellaneous"/>
+								<enumeration value="MilitaryGovernment"/>
+								<enumeration value="PaperMill"/>
+								<enumeration value="PetroleumPlant"/>
+								<enumeration value="Pipeline"/>
+								<enumeration value="Refinery"/>
+								<enumeration value="Rig"/>
+								<enumeration value="UtilityPlant"/>
+								<enumeration value="Other"/>
+							</restriction>
+						</simpleType>
+					</attribute>
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+	<element name="JobLocationInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:JobLocationIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:JobLocationClassCode" minOccurs="0"/>
+				<element ref="pidx:JobLocationDescription" minOccurs="0"/>
+				<element ref="pidx:JobLocationStatus" minOccurs="0"/>
+				<element ref="pidx:WellInformation" minOccurs="0"/>
+				<element ref="pidx:JobSiteCategory" minOccurs="0"/>
+				<element ref="pidx:AddressInformation" minOccurs="0"/>
+				<element ref="pidx:GeographicalInformation" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="JobLocationStatus">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Active"/>
+				<enumeration value="Inactive"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="JobSiteCategory">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Boiler"/>
+				<enumeration value="CivilHighways"/>
+				<enumeration value="Compression"/>
+				<enumeration value="Condenser"/>
+				<enumeration value="ConstructPiles"/>
+				<enumeration value="Dams"/>
+				<enumeration value="HeatExchanger"/>
+				<enumeration value="IndustrialServiceMiscellaneous"/>
+				<enumeration value="Piping"/>
+				<enumeration value="Production"/>
+				<enumeration value="TowerVessel"/>
+				<enumeration value="Turbine"/>
+				<enumeration value="UndergroundStr"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="JobSummary" type="string"/>
+	<element name="Jurisdiction" type="string"/>
+	<element name="LanguageCode" type="string"/>
+	<element name="Latitude" type="string"/>
+	<element name="LineItemDescription" type="string"/>
+	<element name="LineItemIdentifier">
+		<complexType>
+			<simpleContent>
+				<extension base="string">
+					<attribute name="identifierIndicator" use="required">
+						<simpleType>
+							<restriction base="string">
+								<enumeration value="AssignedByBuyer"/>
+								<enumeration value="AssignedByManufacturer"/>
+								<enumeration value="AssignedBySeller"/>
+								<enumeration value="CatalogueNumber"/>
+								<enumeration value="UPCNumber"/>
+								<enumeration value="Other"/>
+							</restriction>
+						</simpleType>
+					</attribute>
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+	<element name="LineItemInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:LineItemIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:LineItemName" minOccurs="0"/>
+				<element ref="pidx:LineItemDescription" minOccurs="0"/>
+				<element ref="pidx:ManufacturerIdentifier" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="LineItemName" type="string"/>
+	<element name="LineItemNumber" type="string"/>
+	<element name="LineItemTotal">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="LineResponseReasonCode" type="string"/>
+	<element name="LineStatusCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Accept"/>
+				<enumeration value="Pending"/>
+				<enumeration value="Reject"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="Location">
+		<complexType>
+			<sequence>
+				<element ref="pidx:LocationIdentifier" minOccurs="0"/>
+				<element ref="pidx:LocationName" minOccurs="0"/>
+				<element ref="pidx:AddressInformation" minOccurs="0"/>
+				<element ref="pidx:GeographicalInformation" minOccurs="0"/>
+				<element ref="pidx:LocationDescription" minOccurs="0"/>
+			</sequence>
+			<attribute name="locationIndicator" use="optional">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="FreightEqualizationPoint"/>
+						<enumeration value="OnVessel-FOBPoint"/>
+						<enumeration value="Origin-AfterLoadingOnEquipment"/>
+						<enumeration value="Origin-ShippingPoint"/>
+						<enumeration value="Plant"/>
+						<enumeration value="ShippingDestination"/>
+						<enumeration value="Warehouse"/>
+						<enumeration value="Other"/>
+					</restriction>
+				</simpleType>
+			</attribute>
+		</complexType>
+	</element>
+	<element name="LocationDescription" type="string"/>
+	<element name="LocationIdentifier" type="string"/>
+	<element name="LocationName" type="string"/>
+	<element name="Longitude" type="string"/>
+	<element name="ManufacturerIdentifier" type="string"/>
+	<element name="MaximumMeasurement" type="decimal"/>
+	<element name="Measurement" type="decimal"/>
+	<element name="MeasurementRange">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MinimumMeasurement"/>
+				<element ref="pidx:MaximumMeasurement"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="MethodOfHandlingCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="ChargeToBePaidByCustomer"/>
+				<enumeration value="OffInvoice"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="MinimumMeasurement" type="decimal"/>
+	<element name="MixedRateIndicator" type="string"/>
+	<element name="MonetaryAmount" type="decimal"/>
+	<element name="NotificationCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="AwardedBid"/>
+				<enumeration value="NotAwardedBid"/>
+				<enumeration value="OrderToFollow"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="OCSGNumber" type="string"/>
+	<element name="offendingMessageComponent">
+		<complexType>
+			<sequence>
+				<element ref="pidx:GlobalMessageComponentCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="OpenDate" type="date"/>
+	<element name="OrderChangeDate" type="date"/>
+	<element name="OrderChangeNumber" type="string"/>
+	<element name="OrderQuantity">
+		<complexType>
+			<sequence>
+				<element ref="pidx:Quantity"/>
+				<element ref="pidx:UnitOfMeasureCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="OrderResponseDate" type="date"/>
+	<element name="OrderResponseNumber" type="string"/>
+	<element name="PackagingCharacteristicCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="PackageSpecifications"/>
+				<enumeration value="ProductMarking"/>
+				<enumeration value="SkidPalletType"/>
+				<enumeration value="TypeOfPackage"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="PackagingCharacteristicDescription" type="string"/>
+	<element name="PartnerIdentifier">
+		<complexType>
+			<simpleContent>
+				<extension base="string">
+					<attribute name="partnerIdentifierIndicator" use="required">
+						<simpleType>
+							<restriction base="string">
+								<enumeration value="AssignedByBuyer"/>
+								<enumeration value="AssignedBySeller"/>
+								<enumeration value="DUNSNumber"/>
+								<enumeration value="DUNS+4Number"/>
+								<enumeration value="Other"/>
+							</restriction>
+						</simpleType>
+					</attribute>
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+	<element name="PartnerInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:PartnerIdentifier" maxOccurs="unbounded"/>
+				<element ref="pidx:PartnerName" minOccurs="0"/>
+				<element ref="pidx:AddressInformation" minOccurs="0"/>
+				<element ref="pidx:ContactInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:TaxInformation" minOccurs="0"/>
+				<element ref="pidx:URL" minOccurs="0"/>
+			</sequence>
+			<attribute name="partnerRoleIndicator" use="required">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="BillAndShipTo"/>
+						<enumeration value="BillTo"/>
+						<enumeration value="Carrier"/>
+						<enumeration value="CommissionPayee"/>
+						<enumeration value="FinalRecipient"/>
+						<enumeration value="Manufacturer"/>
+						<enumeration value="Marketplace"/>
+						<enumeration value="MaterialIssuer"/>
+						<enumeration value="OnsiteContractingCompany"/>
+						<enumeration value="OperatingCompany"/>
+						<enumeration value="Payer"/>
+						<enumeration value="PrimaryContractor"/>
+						<enumeration value="RemitTo"/>
+						<enumeration value="Seller"/>
+						<enumeration value="ShipFromParty"/>
+						<enumeration value="ShipToParty"/>
+						<enumeration value="SoldTo"/>
+						<enumeration value="ThirdParty"/>
+						<enumeration value="Vendor"/>
+						<enumeration value="Warehouse"/>
+						<enumeration value="Other"/>
+					</restriction>
+				</simpleType>
+			</attribute>
+		</complexType>
+	</element>
+	<element name="PartnerName" type="string"/>
+	<element name="PaymentTerms">
+		<complexType>
+			<sequence>
+				<element ref="pidx:PaymentTermsOfSale" minOccurs="0"/>
+				<element ref="pidx:Description" minOccurs="0"/>
+				<element ref="pidx:PaymentTermsBasisDateCode" minOccurs="0"/>
+				<element ref="pidx:PaymentTermsBasisDate" minOccurs="0"/>
+				<element ref="pidx:TermsNetDays" minOccurs="0"/>
+				<element ref="pidx:PercentOfInvoicePayable" minOccurs="0"/>
+				<element ref="pidx:Discounts" minOccurs="0"/>
+				<element ref="pidx:Deferred" minOccurs="0"/>
+				<element ref="pidx:Penalty" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="PaymentTermsBasisDate" type="date"/>
+	<element name="PaymentTermsBasisDateCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="DeliveryDate"/>
+				<enumeration value="InvoiceDate"/>
+				<enumeration value="InvoiceReceiptDate"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="PaymentTermsOfSale" type="string"/>
+	<element name="Penalty" type="string"/>
+	<element name="PercentDeferredPayable" type="decimal"/>
+	<element name="PercentDiscount" type="decimal"/>
+	<element name="PercentOfInvoicePayable" type="decimal"/>
+	<element name="PercentQualifierCode" type="string"/>
+	<element name="PersonnelIdentifier" type="string"/>
+	<element name="PersonnelInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:PersonnelName" minOccurs="0"/>
+				<element ref="pidx:CompanyName" minOccurs="0"/>
+				<element ref="pidx:PersonnelIdentifier" minOccurs="0"/>
+				<element ref="pidx:TimeWorked" minOccurs="0"/>
+				<element ref="pidx:JobDescription" minOccurs="0"/>
+				<element ref="pidx:Comment" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="PersonnelName" type="string"/>
+	<element name="PhoneNumber" type="string"/>
+	<element name="PhoneNumberExtension" type="string"/>
+	<element name="POBoxNumber" type="string"/>
+	<element name="PostalCode" type="string"/>
+	<element name="PostalCountry">
+		<complexType>
+			<sequence>
+				<element ref="pidx:CountryCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="PriceBasis">
+		<complexType>
+			<sequence>
+				<choice>
+					<element ref="pidx:Measurement"/>
+					<element ref="pidx:MeasurementRange"/>
+				</choice>
+				<element ref="pidx:UnitOfMeasureCode"/>
+				<element ref="pidx:BasisDescription" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="Pricing">
+		<complexType>
+			<sequence>
+				<element ref="pidx:UnitPrice"/>
+				<element ref="pidx:PriceBasis" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="PrimaryCurrency">
+		<complexType>
+			<sequence>
+				<element ref="pidx:CurrencyCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="PurchaseOrderInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:PurchaseOrderNumber"/>
+				<element ref="pidx:PurchaseOrderIssuedDate" minOccurs="0"/>
+				<element ref="pidx:PurchaseOrderTypeCode" minOccurs="0"/>
+				<element ref="pidx:ReleaseNumber" minOccurs="0"/>
+				<element ref="pidx:SalesOrderNumber" minOccurs="0"/>
+				<element ref="pidx:RevisionNumber" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="PurchaseOrderIssuedDate" type="date"/>
+	<element name="PurchaseOrderLineItemNumber" type="string"/>
+	<element name="PurchaseOrderNumber" type="string"/>
+	<element name="PurchaseOrderSubLineItemNumber" type="string"/>
+	<element name="PurchaseOrderTypeCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Confirmation"/>
+				<enumeration value="EmergencyOrder"/>
+				<enumeration value="ReleaseOrDeliveryOrder"/>
+				<enumeration value="RushOrder"/>
+				<enumeration value="StandAloneOrder"/>
+				<enumeration value="SupplyOrServiceOrder"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="Quantity" type="decimal"/>
+	<element name="QuoteDate" type="date"/>
+	<element name="QuotedQuantity">
+		<complexType>
+			<sequence>
+				<element ref="pidx:UnitOfMeasureCode"/>
+				<element ref="pidx:Quantity"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="QuoteNotificationDate" type="date"/>
+	<element name="QuoteNotificationNumber" type="string"/>
+	<element name="QuoteNumber" type="string"/>
+	<element name="QuoteRequestDate" type="date"/>
+	<element name="QuoteRequestInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:QuoteRequestNumber"/>
+				<element ref="pidx:QuoteRequestDate"/>
+				<element ref="pidx:RevisionNumber" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="QuoteRequestLineItemNumber" type="string"/>
+	<element name="QuoteRequestNumber" type="string"/>
+	<element name="QuoteTotal">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="QuoteTypeCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="AlternateBid"/>
+				<enumeration value="BidWithoutException"/>
+				<enumeration value="DeclineToQuote"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="Range" type="string"/>
+	<element name="RateOfExchangeDetail">
+		<complexType>
+			<sequence>
+				<element ref="pidx:ReferenceCurrency"/>
+				<element ref="pidx:TargetCurrency"/>
+				<element ref="pidx:ExchangeRate"/>
+				<element ref="pidx:DateOfRateOfExchange" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="ReferenceCurrency">
+		<complexType>
+			<sequence>
+				<element ref="pidx:CurrencyCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="ReferenceInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:ReferenceNumber" minOccurs="0"/>
+				<element ref="pidx:Description" minOccurs="0"/>
+			</sequence>
+			<attribute name="referenceInformationIndicator" use="required">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="AFENumber"/>
+						<enumeration value="BatchNumber"/>
+						<enumeration value="BillOfLading"/>
+						<enumeration value="Certification"/>
+						<enumeration value="CertifiedInspectionTestResults"/>
+						<enumeration value="ConfigurationNumber"/>
+						<enumeration value="ContractNumber"/>
+						<enumeration value="CostAllocationReference"/>
+						<enumeration value="CostCenter"/>
+						<enumeration value="CustomerAccountingReference"/>
+						<enumeration value="CustomerReferenceNumber"/>
+						<enumeration value="DeliveryTicketNumber"/>
+						<enumeration value="DivisionIdentifier"/>
+						<enumeration value="EngineeringChangeOrderNumber"/>
+						<enumeration value="JobNumber"/>
+						<enumeration value="LetterOfCreditNumber"/>
+						<enumeration value="LocationNumber"/>
+						<enumeration value="MaterialSafetyDataSheet"/>
+						<enumeration value="OperatorGeneralLedgerCode"/>
+						<enumeration value="OriginalInvoiceNumber"/>
+						<enumeration value="PriceAreaNumber"/>
+						<enumeration value="ProjectNumber"/>
+						<enumeration value="ProposaNumber"/>
+						<enumeration value="QuoteNumber"/>
+						<enumeration value="RequestForQuotationNumber"/>
+						<enumeration value="TemplateNumber"/>
+						<enumeration value="Other"/>
+					</restriction>
+				</simpleType>
+			</attribute>
+		</complexType>
+	</element>
+	<element name="ReferenceNumber" type="string"/>
+	<element name="Region" type="string"/>
+	<element name="ReleaseNumber" type="string"/>
+	<element name="RequestQuoteResponse">
+		<complexType>
+			<sequence>
+				<element ref="pidx:OpenDate" minOccurs="0"/>
+				<element ref="pidx:CloseDate" minOccurs="0"/>
+				<element ref="pidx:ContactInformation" minOccurs="0"/>
+				<element ref="pidx:ResponseInstructions" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="RequestRequisitionReturnDate" type="date"/>
+	<element name="RequestRequisitionReturnNumber" type="string"/>
+	<element name="RequestRequisitionReturnQuantity">
+		<complexType>
+			<sequence>
+				<element ref="pidx:Quantity"/>
+				<element ref="pidx:UnitOfMeasureCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="RequestRequisitionReturnTotal">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="ResponseInstructions" type="string"/>
+	<element name="ResultingOrderType">
+		<complexType>
+			<sequence>
+				<element ref="pidx:PurchaseOrderTypeCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="RevisionNumber" type="string"/>
+	<element name="Routing" type="string"/>
+	<element name="RoutingSequenceCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="OriginDeliveryCarrier-AnyMode"/>
+				<enumeration value="OriginCarrier-AirMotorOcean"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="SalesOrderNumber" type="string"/>
+	<element name="SecondCurrency">
+		<complexType>
+			<sequence>
+				<element ref="pidx:CurrencyCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="Section" type="string"/>
+	<element name="SequenceNumber" type="integer"/>
+	<element name="ServiceDateTime">
+		<complexType>
+			<simpleContent>
+				<extension base="dateTime">
+					<attribute name="dateTypeIndicator" use="required">
+						<simpleType>
+							<restriction base="string">
+								<enumeration value="ArriveLocationDate"/>
+								<enumeration value="InvoiceDueDate"/>
+								<enumeration value="InvoicePeriodStartDate"/>
+								<enumeration value="LeaveLocationDate"/>
+								<enumeration value="PromisedForDelivery"/>
+								<enumeration value="PromisedForShipment"/>
+								<enumeration value="RequestedForDelivery"/>
+								<enumeration value="RequestedShipment"/>
+								<enumeration value="ServicePeriodEnd"/>
+								<enumeration value="ServicePeriodStart"/>
+								<enumeration value="ShippedDate"/>
+								<enumeration value="Other"/>
+							</restriction>
+						</simpleType>
+					</attribute>
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+	<element name="ServiceLevelCode" type="string"/>
+	<element name="ShipmentMethodOfPayment">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Collect"/>
+				<enumeration value="Collect-FreightCreditedBackToCustomer"/>
+				<enumeration value="ServiceFreight-NoCharge"/>
+				<enumeration value="CustomerPickupBackhaul"/>
+				<enumeration value="Prepaid-ChargedToCustomer"/>
+				<enumeration value="PrepaidBySeller"/>
+				<enumeration value="Pickup"/>
+				<enumeration value="ThirdPartyPay"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="ShipmentTermsCode" type="string"/>
+	<element name="ShippingAmount">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="SpecialHandlingCode" type="string"/>
+	<element name="SpecialInstructions">
+		<complexType>
+			<simpleContent>
+				<extension base="string">
+					<attribute name="instructionIndicator" use="optional">
+						<simpleType>
+							<restriction base="string">
+								<enumeration value="CarrierInstructions"/>
+								<enumeration value="ConsigneeInstructions"/>
+								<enumeration value="DriverInstructions"/>
+								<enumeration value="EmptyReturnInstructions"/>
+								<enumeration value="InspectionInstructions"/>
+								<enumeration value="RoutingInstructions"/>
+								<enumeration value="ShipperInstructions"/>
+								<enumeration value="ShortLeadTime"/>
+								<enumeration value="Tolerances"/>
+								<enumeration value="Other"/>
+							</restriction>
+						</simpleType>
+					</attribute>
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+	<element name="SpecialInvoicePreference">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="InvoiceNotRequired"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="StateLease" type="string"/>
+	<element name="StateProvince" type="string"/>
+	<element name="StreetName" type="string"/>
+	<element name="SubLineItemNumber" type="string"/>
+	<element name="SubTotalAmount">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+			<attribute name="subTotalIndicator" use="required">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="Equipment"/>
+						<enumeration value="Labor"/>
+						<enumeration value="Materials"/>
+						<enumeration value="Other"/>
+					</restriction>
+				</simpleType>
+			</attribute>
+		</complexType>
+	</element>
+	<element name="SupplementaryUnits" type="int"/>
+	<element name="TargetCurrency">
+		<complexType>
+			<sequence>
+				<element ref="pidx:CurrencyCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="Tax" type="pidx:TaxType"/>
+	<element name="TaxAmount">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="TaxBasis" type="string"/>
+	<element name="TaxBasisAmount">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="TaxCertificateNumber" type="string"/>
+	<element name="TaxCertificateType" type="string"/>
+	<element name="TaxExemptCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Exempt"/>
+				<enumeration value="NonExempt"/>
+				<enumeration value="DirectPay"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="TaxIdentifierNumber" type="string"/>
+	<element name="TaxInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:TaxIdentifierNumber" minOccurs="0"/>
+				<element ref="pidx:Jurisdiction" minOccurs="0"/>
+				<element ref="pidx:TaxCertificateType" minOccurs="0"/>
+				<element ref="pidx:TaxCertificateNumber" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="TaxLocation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:LocationIdentifier" minOccurs="0"/>
+				<element ref="pidx:LocationName" minOccurs="0"/>
+				<element ref="pidx:LocationDescription" minOccurs="0"/>
+				<element ref="pidx:AddressInformation" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="TaxRate" type="decimal"/>
+	<element name="TaxReference" type="string"/>
+	<element name="TaxSummary">
+		<complexType>
+			<complexContent>
+				<extension base="pidx:TaxType"/>
+			</complexContent>
+		</complexType>
+	</element>
+	<element name="TaxTypeCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="CountyParishSalesTax"/>
+				<enumeration value="CitySalesTax"/>
+				<enumeration value="CountyTax"/>
+				<enumeration value="FederalExciseTax"/>
+				<enumeration value="GrossReceiptsTax"/>
+				<enumeration value="GoodsAndServicesTax"/>
+				<enumeration value="LocalTax"/>
+				<enumeration value="StateAndLocalSalesTax"/>
+				<enumeration value="MetropolitanTransitTax"/>
+				<enumeration value="StateProvincialTax"/>
+				<enumeration value="StateSalesTax"/>
+				<enumeration value="ValueAddedTax"/>
+				<enumeration value="WellServiceTax"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="TelecomAreaCode" type="string"/>
+	<element name="TelecomCountryCode" type="string"/>
+	<element name="Telephone">
+		<complexType>
+			<sequence>
+				<element ref="pidx:PhoneNumber"/>
+				<element ref="pidx:PhoneNumberExtension" minOccurs="0"/>
+				<element ref="pidx:TelecomCountryCode" minOccurs="0"/>
+				<element ref="pidx:TelecomAreaCode" minOccurs="0"/>
+			</sequence>
+			<attribute name="telephoneIndicator" use="optional">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="Fax"/>
+						<enumeration value="Mobile"/>
+						<enumeration value="Pager"/>
+						<enumeration value="Voice"/>
+						<enumeration value="Other"/>
+					</restriction>
+				</simpleType>
+			</attribute>
+		</complexType>
+	</element>
+	<element name="TermsDiscountAmount">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="TermsNetDays" type="integer"/>
+	<element name="TimeWorked">
+		<complexType>
+			<sequence>
+				<element ref="pidx:Quantity"/>
+				<element ref="pidx:UnitOfMeasureCode"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="ToDate" type="date"/>
+	<element name="TotalAmount">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="TotalLineItems" type="int"/>
+	<element name="Township" type="string"/>
+	<element name="TransactionNature" type="string"/>
+	<element name="TransportInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:ShipmentMethodOfPayment"/>
+				<element ref="pidx:RoutingSequenceCode" minOccurs="0"/>
+				<element ref="pidx:TransportMethodCode" minOccurs="0"/>
+				<element ref="pidx:PartnerInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Location" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:ShipmentTermsCode" minOccurs="0"/>
+				<element ref="pidx:Routing" minOccurs="0"/>
+				<element ref="pidx:ServiceLevelCode" minOccurs="0"/>
+				<element ref="pidx:HazardousMaterials" minOccurs="0"/>
+				<element ref="pidx:CarrierEquipmentCode" minOccurs="0"/>
+				<element ref="pidx:TransportName" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="TransportMethodCode">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Air"/>
+				<enumeration value="AirExpress"/>
+				<enumeration value="ParcelPost"/>
+				<enumeration value="ExpeditedTruck"/>
+				<enumeration value="CustomerPickup"/>
+				<enumeration value="Motor-CommonCarrier"/>
+				<enumeration value="Rail"/>
+				<enumeration value="Ocean"/>
+				<enumeration value="SupplierTruck"/>
+				<enumeration value="BestWay-ShippersOption"/>
+				<enumeration value="Vessel"/>
+				<enumeration value="Other"/>
+				<enumeration value="Boat"/>
+				<enumeration value="Barge"/>
+				<enumeration value="Truck"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="TransportName" type="string"/>
+	<element name="UnitOfMeasureCode" type="string"/>
+	<element name="UnitPrice">
+		<complexType>
+			<sequence>
+				<element ref="pidx:MonetaryAmount"/>
+				<element ref="pidx:UnitOfMeasureCode"/>
+				<element ref="pidx:CurrencyCode" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="URL" type="string"/>
+	<element name="ValidityDates">
+		<complexType>
+			<sequence>
+				<element ref="pidx:FromDate"/>
+				<element ref="pidx:ToDate"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="WellCategory">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Development"/>
+				<enumeration value="Workover"/>
+				<enumeration value="Wildcat"/>
+				<enumeration value="Recompletion"/>
+				<enumeration value="NonWell"/>
+				<enumeration value="Abandoned"/>
+				<enumeration value="ExistingWell"/>
+				<enumeration value="DevBelow3000"/>
+				<enumeration value="ReacidizeWell"/>
+				<enumeration value="RefractedWell"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<element name="WellIdentifier">
+		<complexType>
+			<simpleContent>
+				<extension base="string">
+					<attribute name="wellIdentifierIndicator">
+						<simpleType>
+							<restriction base="string">
+								<enumeration value="APINumber"/>
+								<enumeration value="CustomerWellNumber"/>
+								<enumeration value="UWINumber"/>
+								<enumeration value="Other"/>
+							</restriction>
+						</simpleType>
+					</attribute>
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+	<element name="WellInformation">
+		<complexType>
+			<sequence>
+				<element ref="pidx:WellIdentifier" maxOccurs="unbounded"/>
+				<element ref="pidx:WellName" minOccurs="0"/>
+				<element ref="pidx:WellType" minOccurs="0"/>
+				<element ref="pidx:WellCategory" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="WellName" type="string"/>
+	<element name="WellType">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Oil"/>
+				<enumeration value="Gas"/>
+				<enumeration value="IndustrialDisposal"/>
+				<enumeration value="Thermal"/>
+				<enumeration value="Storage"/>
+				<enumeration value="Water"/>
+				<enumeration value="Injection"/>
+				<enumeration value="Uranium"/>
+				<enumeration value="Relief"/>
+				<enumeration value="NonWell"/>
+				<enumeration value="DisposalWell"/>
+				<enumeration value="Sulfur"/>
+				<enumeration value="HorizontalOil"/>
+				<enumeration value="HorizontalGas"/>
+				<enumeration value="Brine"/>
+				<enumeration value="DirectionalOil"/>
+				<enumeration value="DirectionalGas"/>
+				<enumeration value="DirectionalNonWell"/>
+				<enumeration value="Environmental"/>
+				<enumeration value="IndustrialNonWell"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</element>
+	<complexType name="TaxType">
+		<sequence>
+			<element ref="pidx:TaxTypeCode"/>
+			<element ref="pidx:MixedRateIndicator" minOccurs="0"/>
+			<element ref="pidx:TaxIdentifierNumber" minOccurs="0"/>
+			<element ref="pidx:TaxExemptCode" minOccurs="0"/>
+			<element ref="pidx:TaxLocation" minOccurs="0"/>
+			<element ref="pidx:TaxRate" minOccurs="0"/>
+			<element ref="pidx:TaxBasisAmount" minOccurs="0"/>
+			<element ref="pidx:TaxAmount" minOccurs="0"/>
+			<element ref="pidx:TaxReference" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<attribute name="transactionPurposeIndicator">
+		<simpleType>
+			<restriction base="string">
+				<enumeration value="Add"/>
+				<enumeration value="Cancellation"/>
+				<enumeration value="Change"/>
+				<enumeration value="Confirmation"/>
+				<enumeration value="Delete"/>
+				<enumeration value="Duplicate"/>
+				<enumeration value="Original"/>
+				<enumeration value="Replace"/>
+				<enumeration value="Request"/>
+				<enumeration value="Other"/>
+			</restriction>
+		</simpleType>
+	</attribute>
+	<attribute name="version" type="decimal" fixed="1.0"/>
+</schema>

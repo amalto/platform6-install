@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.api.org/pidXML/v1.0" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pidx="http://www.api.org/pidXML/v1.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<annotation>
+		<documentation>
+					Schema Name: 	 			OrderResponse
+					Copyright:  					American Petroleum Institute (API)
+												Petroleum Industry Data Exchange (PIDX)
+												2002			
+					Schema Version Number: 	1.0
+					Version Date: 				2002-02-14
+					Change Management Log:
+					Version	Person							Date		Description
+					1.0		Com.Pro.Serv. Task Group		2002-02-14	Version 1.0
+					
+		</documentation>
+	</annotation>
+	<include schemaLocation="/opt/b2box5.data/resources/schemas/pidx_v1_0/PIDXLib-2002-02-14-V1-0.xsd"/>
+	<element name="OrderResponse">
+		<complexType>
+			<sequence>
+				<element ref="pidx:OrderResponseProperties"/>
+				<element ref="pidx:OrderResponseDetails"/>
+				<element ref="pidx:OrderResponseSummary"/>
+			</sequence>
+			<attribute ref="pidx:transactionPurposeIndicator" use="required"/>
+			<attribute ref="pidx:version" use="required"/>
+		</complexType>
+	</element>
+	<element name="OrderResponseDetails">
+		<complexType>
+			<sequence>
+				<element ref="pidx:OrderResponseLineItem" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="OrderResponseLineItem">
+		<complexType>
+			<sequence>
+				<element ref="pidx:PurchaseOrderLineItemNumber"/>
+				<element ref="pidx:LineStatusCode"/>
+				<element ref="pidx:LineResponseReasonCode"/>
+				<element ref="pidx:LineItemInformation"/>
+				<element ref="pidx:OrderQuantity"/>
+				<element ref="pidx:ChangeDescription" minOccurs="0"/>
+				<element ref="pidx:CommodityCode" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:PartnerInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:JobLocationInformation" minOccurs="0"/>
+				<element ref="pidx:Pricing" minOccurs="0"/>
+				<element ref="pidx:AllowanceOrCharge" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Tax" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:LineItemTotal" minOccurs="0"/>
+				<element ref="pidx:ServiceDateTime" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:CountryOfOrigin" minOccurs="0"/>
+				<element ref="pidx:CountryOfFinalDestination" minOccurs="0"/>
+				<element ref="pidx:TransportInformation" minOccurs="0"/>
+				<element ref="pidx:PaymentTerms" minOccurs="0"/>
+				<element ref="pidx:CreditCardInformation" minOccurs="0"/>
+				<element ref="pidx:SpecialInstructions" minOccurs="0" maxOccurs="unbounded"/>
+				<sequence minOccurs="0" maxOccurs="unbounded">
+					<element ref="pidx:PackagingCharacteristicCode" minOccurs="0"/>
+					<element ref="pidx:PackagingCharacteristicDescription"/>
+				</sequence>
+				<element ref="pidx:ReferenceInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Attachment" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Comment" minOccurs="0"/>
+				<element ref="pidx:OrderResponseSubLineItem" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="OrderResponseProperties">
+		<complexType>
+			<sequence>
+				<element ref="pidx:OrderResponseNumber"/>
+				<element ref="pidx:OrderResponseDate"/>
+				<element ref="pidx:PartnerInformation" minOccurs="2" maxOccurs="unbounded"/>
+				<element ref="pidx:PurchaseOrderInformation"/>
+				<element ref="pidx:ChangeOrderInformation" minOccurs="0"/>
+				<element ref="pidx:AcknowledgementType" minOccurs="0"/>
+				<element ref="pidx:SpecialInvoicePreference" minOccurs="0"/>
+				<element ref="pidx:PrimaryCurrency" minOccurs="0"/>
+				<element ref="pidx:SecondCurrency" minOccurs="0"/>
+				<element ref="pidx:LanguageCode" minOccurs="0"/>
+				<element ref="pidx:JobLocationInformation" minOccurs="0"/>
+				<element ref="pidx:ServiceDateTime" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:CountryOfOrigin" minOccurs="0"/>
+				<element ref="pidx:CountryOfFinalDestination" minOccurs="0"/>
+				<element ref="pidx:TransportInformation" minOccurs="0"/>
+				<element ref="pidx:PaymentTerms" minOccurs="0"/>
+				<element ref="pidx:CreditCardInformation" minOccurs="0"/>
+				<element ref="pidx:SpecialInstructions" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:ReferenceInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Attachment" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Comment" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="OrderResponseSubLineItem">
+		<complexType>
+			<sequence>
+				<element ref="pidx:PurchaseOrderSubLineItemNumber"/>
+				<element ref="pidx:LineStatusCode"/>
+				<element ref="pidx:LineResponseReasonCode"/>
+				<element ref="pidx:LineItemInformation"/>
+				<element ref="pidx:OrderQuantity"/>
+				<element ref="pidx:ChangeDescription" minOccurs="0"/>
+				<element ref="pidx:CommodityCode" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:PartnerInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:JobLocationInformation" minOccurs="0"/>
+				<element ref="pidx:Pricing" minOccurs="0"/>
+				<element ref="pidx:AllowanceOrCharge" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Tax" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:LineItemTotal" minOccurs="0"/>
+				<element ref="pidx:ServiceDateTime" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:CountryOfOrigin" minOccurs="0"/>
+				<element ref="pidx:CountryOfFinalDestination" minOccurs="0"/>
+				<element ref="pidx:TransportInformation" minOccurs="0"/>
+				<element ref="pidx:PaymentTerms" minOccurs="0"/>
+				<element ref="pidx:CreditCardInformation" minOccurs="0"/>
+				<element ref="pidx:SpecialInstructions" minOccurs="0" maxOccurs="unbounded"/>
+				<sequence minOccurs="0" maxOccurs="unbounded">
+					<element ref="pidx:PackagingCharacteristicCode" minOccurs="0"/>
+					<element ref="pidx:PackagingCharacteristicDescription"/>
+				</sequence>
+				<element ref="pidx:ReferenceInformation" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Attachment" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="pidx:Comment" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="OrderResponseSummary">
+		<complexType>
+			<sequence>
+				<element ref="pidx:TotalLineItems"/>
+				<element ref="pidx:TotalAmount" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

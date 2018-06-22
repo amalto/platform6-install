@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.api.org/pidXML/v1.0" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pidx="http://www.api.org/pidXML/v1.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<annotation>
+		<documentation>
+					Schema Name: 	 			QuoteNotification
+					Copyright:  					American Petroleum Institute (API)
+												Petroleum Industry Data Exchange (PIDX)
+												2002			
+					Schema Version Number: 	1.0
+					Version Date: 				2002-02-14
+					Change Management Log:
+					Version	Person							Date		Description
+					1.0		Com.Pro.Serv. Task Group		2002-02-14	Version 1.0	
+							
+		</documentation>
+	</annotation>
+	<include schemaLocation="/opt/b2box5.data/resources/schemas/pidx_v1_0/PIDXLib-2002-02-14-V1-0.xsd"/>
+	<element name="QuoteNotification">
+		<complexType>
+			<sequence>
+				<element ref="pidx:QuoteNotificationProperties"/>
+			</sequence>
+			<attribute ref="pidx:version" use="required"/>
+		</complexType>
+	</element>
+	<element name="QuoteNotificationProperties">
+		<complexType>
+			<sequence>
+				<element ref="pidx:QuoteNotificationDate"/>
+				<element ref="pidx:QuoteNumber"/>
+				<element ref="pidx:QuoteDate"/>
+				<element ref="pidx:PartnerInformation" minOccurs="2" maxOccurs="unbounded"/>
+				<element ref="pidx:NotificationCode"/>
+				<element ref="pidx:Comment" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>
