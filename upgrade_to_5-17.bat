@@ -32,11 +32,9 @@ ECHO applicationid=%APPLICATION_ID%>> ".\reference_data\b2box5.data\conf\applica
 RMDIR /S /Q "\b2box5.data\"
 XCOPY /s /q ".\reference_data\b2box5.data" "\b2box5.data\"
 
-docker volume rm platform6_psql platform6_parityinstance
-docker volume create platform6_psql
+docker volume rm platform6_parityinstance
 docker volume create platform6_parityinstance
-docker run -d --rm --name psql-data -v platform6_psql:/opt/psql.data -v platform6_parityinstance:/opt/instance alpine sleep 3600
-docker cp .\reference_data\psql.data\ psql-data:/opt/
+docker run -d --rm --name psql-data -v platform6_parityinstance:/opt/instance alpine sleep 3600
 docker cp c:/b2box5.data/parity/instance psql-data:/opt/
 docker stop psql-data
 

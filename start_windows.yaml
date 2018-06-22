@@ -3,13 +3,17 @@
 #
 version: '3.2'
 
+volumes:
+  psql:
+  parityinstance:
+
 services:
 
   pgsql:
     container_name: pgsql
     image: postgres:9.6.1
     volumes:
-     - /opt/psql.data:/opt/psql.data
+     - psql:/opt/psql.data
     environment:
      - PGDATA=/opt/psql.data
     ports:
@@ -29,7 +33,7 @@ services:
       - pgsql
       - parity
     volumes:
-     - /opt/b2box5.data:/opt/b2box5.data
+     - c:/b2box5.data:/opt/b2box5.data
     links:
      - pgsql:database
     ports:
@@ -51,8 +55,8 @@ services:
       --allow-ips=public
       --no-discovery
     volumes:
-      - /opt/b2box5.data/parity/conf/:/opt/parityconf
-      - /opt/b2box5.data/parity/instance:/root/.local/share/io.parity.ethereum/
+      - c:/b2box5.data/parity/conf/:/opt/parityconf
+      - parityinstance:/root/.local/share/io.parity.ethereum
     ports:
       - 8545:8545
     networks:
@@ -65,7 +69,7 @@ services:
     depends_on:
       - parity
     volumes:
-      - /opt/b2box5.data/parity/conf/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
+      - c:/b2box5.data/parity/conf/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
     networks:
       app_net:
         ipv4_address: 172.13.0.100
