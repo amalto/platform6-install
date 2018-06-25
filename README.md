@@ -24,10 +24,11 @@ The network ports required are:
 - `5900`: used for the messages transactions through the Platform 6 bus.
 - `8080`: used by the Platform 6 server and allow to access the old user interface. 
 - `8480`: used by the Platform 6 proxy and allow to access the Amalto local Portal.
+- `8545`: used by the [Parity](https://www.parity.io/) client.
 
 ## Instructions
 
-__Step 1__
+### Step 1
 
 Once Docker is running, clone the Git repository into a new directory dedicated to your local instance.
 
@@ -36,11 +37,19 @@ git clone git@github.com:amalto/platform6-install.git my-instance
 cd my-instance
 ```
 
-__Step 2__
+### Step 2
 
-In the `provisioning.yml` file (from the root of your directory), set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
+In the `provision_platform6.sh`/`provision_platform6.bat` file (from the root of your directory), set the variable `APPLICATION_ID` with the Platform 6 instance's name given by Amalto.
 
-__Step 3__
+### Step 3
+
+__OSX__
+
+Create a directory `/opt` in your root (`/`) partition if you don't already have one.
+
+> ⚠️  Be sure that your user is the owner of the directory and not the user `root`.
+
+__OSX & Windows__
 
 Run the script `provision_platform6.sh`/`provision_platform6.bat`.
 
@@ -48,12 +57,26 @@ It will clear the existing Platform 6 containers and volumes, before pulling the
 
 > :alarm_clock: This step is normally performed once.
 
-__Step 4__
+### Step 4
+
+__OSX__
+
+Share the folders `/opt/b2box5.data` and `/opt/psql.data` with Docker using the __File Sharing__ tab in the Docker settings menu.
+
+![Docker settings menu for OXS](images/docker_file_sharing_osx.png)
+
+__Windows__
+
+Share the local drive `C` with Docker using the __Shared Drives__ tab in the Docker settings menu.
+
+![Docker settings menu](images/docker_file_sharing_windows.png)
+
+### Step 5
 
 Run the script `start_platform6.sh`/`start_platform6.bat`.
 
 It will start the Platform 6 container.
-Run the script `logs_platform6.bat`/`logs_platform6.bat` to see the logs of the instance.
+Run the script `logs_platform6.sh`/`logs_platform6.bat` to see the logs of the instance.
 
 To stop your Platform 6 instance, run the script `force_stop_platform6.sh`/`force_stop_platform6.bat`.
 
@@ -71,3 +94,11 @@ Say you want the version `5.15.5`, the configuration of the `platform6` containe
 platform6:
     container_name: platform6
     image: amalto/platform6:5.15.5
+```
+
+However, according to the Platform 6's version, you may need to follow more instructions.
+You'll find below the list of the migration guides.
+
+__Migration guides__:
+
+- [`5.15` -> `5.17`](migration/migration_5.17.md)
