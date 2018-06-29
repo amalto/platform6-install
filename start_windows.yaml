@@ -28,7 +28,7 @@ services:
 
   platform6:
     container_name: platform6
-    image: repo.amalto.com/b2box:dev # Have to be changed before release
+    image: amalto/platform6:5.17.0
     depends_on:
       - pgsql
       - parity
