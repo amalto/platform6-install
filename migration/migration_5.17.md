@@ -11,7 +11,7 @@ This section will explain how to update a local Platform 6 instance from `5.15` 
 
 Download the version [`v1.1.0`](https://github.com/amalto/platform6-install/releases/tag/v1.1.0) of the project `platform6-install`.
 
-> ☝️ Keep in mind your instance's name (the variable `INSTANCE_ID` in the file `provisioning.yml`)
+> ☝️ Keep in mind your instance's name (the variable `INSTANCE_ID` in the file `provisioning.yaml`)
 
 Replace all your current installation scripts with the new ones.
 
@@ -31,7 +31,7 @@ It will export your database in the folder `/reference_data/psql.data.backup`.
 
 ## Step 4
 
-### OSX
+### OSX/Linux
 
 Create a directory `/opt` in your root (`/`) partition if you don't already have one.
 
@@ -69,7 +69,7 @@ where `APPLICATION_ID` is your instance's id.
 
 ## Step 5
 
-### OSX
+### OSX/Linux
 
 Share the folders `/opt/b2box5.data` and `/opt/psql.data` with Docker using the __File Sharing__ tab in the Docker settings menu.
 

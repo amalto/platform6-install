@@ -43,13 +43,13 @@ In the `provision_platform6.sh`/`provision_platform6.bat` file (from the root of
 
 ### Step 3
 
-__OSX__
+__OSX/Linux__
 
 Create a directory `/opt` in your root (`/`) partition if you don't already have one.
 
 > ⚠️  Be sure that your user is the owner of the directory and not the user `root`.
 
-__OSX & Windows__
+__OSX/Linux/Windows__
 
 Run the script `provision_platform6.sh`/`provision_platform6.bat`.
 
@@ -84,7 +84,7 @@ To stop your Platform 6 instance, run the script `force_stop_platform6.sh`/`forc
 
 In case you receive a notification from Amalto for a new release of Platform 6, you are advised to upgrade the version of your Platform 6 instance.
 
-For that, check that your instance is stopped, then go to the file `start.yml` and update the version of the image pulled by the `platform6` container.
+For that, check that your instance is stopped, then go to the file `start.yaml` and update the version of the image pulled by the `platform6` container.
 
 __Example__:
 
