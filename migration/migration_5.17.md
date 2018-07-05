@@ -9,7 +9,7 @@ This section will explain how to update a local Platform 6 instance from `5.15` 
 
 ## Step 1
 
-Download the version [`v1.1.0`](https://github.com/amalto/platform6-install/releases/tag/v1.1.0) of the project `platform6-install`.
+Download the version [`v1.1.1`](https://github.com/amalto/platform6-install/releases/tag/v1.1.1) of the project `platform6-install`.
 
 > ☝️ Keep in mind your instance's name (the variable `INSTANCE_ID` in the file `provisioning.yaml`)
 
