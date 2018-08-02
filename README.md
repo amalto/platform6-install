@@ -1,6 +1,6 @@
 # Platform 6 install
 
-> Platform 6 install scripts
+> [Platform 6](https://documentation.amalto.com/platform6/master/) install scripts
 
 ## Requirements
 
