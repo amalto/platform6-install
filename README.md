@@ -22,7 +22,7 @@ The network ports required are:
 - `5005`: used by the Java debug port.
 - `5432`: used internally between the Docker containers for PGSQL access.
 - `5900`: used for the messages transactions through the Platform 6 bus.
-- `8080`: used by the Platform 6 server and allow to access the old user interface. 
+- `8080`: the main port used by the Platform 6 proxy to talk to all instance endpoints.
 - `8480`: used by the Platform 6 proxy and allow to access the Amalto local Portal.
 - `8545`: used by the [Parity](https://www.parity.io/) client.
 
