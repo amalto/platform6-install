@@ -97,10 +97,3 @@ platform6:
     container_name: platform6
     image: amalto/platform6:5.15.5
 ```
-
-However, according to the Platform 6's version, you may need to follow more instructions.
-You'll find below the list of the migration guides.
-
-__Migration guides__:
-
-- [`5.15` -> `5.17`](migration/migration_5.17.md)
