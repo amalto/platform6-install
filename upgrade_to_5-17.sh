@@ -1,11 +1,11 @@
 #!/bin/bash
 # set -x
 
-######### Set your APPLICATION_ID HERE ##########
+######### Set your INSTANCE_ID HERE ##########
 
-export APPLICATION_ID=platform6-developer-x
+export INSTANCE_ID=platform6-developer-x
 
-######### Set your APPLICATION_ID HERE ##########
+######### Set your INSTANCE_ID HERE ##########
 
 # Stop and remove any old container(s)
 docker stop platform6
@@ -21,10 +21,10 @@ docker rm parity
 docker rm ethstats
 
 # Update application.conf
-echo "applicationid=$APPLICATION_ID" >> ./reference_data/b2box5.data/conf/application.conf
+echo "applicationid=$INSTANCE_ID" >> ./reference_data/b2box5.data/conf/application.conf
 
 # Update app.json
-sed -i '' "s/noname/$APPLICATION_ID/g" ./reference_data/b2box5.data/parity/conf/app.json
+sed -i '' "s/noname/$INSTANCE_ID/g" ./reference_data/b2box5.data/parity/conf/app.json
 
 rm -r /opt/b2box5.data /opt/psql.data
 cp -r ./reference_data/b2box5.data /opt/

@@ -17,7 +17,7 @@ Replace all your current installation scripts with the new ones.
 
 ## Step 2
 
-In the `provision_platform6.sh`/`provision_platform6.bat` file (from the root of your directory), set the variable `APPLICATION_ID` with your Platform 6 instance's name.
+In the `provision_platform6.sh`/`provision_platform6.bat` file (from the root of your directory), set the variable `INSTANCE_ID` with your Platform 6 instance's name.
 
 Same thing for the script `upgrade_to_5-17.sh`/`upgrade_to_5-17.bat`.
 
@@ -45,9 +45,9 @@ It will create several directories in your folder `/opt`.
 
 :point_right: Check that the file `/reference_data/b2box5.data/conf/application.conf` contains:
 ```
-applicationid=APPLICATION_ID
+applicationid=INSTANCE_ID
 ``` 
-where `APPLICATION_ID` is your instance's id.
+where `INSTANCE_ID` is your instance's id.
 
 :point_right: Check also that the folders `/opt/b2box5.data` and `/opt/psql.data` are not empty.
 
@@ -61,9 +61,9 @@ It will create a directory named `/b2box5.data` on your local drive `C`.
 
 :point_right: Check that the file `/reference_data/b2box5.data/conf/application.conf` contains:
 ```
-applicationid=APPLICATION_ID
+applicationid=INSTANCE_ID
 ``` 
-where `APPLICATION_ID` is your instance's id.
+where `INSTANCE_ID` is your instance's id.
 
 :point_right: Check also that the folder `c:/b2box5.data` is not empty.
 

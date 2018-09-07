@@ -1,8 +1,8 @@
-REM ######### Set your APPLICATION_ID HERE ##########
+REM ######### Set your INSTANCE_ID HERE ##########
 
-set APPLICATION_ID=platform6-developer-x
+set INSTANCE_ID=platform6-developer-x
 
-REM ######### Set your APPLICATION_ID HERE ##########
+REM ######### Set your INSTANCE_ID HERE ##########
 
 
 REM ## Stop and remove any old container(s)
@@ -23,11 +23,11 @@ docker rm ethstats
 REM ## Update/build app.json
 DEL /Q /S ".\reference_data\b2box5.data\parity\conf\app.json"
 TYPE ".\reference_data\b2box5.data\parity\conf\platform6_app1.json" > ".\reference_data\b2box5.data\parity\conf\app.json"
-ECHO|SET /p="%APPLICATION_ID%">> ".\reference_data\b2box5.data\parity\conf\app.json"
+ECHO|SET /p="%INSTANCE_ID%">> ".\reference_data\b2box5.data\parity\conf\app.json"
 TYPE ".\reference_data\b2box5.data\parity\conf\platform6_app2.json" >> ".\reference_data\b2box5.data\parity\conf\app.json"
 
 REM ## Update application.conf
-ECHO applicationid=%APPLICATION_ID%>> ".\reference_data\b2box5.data\conf\application.conf"
+ECHO applicationid=%INSTANCE_ID%>> ".\reference_data\b2box5.data\conf\application.conf"
 
 RMDIR /S /Q "\b2box5.data\"
 XCOPY /s /q ".\reference_data\b2box5.data" "\b2box5.data\"

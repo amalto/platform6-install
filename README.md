@@ -39,7 +39,7 @@ cd my-instance
 
 ### Step 2
 
-In the `provision_platform6.sh`/`provision_platform6.bat` file (from the root of your directory), set the variable `APPLICATION_ID` with the Platform 6 instance's name given by Amalto.
+In the `provision_platform6.sh`/`provision_platform6.bat` file (from the root of your directory), set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
 
 ### Step 3
 
@@ -79,6 +79,8 @@ It will start the Platform 6 container.
 Run the script `logs_platform6.sh`/`logs_platform6.bat` to see the logs of the instance.
 
 To stop your Platform 6 instance, run the script `force_stop_platform6.sh`/`force_stop_platform6.bat`.
+
+Once your instance is up and running, you can access the [Portal](http://localhost:8480/#/) with the credentials given by platform6.io.
 
 ## Update your instance's version
 
