@@ -77,14 +77,17 @@ services:
       - platform6
     environment:
      - PROXY_PLAIN_PORT=8480
+     - PROXY_SSL_PORT=8483
      - LOG_FORMAT=string
-     - LOG_LEVEL=3
-     - PROXY_NO_SSL=true
+     - PROXY_ENV=dev
+     - LOG_LEVEL=5
+     - PROXY_NO_SSL=false
      - PROXY_NO_CACHE=true
     links:
      - platform6:b2box
     ports:
      - "8480:8480"
+     - "8483:8483"
     networks:
      - app_net
     healthcheck:
