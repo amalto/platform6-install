@@ -28,7 +28,7 @@ services:
 
   platform6:
     container_name: platform6
-    image: amalto/platform6:5.17.0
+    image: amalto/platform6:latest
     depends_on:
       - pgsql
       - parity
