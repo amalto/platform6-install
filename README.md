@@ -23,7 +23,7 @@ The network ports required are:
 - `5432`: used internally between the Docker containers for PGSQL access.
 - `5900`: used for the messages transactions through the Platform 6 bus.
 - `8080`: used by the Platform 6 proxy (proxy.amalto.io) to have access on the Platform 6 instance.
-- `8480`: used by the Platform 6 proxy (proxy.amalto.io) and allow to access the Amalto local Portal.
+- `8483`: used by the Platform 6 proxy (proxy.amalto.io) and allow to access the Amalto local Portal.
 - `8545`: used by the [Parity](https://www.parity.io/) client.
 
 ## Instructions
