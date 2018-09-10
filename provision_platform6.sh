@@ -10,13 +10,13 @@ export INSTANCE_ID=platform6-developer-x
 # Stop and remove any old container(s)
 docker stop platform6
 docker stop pgsql
-docker stop b2proxy
+docker stop p6proxy
 docker stop parity
 docker stop ethstats
 
 docker rm platform6
 docker rm pgsql
-docker rm b2proxy
+docker rm p6proxy
 docker rm parity
 docker rm ethstats
 

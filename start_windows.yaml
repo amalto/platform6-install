@@ -74,8 +74,8 @@ services:
       app_net:
         ipv4_address: 172.13.0.100
 
-  b2proxy:
-    container_name: b2proxy
+  p6proxy:
+    container_name: p6proxy
     image: amalto/b2proxy
     depends_on:
       - platform6
