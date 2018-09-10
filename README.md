@@ -80,7 +80,7 @@ Run the script `logs_platform6.sh`/`logs_platform6.bat` to see the logs of the i
 
 To stop your Platform 6 instance, run the script `force_stop_platform6.sh`/`force_stop_platform6.bat`.
 
-Once your instance is up and running, you can access the [Portal](http://localhost:8480/#/) with the credentials given by platform6.io.
+Once your instance is up and running, you can access the Portal on [https://Your-MacBook-Pro.local:8483](https://Your-MacBook-Pro.local:8483) by replacing `Your-MacBook-Pro` with your hostname and using your internal dev portal credentials.
 
 ## Update your instance's version
 

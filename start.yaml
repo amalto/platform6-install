@@ -70,21 +70,24 @@ services:
       app_net:
         ipv4_address: 172.13.0.100
 
-  b2proxy:
-    container_name: b2proxy
+  p6proxy:
+    container_name: p6proxy
     image: amalto/b2proxy
     depends_on:
       - platform6
     environment:
      - PROXY_PLAIN_PORT=8480
+     - PROXY_SSL_PORT=8483
      - LOG_FORMAT=string
-     - LOG_LEVEL=3
-     - PROXY_NO_SSL=true
+     - PROXY_ENV=dev
+     - LOG_LEVEL=5
+     - PROXY_NO_SSL=false
      - PROXY_NO_CACHE=true
     links:
      - platform6:b2box
     ports:
      - "8480:8480"
+     - "8483:8483"
     networks:
      - app_net
     healthcheck:
@@ -99,6 +102,4 @@ networks:
     ipam:
       driver: default
       config:
-      -
-        subnet: 172.13.0.0/24
-
+      - subnet: 172.13.0.0/24
