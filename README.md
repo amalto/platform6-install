@@ -55,7 +55,7 @@ Run the script `provision_platform6.sh`/`provision_platform6.bat`.
 
 It will clear the existing Platform 6 containers and volumes, before pulling the data needed for the initialisation of your instance.
 
-> :alarm_clock: This step is normally performed once.
+> ⏰ This step is normally performed once.
 
 ### Step 4
 
