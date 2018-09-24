@@ -1,7 +1,7 @@
 #
 # This file is meant for developers that want to run Platform 6 on their local machine
 #
-version: '3.2'
+version: '3'
 
 services:
 
