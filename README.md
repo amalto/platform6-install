@@ -1,3 +1,8 @@
+# EARLY ADOPTER PROGRAM
+
+> Before running installation scripts you need to signup to our [Early Adopter Program](https://www.platform6.io/early-adopter-pgm-signup/).
+> Once accepted in the program, you will be given an instance id that would allow you to proceed with the installation and use [Platform6](https://www.platform6.io/).
+
 # Platform 6 install
 
 > [Platform 6](https://documentation.amalto.com/platform6/master/) install scripts
@@ -55,7 +60,7 @@ Run the script `provision_platform6.sh`/`provision_platform6.bat`.
 
 It will clear the existing Platform 6 containers and volumes, before pulling the data needed for the initialisation of your instance.
 
-> :alarm_clock: This step is normally performed once.
+> ⏰ This step is normally performed once.
 
 ### Step 4
 
