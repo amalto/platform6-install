@@ -1,7 +1,7 @@
 #
 # This file is meant for developers that want to run Platform 6 on their local machine
 #
-version: '3.2'
+version: '3'
 
 volumes:
   psql:
@@ -103,6 +103,4 @@ networks:
     ipam:
       driver: default
       config:
-      -
-        subnet: 172.13.0.0/24
-
+      - subnet: 172.13.0.0/24
