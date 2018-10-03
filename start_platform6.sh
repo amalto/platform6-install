@@ -3,4 +3,4 @@
 clear
 echo "*** Starting platform6..."
 
-docker-compose -f start.yaml -p platform6 up -d
+docker-compose -f docker-compose.yaml -p platform6 up -d

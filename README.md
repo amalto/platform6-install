@@ -83,7 +83,7 @@ Run the script `start_platform6.sh`/`start_platform6.bat`.
 It will start the Platform 6 container.
 Run the script `logs_platform6.sh`/`logs_platform6.bat` to see the logs of the instance.
 
-To stop your Platform 6 instance, run the script `force_stop_platform6.sh`/`force_stop_platform6.bat`.
+To stop your Platform 6 instance, run the script `stop_platform6.sh`/`stop_platform6.bat`.
 
 Once your instance is up and running, you can access the Portal on [https://Your-MacBook-Pro.local:8483](https://Your-MacBook-Pro.local:8483) by replacing `Your-MacBook-Pro` with your hostname and using your internal dev portal credentials.
 
@@ -91,7 +91,7 @@ Once your instance is up and running, you can access the Portal on [https://Your
 
 In case you receive a notification from Amalto for a new release of Platform 6, you are advised to upgrade the version of your Platform 6 instance.
 
-For that, check that your instance is stopped, then go to the file `start.yaml` and update the version of the image pulled by the `platform6` container.
+For that, check that your instance is stopped, then go to the file `docker-compose.yaml` and update the version of the image pulled by the `platform6` container.
 
 __Example__:
 

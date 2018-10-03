@@ -1,6 +1,9 @@
-ECHO "*** Forcing platform6 to stop..."
+#!/bin/bash
 
-docker-compose -f start_windows.yaml -p platform6 down
+clear
+echo "*** Forcing platform6 to stop..."
+
+docker-compose -f docker-compose.yaml -p platform6 down
 docker stop p6proxy
 docker stop platform6
 docker stop pgsql
