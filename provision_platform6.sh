@@ -1,11 +1,14 @@
 #!/bin/bash
 # set -x
 
-######### Set your INSTANCE_ID HERE ##########
+if [ -e .env ]; then
+    source .env
+else
+    echo "Please set up your .env file before starting your environment."
+    exit 1
+fi
 
-export INSTANCE_ID=platform6-developer-x
-
-######### Set your INSTANCE_ID HERE ##########
+export INSTANCE_DATA_PATH=$PLATFORM6_ROOT/$INSTANCE_ID
 
 # Stop and remove any old container(s)
 docker stop platform6
@@ -21,11 +24,12 @@ docker rm parity
 docker rm ethstats
 
 # Update application.conf
-echo "applicationid=$INSTANCE_ID" >> ./reference_data/b2box5.data/conf/application.conf
+echo "applicationid=$INSTANCE_ID" >> ./reference_data/p6box.data/conf/application.conf
 
 # Update app.json
-sed -i '' "s/noname/$INSTANCE_ID/g" ./reference_data/b2box5.data/parity/conf/app.json
+sed -i '' "s/noname/$INSTANCE_ID/g" ./reference_data/p6box.data/parity/conf/app.json
 
-rm -r /opt/b2box5.data /opt/psql.data
-cp -r ./reference_data/b2box5.data /opt/
-cp -r ./reference_data/psql.data /opt/
+rm -r $INSTANCE_DATA_PATH/p6box.data $INSTANCE_DATA_PATH/psql.data
+mkdir -p $INSTANCE_DATA_PATH
+cp -r ./reference_data/p6box.data $INSTANCE_DATA_PATH/
+cp -r ./reference_data/psql.data $INSTANCE_DATA_PATH/
