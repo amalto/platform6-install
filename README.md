@@ -44,17 +44,15 @@ cd my-instance
 
 ### Step 2
 
-In the `provision_platform6.sh`/`provision_platform6.bat` file (from the root of your directory), set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
-
-### Step 3
-
 __OSX/Linux__
 
-Create a directory `/opt` in your root (`/`) partition if you don't already have one.
+Rename the _.env.sample_ file to `.env` and set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
 
-> ⚠️  Be sure that your user is the owner of the directory and not the user `root`.
+__Windows__
 
-__OSX/Linux/Windows__
+In the `provision_platform6.bat` file (from the root of your directory), set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
+
+### Step 3
 
 Run the script `provision_platform6.sh`/`provision_platform6.bat`.
 
@@ -64,11 +62,7 @@ It will clear the existing Platform 6 containers and volumes, before pulling the
 
 ### Step 4
 
-__OSX__
-
-Share the folders `/opt/b2box5.data` and `/opt/psql.data` with Docker using the __File Sharing__ tab in the Docker settings menu.
-
-![Docker settings menu for OXS](images/docker_file_sharing_osx.png)
+Only Windows:
 
 __Windows__
 
