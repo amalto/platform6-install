@@ -1,7 +1,7 @@
 # EARLY ADOPTER PROGRAM
 
 > Before running installation scripts you need to signup to our [Early Adopter Program](https://www.platform6.io/early-adopter-pgm-signup/).
-> Once accepted in the program, you will be given an instance id that would allow you to proceed with the installation and use [Platform6](https://www.platform6.io/).
+> Once accepted in the program, you will be given an instance id that would allow you to proceed with the installation and use [Platform 6](https://www.platform6.io/).
 
 # Platform 6 install
 
@@ -46,7 +46,7 @@ cd my-instance
 
 __OSX/Linux__
 
-Rename the _.env.sample_ file to `.env` and set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
+Rename the `.env.sample` file to `.env` and set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
 
 __Windows__
 
@@ -61,8 +61,6 @@ It will clear the existing Platform 6 containers and volumes, before pulling the
 > ⏰ This step is normally performed once.
 
 ### Step 4
-
-Only Windows:
 
 __Windows__
 
