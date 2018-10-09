@@ -11,7 +11,7 @@
 
 You need to install [Docker](https://www.docker.com/) on your machine: 
 - OSX: https://docs.docker.com/docker-for-mac/
-- Windows: https://docs.docker.com/docker-for-windows/
+- Windows: https://docs.docker.com/docker-for-windows/ (only Windows Pro is supported!)
 - Linux: https://docs.docker.com/engine/installation/
 
 ⚠️ Please download only the stable channel! We recommend using the following version of Docker: 
