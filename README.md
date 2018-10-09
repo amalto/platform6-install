@@ -56,9 +56,15 @@ In the `provision_platform6.bat` file (from the root of your directory), set the
 
 Run the script `provision_platform6.sh`/`provision_platform6.bat`.
 
-It will clear the existing Platform 6 containers and volumes, before pulling the data needed for the initialisation of your instance.
+It will clear the existing Platform 6 containers and volumes for your instance if any, before pulling the data needed for the initialisation of your instance.
 
 > ⏰ This step is normally performed once.
+
+__OSX/Linux__
+
+By default, it creates a folder called _platform6_ in your _home_ directory (if not already present), where it creates another folder called after your instance id. This is where all your instance data resides. Hence, you can install multiple Platform 6 instances on the same physical machine.
+
+However, you cannot run them at the same time, unless you modify port mapping in the [`docker-compose.yaml`](docker-compose.yaml) for some of your instances to avoid having multiple instances compete for the same port on the physical machine.
 
 ### Step 4
 
