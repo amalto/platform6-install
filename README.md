@@ -31,6 +31,8 @@ The network ports required are:
 - `8483`: used by the Platform 6 proxy (proxy.amalto.io) and allow to access the Amalto local Portal.
 - `8545`: used by the [Parity](https://www.parity.io/) client.
 
+You also need to [login](https://documentation.internal.amalto.com/internal/infrastructure/publish-p6-image/#login-to-the-repository) to Amalto's Docker repository to pull the dev image of Platform 6.
+
 ## Instructions
 
 ### Step 1
