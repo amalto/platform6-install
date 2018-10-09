@@ -1,7 +1,7 @@
 # EARLY ADOPTER PROGRAM
 
 > Before running installation scripts you need to signup to our [Early Adopter Program](https://www.platform6.io/early-adopter-pgm-signup/).
-> Once accepted in the program, you will be given an instance id that would allow you to proceed with the installation and use [Platform6](https://www.platform6.io/).
+> Once accepted in the program, you will be given an instance id that would allow you to proceed with the installation and use [Platform 6](https://www.platform6.io/).
 
 # Platform 6 install
 
@@ -11,7 +11,7 @@
 
 You need to install [Docker](https://www.docker.com/) on your machine: 
 - OSX: https://docs.docker.com/docker-for-mac/
-- Windows: https://docs.docker.com/docker-for-windows/
+- Windows: https://docs.docker.com/docker-for-windows/ (only Windows Pro is supported!)
 - Linux: https://docs.docker.com/engine/installation/
 
 ⚠️ Please download only the stable channel! We recommend using the following version of Docker: 
@@ -44,31 +44,29 @@ cd my-instance
 
 ### Step 2
 
-In the `provision_platform6.sh`/`provision_platform6.bat` file (from the root of your directory), set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
+__OSX/Linux__
+
+Rename the `.env.sample` file to `.env` and set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
+
+__Windows__
+
+In the `provision_platform6.bat` file (from the root of your directory), set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
 
 ### Step 3
 
-__OSX/Linux__
-
-Create a directory `/opt` in your root (`/`) partition if you don't already have one.
-
-> ⚠️  Be sure that your user is the owner of the directory and not the user `root`.
-
-__OSX/Linux/Windows__
-
 Run the script `provision_platform6.sh`/`provision_platform6.bat`.
 
-It will clear the existing Platform 6 containers and volumes, before pulling the data needed for the initialisation of your instance.
+It will clear the existing Platform 6 containers and volumes for your instance if any, before pulling the data needed for the initialisation of your instance.
 
 > ⏰ This step is normally performed once.
 
+__OSX/Linux__
+
+By default, it creates a folder called _platform6_ in your _home_ directory (if not already present), where it creates another folder called after your instance id. This is where all your instance data resides. Hence, you can install multiple Platform 6 instances on the same physical machine.
+
+However, you cannot run them at the same time, unless you modify port mapping in the [`docker-compose.yaml`](docker-compose.yaml) for some of your instances to avoid having multiple instances compete for the same port on the physical machine.
+
 ### Step 4
-
-__OSX__
-
-Share the folders `/opt/b2box5.data` and `/opt/psql.data` with Docker using the __File Sharing__ tab in the Docker settings menu.
-
-![Docker settings menu for OXS](images/docker_file_sharing_osx.png)
 
 __Windows__
 
