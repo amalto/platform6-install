@@ -34,6 +34,7 @@ services:
      - pgsql:database
     ports:
      - "8080:8080"
+     - "2222:2222"
      - "5005:5005"
      - "5900:5900"
     networks:
