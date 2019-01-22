@@ -12,4 +12,4 @@ fi
 
 export INSTANCE_DATA_PATH=$PLATFORM6_ROOT/$INSTANCE_ID
 
-docker-compose -f docker-compose.yaml -p p6core up -d
+docker-compose -f docker-compose.yaml -p platform6 up -d
