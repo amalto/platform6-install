@@ -26,14 +26,14 @@ services:
       timeout: 3s
       retries: 30
 
-  platform6:
-    container_name: platform6
+  p6core:
+    container_name: p6core
     image: repo.amalto.com/b2box:dev
     depends_on:
       - pgsql
       - parity
     volumes:
-     - c:/p6box.data:/opt/b2box5.data
+     - c:/p6core.data:/opt/b2box5.data
     links:
      - pgsql:database
     ports:
@@ -55,7 +55,7 @@ services:
       --allow-ips=public
       --no-discovery
     volumes:
-      - c:/p6box.data/parity/conf/:/opt/parityconf
+      - c:/p6core.data/parity/conf/:/opt/parityconf
       - parityinstance:/root/.local/share/io.parity.ethereum
     ports:
       - 8545:8545
@@ -69,7 +69,7 @@ services:
     depends_on:
       - parity
     volumes:
-      - c:/p6box.data/parity/conf/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
+      - c:/p6core.data/parity/conf/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
     networks:
       app_net:
         ipv4_address: 172.13.0.100
@@ -78,7 +78,7 @@ services:
     container_name: p6proxy
     image: amalto/b2proxy
     depends_on:
-      - platform6
+      - p6core
     environment:
      - PROXY_PLAIN_PORT=8480
      - PROXY_SSL_PORT=8483
@@ -88,7 +88,7 @@ services:
      - PROXY_NO_SSL=false
      - PROXY_NO_CACHE=true
     links:
-     - platform6:b2box
+     - p6core:b2box
     ports:
      - "8480:8480"
      - "8483:8483"

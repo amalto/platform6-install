@@ -1,0 +1,18 @@
+[parity]
+chain = "/opt/parityconf/chain.json"
+
+[network]
+bootnodes = [
+  "enode://6add83dfc2c848ca3129d6785a01fc1f5dc6ec43e312f12dbd39ec858efc2cab0b9fc03934519295a5878566a11a6a530353e998a80a89cffe445f710952a1c6@158.69.185.171:30306",
+  "enode://15f06d6e4ba9f4cec034e1ca311e4a1a1dbf55b9c84ea5d7e43893a377029ae292e2de86ab5e25fa8ee7d3ca3d624fc92972500a1ac3b931dd080325857dc4af@158.69.185.171:30307",
+  "enode://2da364864d5954fd34b3f6a5bc69ff4b3ee6cf4d29b879487ca82d92eccf421c75fddb5b53a52f3abf9258804b527ee0d92451cde5b8f4c8b61e33451ab34d7c@158.69.185.171:30308"
+]
+
+[websockets]
+disable = true
+
+[rpc]
+interface = "0.0.0.0"
+cors = ["all"]
+hosts = ["all"]
+apis = ["web3", "eth", "net", "rpc"]

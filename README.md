@@ -98,7 +98,7 @@ __Example__:
 Say you want the version `5.15.5`, the configuration of the `platform6` container should start with the following:
 
 ```yaml
-platform6:
-    container_name: platform6
+p6core:
+    container_name: p6core
     image: amalto/platform6:5.15.5
 ```
