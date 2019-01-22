@@ -1,1 +1,1 @@
-docker exec -it platform6 tail -f /opt/b2box5.data/logs/b2box.log
+docker exec -it p6core tail -f /opt/b2box5.data/logs/b2box.log

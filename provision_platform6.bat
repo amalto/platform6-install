@@ -6,14 +6,14 @@ REM ######### Set your INSTANCE_ID HERE ##########
 
 
 REM ## Stop and remove any old container(s)
-docker stop platform6
+docker stop p6core
 docker stop pgsql
 docker stop p6proxy
 docker stop parity
 docker stop ethstats
 docker stop psql-data
 
-docker rm platform6
+docker rm p6core
 docker rm pgsql
 docker rm p6proxy
 docker rm parity

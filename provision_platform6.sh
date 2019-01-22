@@ -11,13 +11,13 @@ fi
 export INSTANCE_DATA_PATH=$PLATFORM6_ROOT/$INSTANCE_ID
 
 # Stop and remove any old container(s)
-docker stop platform6
+docker stop p6core
 docker stop pgsql
 docker stop p6proxy
 docker stop parity
 docker stop ethstats
 
-docker rm platform6
+docker rm p6core
 docker rm pgsql
 docker rm p6proxy
 docker rm parity

@@ -26,8 +26,8 @@ services:
       timeout: 3s
       retries: 30
 
-  platform6:
-    container_name: platform6
+  p6core:
+    container_name: p6core
     image: amalto/platform6:latest
     depends_on:
       - pgsql
@@ -78,7 +78,7 @@ services:
     container_name: p6proxy
     image: amalto/b2proxy
     depends_on:
-      - platform6
+      - p6core
     environment:
      - PROXY_PLAIN_PORT=8480
      - LOG_FORMAT=string
@@ -86,7 +86,7 @@ services:
      - PROXY_NO_SSL=true
      - PROXY_NO_CACHE=true
     links:
-     - platform6:b2box
+     - p6core:b2box
     ports:
      - "8480:8480"
     networks:
