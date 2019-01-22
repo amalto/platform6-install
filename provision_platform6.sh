@@ -24,12 +24,12 @@ docker rm parity
 docker rm ethstats
 
 # Update application.conf
-echo "applicationid=$INSTANCE_ID" >> ./reference_data/p6box.data/conf/application.conf
+echo "applicationid=$INSTANCE_ID" >> ./reference_data/p6core.data/conf/application.conf
 
 # Update app.json
-sed -i '' "s/noname/$INSTANCE_ID/g" ./reference_data/p6box.data/parity/conf/app.json
+sed -i '' "s/noname/$INSTANCE_ID/g" ./reference_data/p6core.data/parity/conf/app.json
 
-rm -r $INSTANCE_DATA_PATH/p6box.data $INSTANCE_DATA_PATH/psql.data
+rm -r $INSTANCE_DATA_PATH/p6core.data $INSTANCE_DATA_PATH/psql.data
 mkdir -p $INSTANCE_DATA_PATH
-cp -r ./reference_data/p6box.data $INSTANCE_DATA_PATH/
+cp -r ./reference_data/p6core.data $INSTANCE_DATA_PATH/
 cp -r ./reference_data/psql.data $INSTANCE_DATA_PATH/
