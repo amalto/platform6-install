@@ -110,7 +110,7 @@ services:
     ports:
       - "9545:8545"
     volumes:
-      - $INSTANCE_DATA_PATH/p6box.data/demo/pantheon:/var/lib/pantheon
+      - $INSTANCE_DATA_PATH/p6core.data/demo/pantheon:/var/lib/pantheon
     networks:
       app_net:
         ipv4_address: 172.13.0.20
