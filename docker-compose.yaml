@@ -71,6 +71,7 @@ services:
       app_net:
         ipv4_address: 172.13.0.100
 
+  # Only for testing on a local machine, you don't need this container in production
   p6proxy:
     container_name: p6proxy
     image: amalto/b2proxy
@@ -93,6 +94,26 @@ services:
       interval: 5s
       timeout: 2s
       retries: 20
+
+  # Local Ethereum blockchain used by the Demo App, delete this container in production
+  demobc:
+    container_name: demobc
+    image: pegasyseng/pantheon:latest
+    command:
+      --dev-mode
+      --rpc-enabled
+      --ws-enabled
+      --host-whitelist=172.13.0.20
+      --rpc-cors-origins="all"
+      --miner-enabled
+      --miner-coinbase fe3b557e8fb62b89f4916b721be55ceb828dbd73
+    ports:
+      - "9545:8545"
+    volumes:
+      - $INSTANCE_DATA_PATH/p6box.data/demo/pantheon:/var/lib/pantheon
+    networks:
+      app_net:
+        ipv4_address: 172.13.0.20
 
 networks:
   app_net:

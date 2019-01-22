@@ -16,12 +16,14 @@ docker stop pgsql
 docker stop p6proxy
 docker stop parity
 docker stop ethstats
+docker stop demobc
 
 docker rm p6core
 docker rm pgsql
 docker rm p6proxy
 docker rm parity
 docker rm ethstats
+docker rm demobc
 
 # Update application.conf
 echo "applicationid=$INSTANCE_ID" >> ./reference_data/p6core.data/conf/application.conf
