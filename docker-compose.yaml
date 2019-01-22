@@ -9,13 +9,13 @@ services:
     container_name: pgsql
     image: postgres:9.6.1
     volumes:
-     - $INSTANCE_DATA_PATH/psql.data:/opt/psql.data
+      - $INSTANCE_DATA_PATH/psql.data:/opt/psql.data
     environment:
-     - PGDATA=/opt/psql.data
+      - PGDATA=/opt/psql.data
     ports:
-     - "5432:5432"
+      - "5432:5432"
     networks:
-     - app_net
+      - app_net
     healthcheck:
       test: ["CMD", "pg_isready", "-d", "b2box", "-U", "b2box", "-q"]
       interval: 1s
@@ -29,20 +29,20 @@ services:
       - pgsql
       - parity
     volumes:
-     - $INSTANCE_DATA_PATH/p6core.data:/opt/b2box5.data
+      - $INSTANCE_DATA_PATH/p6core.data:/opt/b2box5.data
     links:
-     - pgsql:database
+      - pgsql:database
     ports:
-     - "8080:8080"
-     - "2222:2222"
-     - "5005:5005"
-     - "5900:5900"
+      - "8080:8080"
+      - "2222:2222"
+      - "5005:5005"
+      - "5900:5900"
     networks:
-     - app_net
+      - app_net
     environment:
-     - S6_KILL_GRACETIME=300000
-     - XMX=3g
-    
+      - S6_KILL_GRACETIME=300000
+      - XMX=3g
+
   parity:
     container_name: parity
     image: parity/parity:stable
@@ -77,22 +77,22 @@ services:
     depends_on:
       - p6core
     environment:
-     - PROXY_PLAIN_PORT=8480
-     - LOG_FORMAT=string
-     - LOG_LEVEL=3
-     - PROXY_NO_SSL=true
-     - PROXY_NO_CACHE=true
+      - PROXY_PLAIN_PORT=8480
+      - LOG_FORMAT=string
+      - LOG_LEVEL=3
+      - PROXY_NO_SSL=true
+      - PROXY_NO_CACHE=true
     links:
-     - p6core:b2box
+      - p6core:b2box
     ports:
-     - "8480:8480"
+      - "8480:8480"
     networks:
-     - app_net
+      - app_net
     healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:8480"]
-        interval: 5s
-        timeout: 2s
-        retries: 20
+      test: ["CMD", "curl", "-f", "http://localhost:8480"]
+      interval: 5s
+      timeout: 2s
+      retries: 20
 
 networks:
   app_net:
@@ -100,4 +100,4 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet: 172.13.0.0/24
+        - subnet: 172.13.0.0/24
