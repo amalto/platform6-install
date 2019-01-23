@@ -106,7 +106,7 @@ services:
       --dev-mode
       --rpc-enabled
       --ws-enabled
-      --host-whitelist=172.13.0.20
+      --host-whitelist="all"
       --rpc-cors-origins="all"
       --miner-enabled
       --miner-coinbase fe3b557e8fb62b89f4916b721be55ceb828dbd73
@@ -117,6 +117,18 @@ services:
     networks:
       app_net:
         ipv4_address: 172.13.0.20
+
+  # Light Ethereum blockchain explorer used by the Demo App, delete this container in production
+  #demoexplorer:
+  #  container_name: demoexplorer
+  #  image: alethio/ethstats-lite-explorer
+  #  environment:
+  #    - NODE_URL='http://172.13.0.30:8545'
+  #  ports:
+  #    - "80:80"
+  #  networks:
+  #    app_net:
+  #      ipv4_address: 172.13.0.30
 
 networks:
   app_net:
