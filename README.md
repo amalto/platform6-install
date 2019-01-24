@@ -71,7 +71,7 @@ In the `provision_platform6.bat` file (from the root of your directory), set the
 Run the script `provision_platform6.sh`/`provision_platform6.bat`.
 
 It will clear the existing Platform 6 containers and volumes for your instance if any, before pulling the data needed for the initialisation of your instance.
-When you run this script for the first time, it will try to delete a previous installation and throw errors because it cannot find any, therefore you can safely __ignore these errors_.
+When you run this script for the first time, it will try to delete a previous installation and throw errors because it cannot find any, therefore you can __safely ignore these errors__.
 
 > ⏰ This step is normally performed once.
 
