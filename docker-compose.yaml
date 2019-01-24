@@ -92,11 +92,6 @@ services:
       - "8483:8483"
     networks:
       - app_net
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8480"]
-      interval: 5s
-      timeout: 2s
-      retries: 20
 
   # Local Ethereum blockchain used by the Demo App, delete this container in production
   demobc:
@@ -123,12 +118,12 @@ services:
   #  container_name: demoexplorer
   #  image: alethio/ethstats-lite-explorer
   #  environment:
-  #    - NODE_URL='http://172.13.0.30:8545'
+  #    - NODE_URL='http://172.13.0.20:8545'
   #  ports:
   #    - "80:80"
   #  networks:
   #    app_net:
-  #      ipv4_address: 172.13.0.30
+  #      ipv4_address: 172.13.0.200
 
 networks:
   app_net:

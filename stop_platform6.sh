@@ -13,6 +13,7 @@ docker stop pgsql
 docker stop parity
 docker stop ethstats
 docker stop demobc
+docker stop demoexplorer
 
 docker network ls
 docker network rm platform6_app_net

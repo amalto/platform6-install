@@ -23,13 +23,27 @@ You'll find in the __Getting Started__ how to update your settings:
 - OSX: https://docs.docker.com/docker-for-mac/#memory.
 - Windows: https://docs.docker.com/docker-for-windows/#advanced
 
-The network ports required are:
+The network ports used are:
+- `2222`: used for SFTP.
 - `5005`: used by the Java debug port.
 - `5432`: used internally between the Docker containers for PGSQL access.
 - `5900`: used for the messages transactions through the Platform 6 bus.
 - `8080`: used by the Platform 6 proxy (proxy.amalto.io) to have access on the Platform 6 instance.
 - `8483`: used by the Platform 6 proxy (proxy.amalto.io) and allow to access the Amalto local Portal.
 - `8545`: used by the [Parity](https://www.parity.io/) client.
+
+In production, __only__ the following ports are __required__ to be open on the host machine: 2222, 8080 and 8545. All other ports should be closed and only used within Docker.
+
+## Docker Containers
+
+The current installation of Platform 6 relies on [Docker Compose](https://docs.docker.com/compose/install/) to launch the following containers on a single host machine:
+- _pgsql_: The database container used by P6 Core.
+- _p6core_: The Platform 6 Core container where P6 applications run.
+- _parity_: A node of the Platform 6 private blockchain to track P6 credit consumption.
+- _ethstats_: Monitors the _parity_ node.
+- _p6proxy_: This container is only required if you want to run the Platform 6 Portal locally. _You can safely delete it in production._
+- _demobc_: A local Ethereum blockchain node used by the Demo App. _You can safely delete it in production._
+- _demoexplorer_: A web UI to monitor the Demo blockchain. _You can safely delete it in production._
 
 You also need to [login](https://documentation.internal.amalto.com/internal/infrastructure/publish-p6-image/#login-to-the-repository) to Amalto's Docker repository to pull the dev image of Platform 6.
 
@@ -59,12 +73,13 @@ In the `provision_platform6.bat` file (from the root of your directory), set the
 Run the script `provision_platform6.sh`/`provision_platform6.bat`.
 
 It will clear the existing Platform 6 containers and volumes for your instance if any, before pulling the data needed for the initialisation of your instance.
+When you run this script for the first time, it will try to delete a previous installation and throw errors because it cannot find any, therefore you can __safely ignore these errors__.
 
 > ⏰ This step is normally performed once.
 
 __OSX/Linux__
 
-By default, it creates a folder called _platform6_ in your _home_ directory (if not already present), where it creates another folder called after your instance id. This is where all your instance data resides. Hence, you can install multiple Platform 6 instances on the same physical machine.
+By default, it creates a folder called _platform6/instances_ in your _home_ directory (if not already present), where it creates another folder called after your instance id. This is where all your instance data resides. Hence, you can install multiple Platform 6 instances on the same physical machine.
 
 However, you cannot run them at the same time, unless you modify port mapping in the [`docker-compose.yaml`](docker-compose.yaml) for some of your instances to avoid having multiple instances compete for the same port on the physical machine.
 
