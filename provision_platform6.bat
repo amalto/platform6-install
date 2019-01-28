@@ -23,7 +23,7 @@ docker rm ethstats
 REM ## Update/build app.json
 DEL /Q /S ".\reference_data\p6core.data\parity\conf\app.json"
 TYPE ".\reference_data\p6core.data\parity\conf\platform6_app1.json" > ".\reference_data\p6core.data\parity\conf\app.json"
-ECHO|SET /p="%INSTANCE_ID%">> ".\reference_data\b2box5.data\parity\conf\app.json"
+ECHO|SET /p="%INSTANCE_ID%">> ".\reference_data\p6core.data\parity\conf\app.json"
 TYPE ".\reference_data\p6core.data\parity\conf\platform6_app2.json" >> ".\reference_data\p6core.data\parity\conf\app.json"
 
 REM ## Update application.conf
