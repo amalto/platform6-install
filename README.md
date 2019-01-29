@@ -117,3 +117,9 @@ p6core:
     container_name: p6core
     image: amalto/platform6:5.15.5
 ```
+
+## Troubleshooting
+
+__Windows__
+
+Whenever Docker is a pain to mount your volumes on Windows, check this [very useful link](https://stackoverflow.com/questions/45972812/are-you-trying-to-mount-a-directory-onto-a-file-or-vice-versa), especially the answer that starts with _If you are using Docker for Windows..._
