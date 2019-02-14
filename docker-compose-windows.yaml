@@ -103,11 +103,11 @@ services:
     container_name: demobc
     image: pegasyseng/pantheon:latest
     command:
-      --dev-mode
-      --rpc-enabled
-      --ws-enabled
+      --network=dev
+      --rpc-http-enabled
+      --rpc-ws-enabled
       --host-whitelist="all"
-      --rpc-cors-origins="all"
+      --rpc-http-cors-origins="all"
       --miner-enabled
       --miner-coinbase fe3b557e8fb62b89f4916b721be55ceb828dbd73
     ports:
