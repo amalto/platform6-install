@@ -34,7 +34,7 @@ services:
       - pgsql
       - parity
     volumes:
-      - c:/p6core.data:/opt/b2box5.data
+      - $INSTANCE_DATA_PATH/p6core.data:/opt/b2box5.data
     links:
       - pgsql:database
     ports:
@@ -57,7 +57,7 @@ services:
       --allow-ips=public
       --no-discovery
     volumes:
-      - c:/p6core.data/parity/conf/:/opt/parityconf
+      - $INSTANCE_DATA_PATH/p6core.data/parity/conf/:/opt/parityconf
       - parityinstance:/root/.local/share/io.parity.ethereum
     ports:
       - 8545:8545
@@ -71,7 +71,7 @@ services:
     depends_on:
       - parity
     volumes:
-      - c:/p6core.data/parity/conf/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
+      - $INSTANCE_DATA_PATH/p6core.data/parity/conf/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
     networks:
       app_net:
         ipv4_address: 172.13.0.100

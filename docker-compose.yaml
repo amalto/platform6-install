@@ -27,7 +27,7 @@ services:
     image: repo.amalto.com/b2box:dev
     depends_on:
       - pgsql
-      - parity
+   #   - parity
     volumes:
       - $INSTANCE_DATA_PATH/p6core.data:/opt/b2box5.data
     links:
@@ -43,33 +43,33 @@ services:
       - S6_KILL_GRACETIME=300000
       - XMX=3g
 
-  parity:
-    container_name: parity
-    image: parity/parity:stable
-    command:
-      --config /opt/parityconf/p6instance.toml
-      --jsonrpc-interface all
-      --allow-ips=public
-      --no-discovery
-    volumes:
-      - $INSTANCE_DATA_PATH/p6core.data/parity/conf/:/opt/parityconf
-      - $INSTANCE_DATA_PATH/p6core.data/parity/instance:/root/.local/share/io.parity.ethereum/
-    ports:
-      - 8545:8545
-    networks:
-      app_net:
-        ipv4_address: 172.13.0.10
+  #parity:
+  #  container_name: parity
+  #  image: parity/parity:stable
+  #  command:
+  #    --config /opt/parityconf/p6instance.toml
+  #    --jsonrpc-interface all
+  #    --allow-ips=public
+  #    --no-discovery
+  #  volumes:
+  #    - $INSTANCE_DATA_PATH/p6core.data/parity/conf/:/opt/parityconf
+  #    - $INSTANCE_DATA_PATH/p6core.data/parity/instance:/root/.local/share/io.parity.ethereum/
+  #  ports:
+  #    - 8545:8545
+  #  networks:
+  #    app_net:
+  #      ipv4_address: 172.13.0.10
 
-  ethstats:
-    container_name: ethstats
-    image: buythewhale/ethstats_monitor
-    depends_on:
-      - parity
-    volumes:
-      - $INSTANCE_DATA_PATH/p6core.data/parity/conf/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
-    networks:
-      app_net:
-        ipv4_address: 172.13.0.100
+  #ethstats:
+  #  container_name: ethstats
+  #  image: buythewhale/ethstats_monitor
+  #  depends_on:
+  #    - parity
+  #  volumes:
+  #    - $INSTANCE_DATA_PATH/p6core.data/parity/conf/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
+  #  networks:
+  #    app_net:
+  #      ipv4_address: 172.13.0.100
 
   # Only for testing on a local machine, you don't need this container in production
   p6proxy:
