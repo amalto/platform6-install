@@ -1,9 +1,0 @@
-", // whatever you wish to name your node
-	  "CONTACT_DETAILS" : "www.amalto.com", // add your contact details here if you wish (email/skype)
-	  "WS_SERVER"       : "ws://p6chain00.amalto.io:3001", // path to eth-netstats WebSockets api server
-	  "WS_SECRET"       : "123", // WebSockets api server secret used for login
-      "VERBOSITY"       : 3
-    }
-  }
-]
-

@@ -30,17 +30,14 @@ The network ports used are:
 - `5900`: used for the messages transactions through the Platform 6 bus.
 - `8080`: used by the Platform 6 proxy (proxy.amalto.io) to have access on the Platform 6 instance.
 - `8483`: used by the Platform 6 proxy (proxy.amalto.io) and allow to access the Amalto local Portal.
-- `8545`: used by the [Parity](https://www.parity.io/) client.
 
-In production, __only__ the following ports are __required__ to be open on the host machine: 2222, 8080 and 8545. All other ports should be closed and only used within Docker.
+In production, __only__ the following ports are __required__ to be open on the host machine: 2222 and 8080. All other ports should be closed and only used within Docker.
 
 ## Docker Containers
 
 The current installation of Platform 6 relies on [Docker Compose](https://docs.docker.com/compose/install/) to launch the following containers on a single host machine:
 - _pgsql_: The database container used by P6 Core.
 - _p6core_: The Platform 6 Core container where P6 applications run.
-- _parity_: A node of the Platform 6 private blockchain to track P6 credit consumption.
-- _ethstats_: Monitors the _parity_ node.
 - _p6proxy_: This container is only required if you want to run the Platform 6 Portal locally. _You can safely delete it in production._
 - _demobc_: A local Ethereum blockchain node used by the Demo App. _You can safely delete it in production._
 - _demoexplorer_: A web UI to monitor the Demo blockchain. _You can safely delete it in production._
