@@ -10,8 +10,6 @@ docker-compose -f docker-compose.yaml -p platform6 down
 docker stop p6proxy
 docker stop p6core
 docker stop pgsql
-docker stop parity
-docker stop ethstats
 docker stop demobc
 docker stop demoexplorer
 
