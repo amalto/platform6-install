@@ -55,13 +55,11 @@ cd my-instance
 
 ### Step 2
 
-__OSX/Linux__
-
 Rename the `.env.sample` file to `.env` and set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
 
 __Windows__
 
-In the `provision_platform6.bat` file (from the root of your directory), set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
+Also, set the variable `PLATFORM6_ROOT` to the path where you wish to install your instance.
 
 ### Step 3
 
@@ -112,6 +110,16 @@ p6core:
     container_name: p6core
     image: amalto/platform6:5.15.5
 ```
+
+## Update your database version
+
+The database version is specified in the `.env` file. If you would like to change it follow these steps:
+
+* First, export all your database data by running `pgsql_export.sh` (Unix) / `pgsql_export.bat` (Windows), while your database is still running with the old version. This will create a dump file in the `database_dumps` folder.
+* Stop your instance by running `stop_platform6.sh` (Unix) / `stop_platform6.bat` (Windows).
+* Set the variable `PGSQL_VERSION` in the `.env` file to the desired version, minimum version is 9.6.1.
+* Run `pgsql_import.sh` (Unix) / `pgsql_import.bat` (Windows).
+* Start your instance by running `start_platform6.sh` (Unix) / `start_platform6.bat` (Windows).
 
 ## Troubleshooting
 
