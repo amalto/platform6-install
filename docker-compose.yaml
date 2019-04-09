@@ -7,7 +7,7 @@ services:
 
   pgsql:
     container_name: pgsql
-    image: postgres:9.6.1
+    image: postgres:$PGSQL_VERSION
     volumes:
       - $INSTANCE_DATA_PATH/psql.data:/opt/psql.data
     environment:

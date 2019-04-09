@@ -1,5 +1,4 @@
-docker run -d --rm --name psql-export -v platform6_psql:/opt/psql.data alpine sleep 3600
-docker cp psql-export:/opt/psql.data .\reference_data\psql.data.backup
-docker stop psql-export
+if not exist database_dumps mkdir database_dumps
+docker exec -t pgsql pg_dumpall -c -U postgres > .\database_dumps\dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
 
-ECHO "## Export Complete."
+echo "### Export Complete."
