@@ -26,7 +26,26 @@ docker rm demoexplorer
 # Update application.conf
 echo "applicationid=$INSTANCE_ID" >> ./reference_data/p6core.data/conf/application.conf
 
+# Delete old folders if any
 rm -r $INSTANCE_DATA_PATH/p6core.data $INSTANCE_DATA_PATH/psql.data
+
+# Copy Platform 6 instance reference data
 mkdir -p $INSTANCE_DATA_PATH
 cp -r ./reference_data/p6core.data $INSTANCE_DATA_PATH/
-cp -r ./reference_data/psql.data $INSTANCE_DATA_PATH/
+
+# Start a database container that maps to the intended location on disk
+docker run -d --rm \
+ -p 5432:5432 \
+ --name pgsql \
+ -v $INSTANCE_DATA_PATH/psql.data:/opt/psql.data \
+ -e "PGDATA=/opt/psql.data" \
+ postgres:$PGSQL_VERSION
+
+# Sleep 20 seconds to wait for the database to finish startup
+sleep 20
+
+# Initialize the database instance with reference data
+cat ./reference_data/reference.sql | docker exec -i pgsql psql -U postgres
+
+# Stop the database container
+docker stop pgsql
