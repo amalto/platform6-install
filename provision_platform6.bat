@@ -1,10 +1,5 @@
-REM ######### Set your env variables ##########
-
 for /f "delims== tokens=1,2" %%G in (.env) do set %%G=%%H
 set INSTANCE_DATA_PATH=%PLATFORM6_ROOT%\%INSTANCE_ID%
-
-REM ######### Set your env variables ##########
-
 
 REM ## Stop and remove any old container(s)
 docker stop p6core

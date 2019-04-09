@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-docker exec -it p6core tail -f /opt/b2box5.data/logs/b2box.log | awk '
+docker exec -it p6core tail -f -n 1000 /opt/b2box5.data/logs/b2box.log | awk '
   BEGIN{startingLine=0;color="\033[0m"}
   {matched=0}
   /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}\:[0-9]{2}\:[0-9]{2}\,[0-9]{3}/ {startingLine=1}
