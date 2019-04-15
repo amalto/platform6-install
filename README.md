@@ -51,7 +51,7 @@ You also need to [login](https://documentation.internal.amalto.com/internal/infr
 Once Docker is running, clone the Git repository into a new directory dedicated to your local instance.
 
 ```
-git clone git@github.com:amalto/platform6-install.git my-instance
+git clone https://github.com/amalto/platform6-install.git my-instance
 cd my-instance
 ```
 
