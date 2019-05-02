@@ -42,6 +42,12 @@ mkdir -p $INSTANCE_DATA_PATH
 cp -r ../reference_data/p6core.data $INSTANCE_DATA_PATH/p6core1.data
 cp -r ../reference_data/p6core.data $INSTANCE_DATA_PATH/p6core2.data
 
+# The resources folder should be common all P6 Core instances
+mkdir -p $INSTANCE_DATA_PATH/p6core.data
+cp -r ../reference_data/p6core.data/resources $INSTANCE_DATA_PATH/p6core.data
+rm -r $INSTANCE_DATA_PATH/p6core1.data/resources
+rm -r $INSTANCE_DATA_PATH/p6core2.data/resources
+
 mkdir -p $INSTANCE_DATA_PATH/loadbalancer
 cp ./traefik.toml $INSTANCE_DATA_PATH/loadbalancer/
 
