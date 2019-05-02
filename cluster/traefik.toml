@@ -1,0 +1,46 @@
+defaultEntryPoints = ["http"]
+logLevel = "DEBUG"
+
+
+# Routing configuration
+
+# Use the file provider to configure routes
+# Do not remove this tag, otherwise this file would be ignored!
+[file]
+
+
+[entryPoints]
+
+  [entryPoints.http]
+    address = ":8080"
+
+  [entryPoints.ui]
+    address = ":8481"
+
+
+[frontends]
+
+  [frontends.frontend1]
+    backend = "p6core"
+
+
+[backends]
+
+  [backends.p6core]
+  [backends.p6core.servers.server1]
+    url = "http://172.13.0.10:8080"
+
+  [backends.p6core.servers.server2]
+    url = "http://172.13.0.11:8080"
+
+
+# Dashboard config, only activate it in dev, never in production!
+[api]
+  entryPoint = "ui"
+  dashboard = true
+  debug = true
+
+
+# Log configuration
+[traefikLog]
+  filePath = "/etc/traefik/traefik.log"
