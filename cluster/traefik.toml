@@ -28,8 +28,9 @@ logLevel = "DEBUG"
 
   [backends.p6core]
 
+  # TODO Uncomment once HTTP Basic Auth is removed from this endpoint
   #[backends.p6core.healthCheck]
-  #  path = "/b2box/rest/resource/api-docs"
+  #  path = "/b2box/rest/resource/vmstats"
   #  interval = "10s"
 
   [backends.p6core.servers.server1]
