@@ -28,6 +28,7 @@ services:
     depends_on:
       - pgsql
     volumes:
+      - $INSTANCE_DATA_PATH/p6core.data/resources:/opt/b2box5.data/resources
       - $INSTANCE_DATA_PATH/p6core1.data:/opt/b2box5.data
     links:
       - pgsql:database
@@ -50,6 +51,7 @@ services:
       - pgsql
       - p6core1
     volumes:
+      - $INSTANCE_DATA_PATH/p6core.data/resources:/opt/b2box5.data/resources
       - $INSTANCE_DATA_PATH/p6core2.data:/opt/b2box5.data
     links:
       - pgsql:database
