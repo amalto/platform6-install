@@ -24,7 +24,7 @@ docker rm demobc
 docker rm demoexplorer
 
 # Update application.conf
-echo "applicationid=$INSTANCE_ID" >> ./reference_data/p6core.data/conf/application.conf
+echo "instance.id=$INSTANCE_ID" >> ./reference_data/p6core.data/conf/application.conf
 
 # Delete old folders if any
 rm -r $INSTANCE_DATA_PATH/p6core.data $INSTANCE_DATA_PATH/psql.data

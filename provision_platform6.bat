@@ -16,7 +16,7 @@ docker rm demobc
 docker rm demoexplorer
 
 REM ## Update application.conf
-ECHO applicationid=%INSTANCE_ID%>> ".\reference_data\p6core.data\conf\application.conf"
+ECHO instance.id=%INSTANCE_ID%>> ".\reference_data\p6core.data\conf\application.conf"
 
 REM ## Delete old folders if any
 RMDIR /S /Q "%INSTANCE_DATA_PATH%\p6core.data\"
