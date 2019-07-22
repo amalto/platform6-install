@@ -1,7 +1,6 @@
 #!/bin/bash
 
 source .env
-export INSTANCE_DATA_PATH=$PLATFORM6_ROOT/$INSTANCE_ID
 
 rm -r $INSTANCE_DATA_PATH/psql.data
 
