@@ -1,7 +1,6 @@
 CLS
 
 for /f "delims== tokens=1,2" %%G in (.env) do set %%G=%%H
-set INSTANCE_DATA_PATH=%PLATFORM6_ROOT%\%INSTANCE_ID%
 
 ECHO "*** Starting Platform 6..."
 

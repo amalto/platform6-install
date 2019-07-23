@@ -28,7 +28,7 @@ services:
 
   p6core:
     container_name: p6core
-    image: amalto/platform6:latest
+    image: $P6CORE_IMAGE_ID
     depends_on:
       - pgsql
     volumes:
