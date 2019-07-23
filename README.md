@@ -99,17 +99,12 @@ Once your instance is up and running, you can access the [Portal](http://localho
 
 In case you receive a notification from Amalto for a new release of Platform 6, you are advised to upgrade the version of your Platform 6 instance.
 
-For that, check that your instance is stopped, then go to the file `docker-compose.yaml` and update the version of the image pulled by the `platform6` container.
+For that, check that your instance is stopped, then:
 
-__Example__:
-
-Say you want the version `5.15.5`, the configuration of the `platform6` container should start with the following:
-
-```yaml
-p6core:
-    container_name: p6core
-    image: amalto/platform6:5.15.5
-```
+* Pull the latest version of this repo.
+* Set the `PLATFORM6_VERSION` variable in the `.env` file to the desired version.
+* Carefully read the [migration guide](https://documentation.amalto.com/platform6/master/releases/migration/migration-troubleshooting/) for any additional steps to apply.
+* Start your instance.
 
 ## Update your database version
 
