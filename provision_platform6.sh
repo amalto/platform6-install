@@ -36,6 +36,14 @@ fi
 # Write generated environment variables on disc
 export INSTANCE_DATA_PATH=$PLATFORM6_ROOT/$INSTANCE_ID
 
+if [[ "$PLATFORM6_VERSION" == *-SNAPSHOT ]]
+then
+    export P6CORE_IMAGE_ID='repo.amalto.com/b2box:dev'
+else
+    export P6CORE_IMAGE_ID='amalto/platform6:'$PLATFORM6_VERSION
+fi
+
+echo "P6CORE_IMAGE_ID=$P6CORE_IMAGE_ID" >> .env
 echo "INSTANCE_DATA_PATH=$INSTANCE_DATA_PATH" >> .env
 echo "PGSQL_VERSION=$PGSQL_VERSION" >> .env
 
@@ -44,7 +52,13 @@ rm -r $INSTANCE_DATA_PATH/p6core.data $INSTANCE_DATA_PATH/psql.data
 
 # Copy Platform 6 instance reference data
 mkdir -p $INSTANCE_DATA_PATH
-cp -r ./reference_data/$PLATFORM6_VERSION/p6core.data $INSTANCE_DATA_PATH/
+
+if [[ "$PLATFORM6_VERSION" == *-SNAPSHOT ]]
+then
+    cp -r ./reference_data/SNAPSHOT/p6core.data $INSTANCE_DATA_PATH/
+else
+    cp -r ./reference_data/$PLATFORM6_VERSION/p6core.data $INSTANCE_DATA_PATH/
+fi
 
 # Update application.conf
 if [ $PLATFORM6_VERSION == '5.24.6' ] ||
@@ -68,7 +82,12 @@ docker run -d --rm \
 sleep 20
 
 # Initialize the database instance with reference data
-cat ./reference_data/$PLATFORM6_VERSION/reference.sql | docker exec -i pgsql psql -U postgres
+if [[ "$PLATFORM6_VERSION" == *-SNAPSHOT ]]
+then
+    cat ./reference_data/SNAPSHOT/reference.sql | docker exec -i pgsql psql -U postgres
+else
+    cat ./reference_data/$PLATFORM6_VERSION/reference.sql | docker exec -i pgsql psql -U postgres
+fi
 
 # Stop the database container
 docker stop pgsql
