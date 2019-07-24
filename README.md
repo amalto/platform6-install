@@ -25,7 +25,7 @@ The network ports used are:
 - `5432`: PostgreSQL port.
 - `5900`: P6 instance bus port.
 - `8080`: P6 instance HTTP API port.
-- `8480`: Used by P6 Proxy to serve P6 Portal from a custom domain.
+- `8483`: Used by P6 Proxy to serve P6 Portal from a custom domain.
 
 In production, __only__ the following ports are __required__ to be open on the host machine: 2222 and 8080. All other ports should be closed and only used within Docker.
 
@@ -39,6 +39,7 @@ The current installation of Platform 6 relies on [Docker Compose](https://docs.d
 - _demobc_: A local Ethereum blockchain node used by the Demo App. _You can safely delete it in production._
 - _demoexplorer_: A web UI to monitor the Demo blockchain. _You can safely delete it in production._
 
+You also need to [login](https://documentation.internal.amalto.com/internal/infrastructure/publish-p6-image/#login-to-the-repository) to Amalto's Docker repository to pull the dev image of Platform 6.
 
 ## Instructions
 
@@ -126,7 +127,7 @@ Run the script `logs_platform6.sh`/`logs_platform6.bat` to see the logs of the i
 
 To stop your Platform 6 instance, run the script `stop_platform6.sh`/`stop_platform6.bat`.
 
-Once your instance is up and running, you can access the [Portal](http://localhost:8480/#/) with the credentials you use to access P6 Console.
+Once your instance is up and running, you can access the Portal on [https://Your-MacBook-Pro.local:8483](https://Your-MacBook-Pro.local:8483) by replacing `Your-MacBook-Pro` with your hostname and using your internal dev portal credentials.
 
 
 ## Update your instance's version
