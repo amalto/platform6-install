@@ -27,6 +27,7 @@ services:
     image: $P6CORE_IMAGE_ID
     depends_on:
       - pgsql
+      - demobc
     volumes:
       - $INSTANCE_DATA_PATH/p6core.data:/opt/b2box5.data
     links:
@@ -54,8 +55,6 @@ services:
       - LOG_LEVEL=3
       - PROXY_NO_SSL=true
       - PROXY_NO_CACHE=true
-    links:
-      - p6core:b2box
     ports:
       - "8480:8480"
     networks:
@@ -64,9 +63,10 @@ services:
   # Local Ethereum blockchain used by the Demo App, delete this container in production
   demobc:
     container_name: demobc
-    image: pegasyseng/pantheon:latest
+    image: pegasyseng/pantheon:1.2.2
     command:
       --network=dev
+      --data-path=/var/lib/pantheon
       --rpc-http-enabled
       --rpc-ws-enabled
       --host-whitelist="all"
