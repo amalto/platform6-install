@@ -102,7 +102,7 @@ In case you receive a notification from Amalto for a new release of Platform 6, 
 For that, check that your instance is stopped, then:
 
 * Pull the latest version of this repo.
-* Set the `PLATFORM6_VERSION` variable in the `.env` file to the desired version.
+* Set the `PLATFORM6_VERSION` and `P6CORE_IMAGE_ID` variables in the `.env` file to the desired version.
 * Carefully read the [migration guide](https://documentation.amalto.com/platform6/master/releases/migration/migration-troubleshooting/) for any additional steps to apply.
 * Start your instance.
 
@@ -110,10 +110,10 @@ For that, check that your instance is stopped, then:
 
 The database version is specified in the `.env` file. If you would like to change it follow these steps:
 
-* First, export all your database data by running `pgsql_export.sh` (Unix) / `pgsql_export.bat` (Windows), while your database is still running with the old version. This will create a dump file in the `database_dumps` folder.
+* First, export all your database data by running `db_export.sh` (Unix) / `db_export.bat` (Windows), while your database is still running with the old version. This will create a dump file in the `database_dumps` folder.
 * Stop your instance by running `stop_platform6.sh` (Unix) / `stop_platform6.bat` (Windows).
-* Set the variable `PGSQL_VERSION` in the `.env` file to the desired version, minimum version is 9.6.1.
-* Run `pgsql_import.sh` (Unix) / `pgsql_import.bat` (Windows).
+* Set the variable `PGSQL_VERSION` in the `.env` file to the desired version, minimum version is 11.3.
+* Run `db_import.sh` (Unix) / `db_import.bat` (Windows).
 * Start your instance by running `start_platform6.sh` (Unix) / `start_platform6.bat` (Windows).
 
 ## Troubleshooting
