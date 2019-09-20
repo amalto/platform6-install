@@ -15,7 +15,7 @@ docker rm demobc
 docker rm demoexplorer
 
 REM ## Set database version
-IF "%PLATFORM6_VERSION%"=="5.24.7" (
+IF "%PLATFORM6_VERSION%"=="5.24.8" (
     SET PGSQL_VERSION=9.6.1
 ) ELSE IF %PLATFORM6_VERSION%=="6.0.0-alpha-4" (
     SET PGSQL_VERSION=11.2
@@ -51,7 +51,7 @@ IF "%PLATFORM6_VERSION:~-9%"=="-SNAPSHOT" (
 REM ## Update application.conf
 REM ## Batch scripting does not support logical OR
 SET RESULT=FALSE
-IF "%PLATFORM6_VERSION%"=="5.24.7" SET RESULT=TRUE
+IF "%PLATFORM6_VERSION%"=="5.24.8" SET RESULT=TRUE
 IF "%PLATFORM6_VERSION%"=="6.0.0-alpha-4" SET RESULT=TRUE
 IF "%PLATFORM6_VERSION%"=="6.0.0-alpha-5" SET RESULT=TRUE
 IF "%RESULT%"=="TRUE" (
