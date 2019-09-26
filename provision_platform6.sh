@@ -48,10 +48,10 @@ echo "INSTANCE_DATA_PATH=$INSTANCE_DATA_PATH" >> .env
 echo "PGSQL_VERSION=$PGSQL_VERSION" >> .env
 
 # Delete old folders if any
-rm -r $INSTANCE_DATA_PATH/p6core.data $INSTANCE_DATA_PATH/psql.data
+rm -r $INSTANCE_DATA_PATH
 
 # Copy Platform 6 instance reference data
-mkdir -p $INSTANCE_DATA_PATH
+mkdir $INSTANCE_DATA_PATH
 
 if [[ "$PLATFORM6_VERSION" == *-SNAPSHOT ]]
 then
