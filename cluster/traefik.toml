@@ -28,7 +28,7 @@
 
 [entryPoints]
 
-  [entryPoints.http]
+  [entryPoints.web]
     address = ":8080"
 
   # Used for Traefik's admin UI
@@ -36,10 +36,14 @@
     address = ":444"
 
 
+[providers.file]
+  filename = "/etc/traefik/traefik.toml"
+
 [http]
 
   [http.routers]
     [http.routers.p6core]
+      entryPoints = ["web"]
       rule = "PathPrefix(`/`)"
       service = "p6core"
 

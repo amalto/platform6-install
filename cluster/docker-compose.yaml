@@ -74,7 +74,7 @@ services:
       - p6core1
       - p6core2
     volumes:
-      - $INSTANCE_DATA_PATH/web:/etc/traefik
+      - $INSTANCE_DATA_PATH/loadbalancer:/etc/traefik
     ports:
       - "8080:8080" # P6 Core default port
       - "444:444" # Traefik Admin UI
