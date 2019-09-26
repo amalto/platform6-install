@@ -7,7 +7,7 @@ services:
 
   pgsql:
     container_name: pgsql
-    image: postgres:11.2
+    image: postgres:$PGSQL_VERSION
     volumes:
       - $INSTANCE_DATA_PATH/psql.data:/opt/psql.data
     environment:
@@ -24,9 +24,10 @@ services:
 
   p6core1:
     container_name: p6core1
-    image: amalto/platform6:6.0.0-alpha-4
+    image: $P6CORE_IMAGE_ID
     depends_on:
       - pgsql
+      - demobc
     volumes:
       - $INSTANCE_DATA_PATH/p6core.data/resources:/opt/b2box5.data/resources
       - $INSTANCE_DATA_PATH/p6core1.data:/opt/b2box5.data
@@ -38,18 +39,18 @@ services:
       - "5005:5005"
       - "5900:5900"
     networks:
-      app_net:
-        ipv4_address: 172.13.0.10
+      - app_net
     environment:
       - S6_KILL_GRACETIME=300000
       - XMX=3g
 
   p6core2:
     container_name: p6core2
-    image: amalto/platform6:6.0.0-alpha-4
+    image: $P6CORE_IMAGE_ID
     depends_on:
       - pgsql
       - p6core1
+      - demobc
     volumes:
       - $INSTANCE_DATA_PATH/p6core.data/resources:/opt/b2box5.data/resources
       - $INSTANCE_DATA_PATH/p6core2.data:/opt/b2box5.data
@@ -61,26 +62,24 @@ services:
       - "5006:5005"
       - "5901:5900"
     networks:
-      app_net:
-        ipv4_address: 172.13.0.11
+      - app_net
     environment:
       - S6_KILL_GRACETIME=300000
       - XMX=3g
 
   loadbalancer:
     container_name: loadbalancer
-    image: traefik:1.7.10
+    image: traefik:v2.0
     depends_on:
       - p6core1
       - p6core2
+    volumes:
+      - $INSTANCE_DATA_PATH/web:/etc/traefik
     ports:
       - "8080:8080" # P6 Core default port
-      - "8481:8481" # Traefik Admin UI
+      - "444:444" # Traefik Admin UI
     networks:
-      app_net:
-        ipv4_address: 172.13.0.100
-    volumes:
-      - $INSTANCE_DATA_PATH/loadbalancer:/etc/traefik
+      - app_net
 
   # Only for testing on a local machine, you don't need this container in production
   p6proxy:
@@ -95,7 +94,7 @@ services:
       - PROXY_NO_SSL=true
       - PROXY_NO_CACHE=true
     links:
-      - loadbalancer:b2box
+      - loadbalancer:p6core
     ports:
       - "8480:8480"
     networks:
@@ -104,9 +103,10 @@ services:
   # Local Ethereum blockchain used by the Demo App, delete this container in production
   demobc:
     container_name: demobc
-    image: pegasyseng/pantheon:latest
+    image: pegasyseng/pantheon:1.2.2
     command:
       --network=dev
+      --data-path=/var/lib/pantheon
       --rpc-http-enabled
       --rpc-ws-enabled
       --host-whitelist="all"

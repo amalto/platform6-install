@@ -8,8 +8,6 @@ else
     exit 1
 fi
 
-export INSTANCE_DATA_PATH=$PLATFORM6_ROOT/$INSTANCE_ID
-
 # Stop and remove any old container(s)
 docker stop pgsql
 docker stop p6core1
@@ -27,8 +25,30 @@ docker rm p6proxy
 docker rm demobc
 docker rm demoexplorer
 
-# Update application.conf
-echo "applicationid=$INSTANCE_ID" >> ../reference_data/p6core.data/conf/application.conf
+# Set database version
+if [ $PLATFORM6_VERSION == '5.24.8' ]
+then
+    export PGSQL_VERSION='9.6.1'
+elif [ $PLATFORM6_VERSION == '6.0.0-alpha-4' ]
+then
+    export PGSQL_VERSION='11.2'
+else
+    export PGSQL_VERSION='11.3'
+fi
+
+# Write generated environment variables on disc
+export INSTANCE_DATA_PATH=$PLATFORM6_ROOT/$INSTANCE_ID
+
+if [[ "$PLATFORM6_VERSION" == *-SNAPSHOT ]]
+then
+    export P6CORE_IMAGE_ID='repo.amalto.com/b2box:dev'
+else
+    export P6CORE_IMAGE_ID='amalto/platform6:'$PLATFORM6_VERSION
+fi
+
+echo "P6CORE_IMAGE_ID=$P6CORE_IMAGE_ID" >> ../.env
+echo "INSTANCE_DATA_PATH=$INSTANCE_DATA_PATH" >> ../.env
+echo "PGSQL_VERSION=$PGSQL_VERSION" >> ../.env
 
 # Delete old folders if any
 rm -r $INSTANCE_DATA_PATH/p6core.data \
@@ -39,12 +59,31 @@ rm -r $INSTANCE_DATA_PATH/p6core.data \
 
 # Copy Platform 6 instance reference data
 mkdir -p $INSTANCE_DATA_PATH
-cp -r ../reference_data/p6core.data $INSTANCE_DATA_PATH/p6core1.data
-cp -r ../reference_data/p6core.data $INSTANCE_DATA_PATH/p6core2.data
+
+if [[ "$PLATFORM6_VERSION" == *-SNAPSHOT ]]
+then
+    cp -r ../reference_data/SNAPSHOT/p6core.data $INSTANCE_DATA_PATH/p6core1.data
+    cp -r ../reference_data/SNAPSHOT/p6core.data $INSTANCE_DATA_PATH/p6core2.data
+else
+    cp -r ../reference_data/$PLATFORM6_VERSION/p6core.data $INSTANCE_DATA_PATH/p6core1.data
+    cp -r ../reference_data/$PLATFORM6_VERSION/p6core.data $INSTANCE_DATA_PATH/p6core2.data
+fi
+
+# Update application.conf
+if [ $PLATFORM6_VERSION == '5.24.8' ] ||
+   [ $PLATFORM6_VERSION == '6.0.0-alpha-4' ] ||
+   [ $PLATFORM6_VERSION == '6.0.0-alpha-5' ]
+then
+    echo "applicationid=$INSTANCE_ID" >> $INSTANCE_DATA_PATH/p6core1.data/conf/application.conf
+    echo "applicationid=$INSTANCE_ID" >> $INSTANCE_DATA_PATH/p6core2.data/conf/application.conf
+else
+    echo "instance.id=$INSTANCE_ID" >> $INSTANCE_DATA_PATH/p6core1.data/conf/application.conf
+    echo "instance.id=$INSTANCE_ID" >> $INSTANCE_DATA_PATH/p6core2.data/conf/application.conf
+fi
 
 # The resources folder should be common all P6 Core instances
 mkdir -p $INSTANCE_DATA_PATH/p6core.data
-cp -r ../reference_data/p6core.data/resources $INSTANCE_DATA_PATH/p6core.data
+cp -r $INSTANCE_DATA_PATH/p6core1.data/resources $INSTANCE_DATA_PATH/p6core.data
 rm -r $INSTANCE_DATA_PATH/p6core1.data/resources
 rm -r $INSTANCE_DATA_PATH/p6core2.data/resources
 
@@ -63,7 +102,12 @@ docker run -d --rm \
 sleep 20
 
 # Initialize the database instance with reference data
-cat ../reference_data/reference.sql | docker exec -i pgsql psql -U postgres
+if [[ "$PLATFORM6_VERSION" == *-SNAPSHOT ]]
+then
+    cat ../reference_data/SNAPSHOT/reference.sql | docker exec -i pgsql psql -U postgres
+else
+    cat ../reference_data/$PLATFORM6_VERSION/reference.sql | docker exec -i pgsql psql -U postgres
+fi
 
 # Stop the database container
 docker stop pgsql

@@ -1,12 +1,29 @@
-defaultEntryPoints = ["http"]
-logLevel = "DEBUG"
+[global]
+  checkNewVersion = true
+  sendAnonymousUsage = false
 
 
-# Routing configuration
+# Dashboard config, only activate it in dev, never in production!
+[api]
+  insecure = true
+  dashboard = true
+  debug = true
 
-# Use the file provider to configure routes
-# Do not remove this tag, otherwise this file would be ignored!
-[file]
+
+[log]
+  level = "DEBUG"
+  filePath = "/etc/traefik/traefik.log"
+
+
+[accessLog]
+  filePath = "/etc/traefik/access.log"
+  bufferingSize = 100
+
+  [accessLog.fields]
+    defaultMode = "keep"
+
+    [accessLog.fields.headers]
+      defaultMode = "keep"
 
 
 [entryPoints]
@@ -14,41 +31,27 @@ logLevel = "DEBUG"
   [entryPoints.http]
     address = ":8080"
 
-  [entryPoints.ui]
-    address = ":8481"
+  # Used for Traefik's admin UI
+  [entryPoints.traefik]
+    address = ":444"
 
 
-[frontends]
+[http]
 
-  [frontends.frontend1]
-    backend = "p6core"
+  [http.routers]
+    [http.routers.p6core]
+      rule = "PathPrefix(`/`)"
+      service = "p6core"
 
+  [http.services]
+    [http.services.p6core.loadBalancer]
+      [http.services.p6core.loadBalancer.healthCheck]
+        path = "/p6/vmstats"
+        interval = "10s"
+        timeout = "3s"
 
-[backends]
+      [[http.services.p6core.loadBalancer.servers]]
+        url = "http://p6core1:8080"
 
-  [backends.p6core]
-
-  # TODO Uncomment once HTTP Basic Auth is removed from this endpoint
-  #[backends.p6core.healthCheck]
-  #  path = "/b2box/rest/resource/vmstats"
-  #  interval = "10s"
-
-  [backends.p6core.servers.server1]
-    url = "http://172.13.0.10:8080"
-    weight = 1
-
-  [backends.p6core.servers.server2]
-    url = "http://172.13.0.11:8080"
-    weight = 1
-
-
-# Dashboard config, only activate it in dev, never in production!
-[api]
-  entryPoint = "ui"
-  dashboard = true
-  debug = true
-
-
-# Log configuration
-[traefikLog]
-  filePath = "/etc/traefik/traefik.log"
+      [[http.services.p6core.loadBalancer.servers]]
+        url = "http://p6core2:8080"
