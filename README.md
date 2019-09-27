@@ -121,3 +121,8 @@ The database version is specified in the `.env` file. If you would like to chang
 __Windows__
 
 Whenever Docker is a pain to mount your volumes on Windows, check this [very useful link](https://stackoverflow.com/questions/45972812/are-you-trying-to-mount-a-directory-onto-a-file-or-vice-versa), especially the answer that starts with _If you are using Docker for Windows..._
+
+## Failover Mode
+
+Platform 6 can run in failover mode, where 2 nodes (one active and one passive) are fired on top of the same database.
+To see that working locally on your machine check out this [prototype](./cluster/README.md).
