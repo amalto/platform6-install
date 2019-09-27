@@ -29,8 +29,9 @@ services:
       - pgsql
       - demobc
     volumes:
-      - $INSTANCE_DATA_PATH/p6core.data/resources:/opt/b2box5.data/resources
-      - $INSTANCE_DATA_PATH/p6core1.data:/opt/b2box5.data
+      - $INSTANCE_DATA_PATH/p6core1.data/conf:/opt/b2box5.data/conf
+      - $INSTANCE_DATA_PATH/p6core1.data/logs:/opt/b2box5.data/logs
+      - $INSTANCE_DATA_PATH/p6core.data:/opt/b2box5.data
     links:
       - pgsql:database
     ports:
@@ -52,8 +53,9 @@ services:
       - p6core1
       - demobc
     volumes:
-      - $INSTANCE_DATA_PATH/p6core.data/resources:/opt/b2box5.data/resources
-      - $INSTANCE_DATA_PATH/p6core2.data:/opt/b2box5.data
+      - $INSTANCE_DATA_PATH/p6core2.data/conf:/opt/b2box5.data/conf
+      - $INSTANCE_DATA_PATH/p6core2.data/logs:/opt/b2box5.data/logs
+      - $INSTANCE_DATA_PATH/p6core.data:/opt/b2box5.data
     links:
       - pgsql:database
     ports:

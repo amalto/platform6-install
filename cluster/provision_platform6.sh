@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# WORKS ONLY ABOVE 6.0.0-beta-1!
+
 # set -x
 
 if [ -e ../.env ]; then
@@ -26,15 +29,7 @@ docker rm demobc
 docker rm demoexplorer
 
 # Set database version
-if [ $PLATFORM6_VERSION == '5.24.8' ]
-then
-    export PGSQL_VERSION='9.6.1'
-elif [ $PLATFORM6_VERSION == '6.0.0-alpha-4' ]
-then
-    export PGSQL_VERSION='11.2'
-else
-    export PGSQL_VERSION='11.3'
-fi
+export PGSQL_VERSION='11.3'
 
 # Write generated environment variables on disc
 export INSTANCE_DATA_PATH=$PLATFORM6_ROOT/$INSTANCE_ID
@@ -51,41 +46,33 @@ echo "INSTANCE_DATA_PATH=$INSTANCE_DATA_PATH" >> ../.env
 echo "PGSQL_VERSION=$PGSQL_VERSION" >> ../.env
 
 # Delete old folders if any
-rm -r $INSTANCE_DATA_PATH/p6core.data \
-      $INSTANCE_DATA_PATH/p6core1.data \
-      $INSTANCE_DATA_PATH/p6core2.data \
-      $INSTANCE_DATA_PATH/psql.data \
-      $INSTANCE_DATA_PATH/loadbalancer
+rm -r $INSTANCE_DATA_PATH
 
 # Copy Platform 6 instance reference data
-mkdir -p $INSTANCE_DATA_PATH
+mkdir -p $INSTANCE_DATA_PATH/p6core1.data
+mkdir -p $INSTANCE_DATA_PATH/p6core2.data
 
 if [[ "$PLATFORM6_VERSION" == *-SNAPSHOT ]]
 then
-    cp -r ../reference_data/SNAPSHOT/p6core.data $INSTANCE_DATA_PATH/p6core1.data
-    cp -r ../reference_data/SNAPSHOT/p6core.data $INSTANCE_DATA_PATH/p6core2.data
+    cp -r ../reference_data/SNAPSHOT/p6core.data $INSTANCE_DATA_PATH/p6core.data
 else
-    cp -r ../reference_data/$PLATFORM6_VERSION/p6core.data $INSTANCE_DATA_PATH/p6core1.data
-    cp -r ../reference_data/$PLATFORM6_VERSION/p6core.data $INSTANCE_DATA_PATH/p6core2.data
+    cp -r ../reference_data/$PLATFORM6_VERSION/p6core.data $INSTANCE_DATA_PATH/p6core.data
 fi
 
 # Update application.conf
-if [ $PLATFORM6_VERSION == '5.24.8' ] ||
-   [ $PLATFORM6_VERSION == '6.0.0-alpha-4' ] ||
-   [ $PLATFORM6_VERSION == '6.0.0-alpha-5' ]
-then
-    echo "applicationid=$INSTANCE_ID" >> $INSTANCE_DATA_PATH/p6core1.data/conf/application.conf
-    echo "applicationid=$INSTANCE_ID" >> $INSTANCE_DATA_PATH/p6core2.data/conf/application.conf
-else
-    echo "instance.id=$INSTANCE_ID" >> $INSTANCE_DATA_PATH/p6core1.data/conf/application.conf
-    echo "instance.id=$INSTANCE_ID" >> $INSTANCE_DATA_PATH/p6core2.data/conf/application.conf
-fi
+echo "instance.id=$INSTANCE_ID" >> $INSTANCE_DATA_PATH/p6core.data/conf/application.conf
 
-# The resources folder should be common all P6 Core instances
-mkdir -p $INSTANCE_DATA_PATH/p6core.data
-cp -r $INSTANCE_DATA_PATH/p6core1.data/resources $INSTANCE_DATA_PATH/p6core.data
-rm -r $INSTANCE_DATA_PATH/p6core1.data/resources
-rm -r $INSTANCE_DATA_PATH/p6core2.data/resources
+cp -r $INSTANCE_DATA_PATH/p6core.data/conf $INSTANCE_DATA_PATH/p6core1.data/conf
+cp -r $INSTANCE_DATA_PATH/p6core.data/conf $INSTANCE_DATA_PATH/p6core2.data/conf
+rm -rf $INSTANCE_DATA_PATH/p6core.data/conf
+
+sed s/NAME/p6core1/ application.conf >> $INSTANCE_DATA_PATH/p6core1.data/conf/application.conf
+sed s/NAME/p6core2/ application.conf >> $INSTANCE_DATA_PATH/p6core2.data/conf/application.conf
+
+# All folders should be common all P6 Core instances except logs and conf
+cp -r $INSTANCE_DATA_PATH/p6core.data/logs $INSTANCE_DATA_PATH/p6core1.data/logs
+cp -r $INSTANCE_DATA_PATH/p6core.data/logs $INSTANCE_DATA_PATH/p6core2.data/logs
+rm -rf $INSTANCE_DATA_PATH/p6core.data/logs
 
 mkdir -p $INSTANCE_DATA_PATH/loadbalancer
 cp ./traefik.toml $INSTANCE_DATA_PATH/loadbalancer/
