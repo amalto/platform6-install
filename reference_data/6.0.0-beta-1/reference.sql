@@ -397,10 +397,10 @@ COPY p6core.flyway_schema_history (installed_rank, version, description, type, s
 15	14	B2BOX5-1839 Simplify counter view	SQL	V14__B2BOX5-1839_Simplify_counter_view.sql	2110665982	b2box	2019-07-09 16:56:55.687712	35	t
 16	15	B2BOX5-1901 Add indexes	SQL	V15__B2BOX5-1901_Add_indexes.sql	-1607078097	b2box	2019-07-12 12:36:31.128033	66	t
 17	16	B2BOX5-1928 Remove meta table	SQL	V16__B2BOX5-1928_Remove_meta_table.sql	-1060199810	b2box	2019-09-19 14:45:47.956626	67	t
-18	17	B2BOX5-1914 DSL migration	SQL	V17__B2BOX5-1914_DSL_migration.sql	-1818743481	b2box	2019-09-19 14:45:48.067897	117	t
 19	18	B2BOX5-1937 Exception migration	SQL	V18__B2BOX5-1937_Exception_migration.sql	1562596096	b2box	2019-09-19 14:45:48.204782	13	t
 20	19	B2BOX5-1929 Remove application min-max version	SQL	V19__B2BOX5-1929_Remove_application_min-max_version.sql	-656397094	b2box	2019-09-19 14:45:48.230868	147	t
-21	20	B2BOX5-1822 DSL remove deprecated	SQL	V20__B2BOX5-1822_DSL_remove_deprecated.sql	1970508059	b2box	2019-09-19 14:45:48.395351	9	t
+18	17	B2BOX5-1914 DSL migration	SQL	V17__B2BOX5-1914_DSL_migration.sql	1644579705	b2box	2019-09-19 14:45:48.067897	117	t
+21	20	B2BOX5-1822 DSL remove deprecated	SQL	V20__B2BOX5-1822_DSL_remove_deprecated.sql	-1538317084	b2box	2019-09-19 14:45:48.395351	9	t
 \.
 
 
