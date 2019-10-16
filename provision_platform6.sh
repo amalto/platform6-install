@@ -51,7 +51,7 @@ echo "PGSQL_VERSION=$PGSQL_VERSION" >> .env
 rm -r $INSTANCE_DATA_PATH
 
 # Copy Platform 6 instance reference data
-mkdir $INSTANCE_DATA_PATH
+mkdir -p $INSTANCE_DATA_PATH
 
 if [[ "$PLATFORM6_VERSION" == *-SNAPSHOT ]]
 then
