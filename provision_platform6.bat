@@ -55,8 +55,12 @@ IF "%PLATFORM6_VERSION%"=="5.24.9" SET RESULT=TRUE
 IF "%PLATFORM6_VERSION%"=="6.0.0-alpha-4" SET RESULT=TRUE
 IF "%PLATFORM6_VERSION%"=="6.0.0-alpha-5" SET RESULT=TRUE
 IF "%RESULT%"=="TRUE" (
+    ECHO b2auth.client.id=%CLIENT_ID%>> "%INSTANCE_DATA_PATH%\p6core.data\conf\application.conf"
+    ECHO b2auth.client.secret=%CLIENT_SECRET%>> "%INSTANCE_DATA_PATH%\p6core.data\conf\application.conf"
     ECHO applicationid=%INSTANCE_ID%>> "%INSTANCE_DATA_PATH%\p6core.data\conf\application.conf"
 ) ELSE (
+    ECHO p6auth.client.id=%CLIENT_ID%>> "%INSTANCE_DATA_PATH%\p6core.data\conf\application.conf"
+    ECHO p6auth.client.secret=%CLIENT_SECRET%>> "%INSTANCE_DATA_PATH%\p6core.data\conf\application.conf"
     ECHO instance.id=%INSTANCE_ID%>> "%INSTANCE_DATA_PATH%\p6core.data\conf\application.conf"
 )
 

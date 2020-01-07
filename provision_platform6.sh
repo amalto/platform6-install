@@ -65,8 +65,12 @@ if [ $PLATFORM6_VERSION == '5.24.9' ] ||
    [ $PLATFORM6_VERSION == '6.0.0-alpha-4' ] ||
    [ $PLATFORM6_VERSION == '6.0.0-alpha-5' ]
 then
+    echo "b2auth.client.id=$CLIENT_ID" >> $INSTANCE_DATA_PATH/p6core.data/conf/application.conf
+    echo "b2auth.client.secret=$CLIENT_SECRET" >> $INSTANCE_DATA_PATH/p6core.data/conf/application.conf
     echo "applicationid=$INSTANCE_ID" >> $INSTANCE_DATA_PATH/p6core.data/conf/application.conf
 else
+    echo "p6auth.client.id=$CLIENT_ID" >> $INSTANCE_DATA_PATH/p6core.data/conf/application.conf
+    echo "p6auth.client.secret=$CLIENT_SECRET" >> $INSTANCE_DATA_PATH/p6core.data/conf/application.conf
     echo "instance.id=$INSTANCE_ID" >> $INSTANCE_DATA_PATH/p6core.data/conf/application.conf
 fi
 
