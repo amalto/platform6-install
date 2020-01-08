@@ -83,7 +83,7 @@ docker run -d --rm \
  postgres:$PGSQL_VERSION
 
 # Sleep 20 seconds to wait for the database to finish startup
-sleep 20
+sleep 30
 
 # Initialize the database instance with reference data
 if [[ "$PLATFORM6_VERSION" == *-SNAPSHOT ]]

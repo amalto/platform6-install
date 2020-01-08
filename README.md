@@ -1,32 +1,34 @@
-# Platform 6 install
+# Platform 6 Installation Guide
 
-> [Platform 6](https://documentation.amalto.com/platform6/master/) install scripts
+This repository contains [Platform 6](https://documentation.amalto.com/platform6/latest/)'s install scripts.
+Before trying to install a P6 instance, make sure you signed up to Platform 6 [here](https://signup.console.platform6.io).
 
 ## Requirements
 
 You need to install [Docker](https://www.docker.com/) on your machine: 
 - OSX: https://docs.docker.com/docker-for-mac/
-- Windows: https://docs.docker.com/docker-for-windows/ (only Windows Pro is supported!)
+- Windows: https://docs.docker.com/docker-for-windows/
 - Linux: https://docs.docker.com/engine/installation/
 
-⚠️ Please download only the stable channel! We recommend using the following version of Docker: 
+⚠️ Please download only the stable channel! We recommend using a version of Docker newer than:
 - OSX: `18.03.1-ce-mac65`
 - Windows: `18.03.1-ce-win65`
 
 Configure Docker to use at least 2 CPUs, 4 GiB of memory and 1 GiB of swap.
-You'll find in the __Getting Started__ how to update your settings: 
+You'll find in the __Getting Started__ page how to update your settings: 
 - OSX: https://docs.docker.com/docker-for-mac/#memory.
 - Windows: https://docs.docker.com/docker-for-windows/#advanced
 
 The network ports used are:
-- `2222`: used for SFTP.
-- `5005`: used by the Java debug port.
-- `5432`: used internally between the Docker containers for PGSQL access.
-- `5900`: used for the messages transactions through the Platform 6 bus.
-- `8080`: used by the Platform 6 proxy (proxy.amalto.io) to have access on the Platform 6 instance.
-- `8480`: used by the Platform 6 proxy (proxy.amalto.io) and allow to access the Amalto local Portal.
+- `2222`: SFTP port.
+- `5005`: Java debug port.
+- `5432`: PostgreSQL port.
+- `5900`: P6 instance bus port.
+- `8080`: P6 instance HTTP API port.
+- `8480`: Used by P6 Proxy to serve P6 Portal from a custom domain.
 
 In production, __only__ the following ports are __required__ to be open on the host machine: 2222 and 8080. All other ports should be closed and only used within Docker.
+
 
 ## Docker Containers
 
@@ -37,9 +39,29 @@ The current installation of Platform 6 relies on [Docker Compose](https://docs.d
 - _demobc_: A local Ethereum blockchain node used by the Demo App. _You can safely delete it in production._
 - _demoexplorer_: A web UI to monitor the Demo blockchain. _You can safely delete it in production._
 
+
 ## Instructions
 
 ### Step 1
+
+In your P6 Console account navigate to the _Instances_ menu. Then click the _Add_ button.
+
+![Go to Instances Menu](images/go_to_instances_menu.png)
+
+In the instance creation form, specify the following parameters:
+
+* Name: Name of your instance.
+* Description: Optional.
+* Environment: This is purely informational, you can change this at any time. The default value is _Development_.
+* Instance runs locally: Toggle this if you intend to run your instance locally on your machine, otherwise please fill in
+ the _P6 Core Server URL_ field with the URL (including port, default is 8080 unless you change it in docker-compose.yaml file).
+* Instance Admin User Admin: By default, you are the administrator of your instance, however you could perfectly choose otherwise.
+
+![Create Instance](images/create_instance.png)
+
+Finally, press the _Create_ button to create your instance.
+
+### Step 2
 
 Once Docker is running, clone the Git repository into a new directory dedicated to your local instance.
 
@@ -48,15 +70,23 @@ git clone https://github.com/amalto/platform6-install.git my-instance
 cd my-instance
 ```
 
-### Step 2
+### Step 3
 
-Rename the `.env.sample` file to `.env` and set the variable `INSTANCE_ID` with the Platform 6 instance's name given by Amalto.
+Download the `.env` file from your P6 Console interface, as you can see below:
+
+![Download .env File](images/download_dot_env_file.png)
+
+Place this file at the root of your instance directory, next to `.env.sample`, and __make sure the file is called `.env`__.
+This name is required by Docker Compose, by convention this latter will read environment variables from this file.
+
+Do not hesitate to edit this file to change the values of the variables to better suit your needs
+(such as version, instance data location...).
 
 __Windows__
 
 Also, set the variable `PLATFORM6_ROOT` to the path where you wish to install your instance.
 
-### Step 3
+### Step 4
 
 Run the script `provision_platform6.sh`/`provision_platform6.bat`.
 
@@ -71,7 +101,7 @@ By default, it creates a folder called _platform6/instances_ in your _home_ dire
 
 However, you cannot run them at the same time, unless you modify port mapping in the [`docker-compose.yaml`](docker-compose.yaml) for some of your instances to avoid having multiple instances compete for the same port on the physical machine.
 
-### Step 4
+### Step 5
 
 __Windows__
 
@@ -79,16 +109,19 @@ Share the local drive `C` with Docker using the __Shared Drives__ tab in the Doc
 
 ![Docker settings menu](images/docker_file_sharing_windows.png)
 
-### Step 5
+### Step 6
 
 Run the script `start_platform6.sh`/`start_platform6.bat`.
 
 It will start the Platform 6 container.
 Run the script `logs_platform6.sh`/`logs_platform6.bat` to see the logs of the instance.
 
+### Step 7
+
 To stop your Platform 6 instance, run the script `stop_platform6.sh`/`stop_platform6.bat`.
 
-Once your instance is up and running, you can access the [Portal](http://localhost:8480/#/) with the credentials given by platform6.io.
+Once your instance is up and running, you can access the [Portal](http://localhost:8480/#/) with the credentials you use to access P6 Console.
+
 
 ## Update your instance's version
 
@@ -98,8 +131,9 @@ For that, check that your instance is stopped, then:
 
 * Pull the latest version of this repo.
 * Set the `PLATFORM6_VERSION` and `P6CORE_IMAGE_ID` variables in the `.env` file to the desired version.
-* Carefully read the [migration guide](https://documentation.amalto.com/platform6/master/releases/migration/migration-troubleshooting/) for any additional steps to apply.
+* Carefully read the [migration guide](https://documentation.amalto.com/platform6/latest/releases/migration/migration-troubleshooting/) for any additional steps to apply.
 * Start your instance.
+
 
 ## Update your database version
 
@@ -111,11 +145,13 @@ The database version is specified in the `.env` file. If you would like to chang
 * Run `db_import.sh` (Unix) / `db_import.bat` (Windows).
 * Start your instance by running `start_platform6.sh` (Unix) / `start_platform6.bat` (Windows).
 
+
 ## Troubleshooting
 
 __Windows__
 
 Whenever Docker is a pain to mount your volumes on Windows, check this [very useful link](https://stackoverflow.com/questions/45972812/are-you-trying-to-mount-a-directory-onto-a-file-or-vice-versa), especially the answer that starts with _If you are using Docker for Windows..._
+
 
 ## Failover Mode
 

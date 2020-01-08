@@ -73,7 +73,7 @@ REM ## Start a database container that maps to the intended location on disk
 docker run -d --rm -p 5432:5432 --name pgsql -v platform6_psql:/opt/psql.data -e "PGDATA=/opt/psql.data" postgres:%PGSQL_VERSION%
 
 REM ## Sleep 20 seconds to wait for the database to finish startup
-timeout 20
+timeout 30
 
 REM ## Initialize the database instance with reference data
 IF "%PLATFORM6_VERSION:~-9%"=="-SNAPSHOT" (
