@@ -54,7 +54,8 @@ In the instance creation form, specify the following parameters:
 * Description: Optional.
 * Environment: This is purely informational, you can change this at any time. The default value is _Development_.
 * Instance runs locally: Toggle this if you intend to run your instance locally on your machine, otherwise please fill in
- the _P6 Core Server URL_ field with the URL (including port, default is 8080 unless you change it in docker-compose.yaml file).
+ the _P6 Core Server URL_ field with the URL (including port, default is 8080 unless you change it in 
+ [`docker-compose.yaml`](docker-compose.yaml) file).
 * Instance Admin User Admin: By default, you are the administrator of your instance, however you could perfectly choose otherwise.
 
 ![Create Instance](images/create_instance.png)
