@@ -76,7 +76,6 @@ fi
 
 # Start a database container that maps to the intended location on disk
 docker run -d --rm \
- -p 5432:5432 \
  --name pgsql \
  -v $INSTANCE_DATA_PATH/psql.data:/opt/psql.data \
  -e "PGDATA=/opt/psql.data" \

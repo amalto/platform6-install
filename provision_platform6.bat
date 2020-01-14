@@ -70,7 +70,7 @@ docker volume create platform6_psql
 docker volume create platform6_demobc
 
 REM ## Start a database container that maps to the intended location on disk
-docker run -d --rm -p 5432:5432 --name pgsql -v platform6_psql:/opt/psql.data -e "PGDATA=/opt/psql.data" postgres:%PGSQL_VERSION%
+docker run -d --rm --name pgsql -v platform6_psql:/opt/psql.data -e "PGDATA=/opt/psql.data" postgres:%PGSQL_VERSION%
 
 REM ## Sleep 20 seconds to wait for the database to finish startup
 timeout 30
