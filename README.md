@@ -163,5 +163,6 @@ Whenever Docker is a pain to mount your volumes on Windows, check this [very use
 
 Platform 6 can run in failover mode, where 2 nodes (one active and one passive) are fired on top of the same database.
 To see that working locally on your machine check out this [prototype](./cluster).
+
 ⚠️ Please not that this is only for demo purposes to understand how failover works, in production you would want to deploy
 every P6 Core on a separate VM.
