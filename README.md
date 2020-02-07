@@ -52,11 +52,14 @@ In the instance creation form, specify the following parameters:
 
 * Name: Name of your instance.
 * Description: Optional.
-* Environment: This is purely informational, you can change this at any time. The default value is _Development_.
+* Environment: You can change this at any time. The default value is _Development_. Please not that _Production_ instances
+will eventually incur usage fees (but not before July 2020).
 * Instance runs locally: Toggle this if you intend to run your instance locally on your machine, otherwise please fill in
- the _P6 Core Server URL_ field with the URL (including port, default is 8080 unless you change it in 
- [`docker-compose.yaml`](docker-compose.yaml) file).
-* Instance Admin User Admin: By default, you are the administrator of your instance, however you could perfectly choose otherwise.
+the _P6 Core Server URL_ field with the URL (including port, default is 8080 unless you change it in 
+[`docker-compose.yaml`](docker-compose.yaml) file).
+* Instance Admin User Email: By default, this field is populated with your email address, so you would be declared as 
+an admin of the newly declared instance. But you can choose otherwise and set another user account as the first admin
+of the instance.
 
 ![Create Instance](images/create_instance.png)
 
@@ -76,6 +79,8 @@ cd my-instance
 Download the `.env` file from your P6 Console interface, as you can see below:
 
 ![Download .env File](images/download_dot_env_file.png)
+
+Please note that depending on the browser and/or OS, the downloaded file may be named `.env` or a `env.txt` or simple `env`.
 
 Place this file at the root of your instance directory, next to `.env.sample`, and __make sure the file is called `.env`__.
 This name is required by Docker Compose, by convention this latter will read environment variables from this file.
@@ -138,7 +143,7 @@ For that, check that your instance is stopped, then:
 
 ## Update your database version
 
-The database version is specified in the `.env` file. If you would like to change it follow these steps:
+The database version is specified in the `.env` file. If you would like to change it, follow these steps:
 
 * First, export all your database data by running `db_export.sh` (Unix) / `db_export.bat` (Windows), while your database is still running with the old version. This will create a dump file in the `database_dumps` folder.
 * Stop your instance by running `stop_platform6.sh` (Unix) / `stop_platform6.bat` (Windows).
@@ -158,3 +163,5 @@ Whenever Docker is a pain to mount your volumes on Windows, check this [very use
 
 Platform 6 can run in failover mode, where 2 nodes (one active and one passive) are fired on top of the same database.
 To see that working locally on your machine check out this [prototype](./cluster).
+⚠️ Please not that this is only for demo purposes to understand how failover works, in production you would want to deploy
+every P6 Core on a separate VM.
