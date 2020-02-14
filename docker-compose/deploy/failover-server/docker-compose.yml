@@ -1,0 +1,94 @@
+version: '3.7'
+
+services:
+
+  pgsql:
+#   restart: always
+    stop_grace_period: 1m
+    image: postgres:${PGSQL_VERSION}
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - ../../reference/${P6CORE_VERSION_TAG}/p6init.sql:/docker-entrypoint-initdb.d/p6init.sql:ro
+    tmpfs:
+      - /tmp
+      - /run
+      - /run/postgresql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "b2box", "-U", "b2box", "-q"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  p6core_node1:
+#   restart: always
+    stop_grace_period: 40s
+    image: $P6CORE_IMAGE_ID
+    depends_on:
+      - pgsql
+    volumes:
+      - ${PLATFORM6_DATA_PATH}/${INSTANCE_ID}/p6core.data:/opt/p6core.data:delegated
+      # :delegated is a performance enhancement for MacOS bind mounts
+      - ../../reference/${P6CORE_VERSION_TAG}/p6core.data:/opt/p6template.data:ro
+      - ./node1_conf:/opt/p6node.data:ro
+    tmpfs:
+      - /tmp
+      - /tmp/p6core
+    links:
+      - pgsql:database
+    environment:
+      - P6_CLASSPATH_EXTRA=/opt/p6node.data
+      - S6_KILL_GRACETIME=300000
+      - XMX=1g
+      - P6_DATA_TEMPLATE=/opt/p6template.data
+      - P6_DATA=/opt/p6core.data
+      - p6core_instance_id=${INSTANCE_ID}
+      - p6auth_client_id=${CLIENT_ID}
+      - p6auth_client_secret=${CLIENT_SECRET}
+
+  p6core_node2:
+#   restart: always
+    stop_grace_period: 40s
+    image: $P6CORE_IMAGE_ID
+    depends_on:
+      - p6core_node1
+    volumes:
+      - ${PLATFORM6_DATA_PATH}/${INSTANCE_ID}/p6core.data:/opt/p6core.data:delegated
+      # :delegated is a performance enhancement for MacOS bind mounts
+      - ../../reference/${P6CORE_VERSION_TAG}/p6core.data:/opt/p6template.data:ro
+      - ./node2_conf:/opt/p6node.data:ro
+    tmpfs:
+      - /tmp
+      - /tmp/p6core
+    links:
+      - pgsql:database
+    environment:
+      - P6_CLASSPATH_EXTRA=/opt/p6node.data
+      - S6_KILL_GRACETIME=300000
+      - XMX=1g
+      - P6_DATA_TEMPLATE=/opt/p6template.data
+      - P6_DATA=/opt/p6core.data
+      - p6core_instance_id=${INSTANCE_ID}
+      - p6auth_client_id=${CLIENT_ID}
+      - p6auth_client_secret=${CLIENT_SECRET}
+
+  nginx:
+#   restart: always
+    image: nginx
+    depends_on:
+      - p6core_node2
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginix/p6.conf:/etc/nginx/conf.d/p6.conf:ro
+    healthcheck:
+      test: ["CMD", "service", "nginx", "status"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+
+volumes:
+  pg-data:
+    driver: local
+
+

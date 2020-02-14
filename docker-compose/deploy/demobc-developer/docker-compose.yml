@@ -1,0 +1,93 @@
+version: '3.7'
+
+services:
+
+  pgsql:
+    stop_grace_period: 1m
+    image: postgres:${PGSQL_VERSION}
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - ../../reference/${P6CORE_VERSION_TAG}/p6init_with_demoapp.sql:/docker-entrypoint-initdb.d/p6init.sql:ro
+    tmpfs:
+      - /tmp
+      - /run
+      - /run/postgresql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "b2box", "-U", "b2box", "-q"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  p6core:
+    stop_grace_period: 40s
+    image: ${P6CORE_IMAGE_ID}
+    depends_on:
+      - pgsql
+      - demobc
+    volumes:
+      - ${PLATFORM6_DATA_PATH}/${INSTANCE_ID}/p6core.data:/opt/p6core.data:delegated
+      # :delegated is a performance enhancement for MacOS bind mounts
+      - ../../reference/${P6CORE_VERSION_TAG}/p6core.data:/opt/p6template.data:ro
+    tmpfs:
+      - /tmp
+      - /tmp/p6core
+    links:
+      - pgsql:database
+    ports:
+      - "2222:2222" # SFTP
+      - "2221:2221" # FTP
+    environment:
+      - S6_KILL_GRACETIME=300000
+      - XMX=1g
+      - P6_DATA_TEMPLATE=/opt/p6template.data
+      - P6_DATA=/opt/p6core.data
+      - p6core_instance_id=${INSTANCE_ID}
+      - p6auth_client_id=${CLIENT_ID}
+      - p6auth_client_secret=${CLIENT_SECRET}
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:8080/p6/vmstats"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+      start_period: 5m
+
+  p6proxy:
+    image: amalto/b2proxy
+    volumes:
+      - ../../scripts/proxy_healthcheck.sh:/opt/proxy_healthcheck.sh:ro
+    environment:
+      - PROXY_PLAIN_PORT=8480
+      - PROXY_SSL_PORT=8483
+      - LOG_FORMAT=string
+      - LOG_LEVEL=5
+      - PROXY_NO_SSL=false
+      - PROXY_NO_CACHE=true
+      - PROXY_ENV=${PROXY_ENV}
+    ports:
+      - "8480:8480"
+      - "8483:8483"
+    healthcheck:
+      test: ["CMD", "/opt/proxy_healthcheck.sh"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+      start_period: 1m
+
+  demobc:
+    image: pegasyseng/pantheon:1.2.2
+    command:
+      --network=dev
+      --data-path=/var/lib/pantheon
+      --rpc-http-enabled
+      --rpc-ws-enabled
+      --host-whitelist="all"
+      --rpc-http-cors-origins="all"
+      --miner-enabled
+      --miner-coinbase fe3b557e8fb62b89f4916b721be55ceb828dbd73
+    volumes:
+      - ${PLATFORM6_DATA_PATH}/${INSTANCE_ID}/p6core.data/demo/pantheon:/var/lib/pantheon
+
+volumes:
+  pg-data:
+    driver: local
