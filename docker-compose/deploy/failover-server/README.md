@@ -11,7 +11,7 @@ same database and share many folders in common. To learn more about failover, ch
 [page](https://documentation.amalto.com/platform6/latest/install-platform6/failover-clustering/).
 
 As you can see in the Docker Compose file, 2 Platform 6 containers are created and share all folders except `logs` and
-`conf`. A load balancer ([NGinix](https://traefik.io/)) sits between the 2 
+`conf`. A load balancer ([NGINX](https://www.nginx.com/)) sits between the 2 
 Platform 6 nodes. It routes traffic to all nodes in a round robin fashion. However, since the passive node does not
 accept incoming HTTP requests, it appears offline to the load balancer which, as a result, routes all traffic to the
 active node. Therefore, when the active node goes away and the passive node becomes active, the load balancer detects

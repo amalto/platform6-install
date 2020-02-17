@@ -8,7 +8,9 @@ You can use the terraform scripts provided to deploy Platform 6 to a major cloud
 
 Whatever your needs, this guide provides our current 'best practice' deployment information and configuration details for Platform 6. 
 
-**Can't wait and don't want to read anymore...? Use this [link](./docker-compose/README.md) and follow the simple instructions to deploy an instance on your desktop or laptop now.**
+_**Can't wait and don't want to read anymore...?
+
+Use this [link](./docker-compose/README.md) and follow the simple instructions to deploy an instance on your desktop or laptop now._**
 
 Types of deployment technology used in his guide:
 
