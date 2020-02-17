@@ -1,4 +1,4 @@
-###Platform 6 docker deployment scripts.
+# Platform 6 docker deployment scripts.
 
 https://docs.docker.com/compose/
 

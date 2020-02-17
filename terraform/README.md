@@ -1,4 +1,4 @@
-###Platform 6 terraform deployment scripts.
+# Platform 6 terraform deployment scripts.
 
 https://www.terraform.io/
 

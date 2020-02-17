@@ -1,10 +1,10 @@
-##Platform 6 deployment: failover-server
+# Platform 6 deployment: failover-server
 
 This deployment is for a single instance Platform 6 on a shared server either on a LAN or hosted in the cloud.
 
 This is a simple deployment of an 'empty' Platform 6 for use by multiple users and ideal for testing your Platform 6 Apps.
 
-**_THIS DEPLOYMENT IS FOR DEMONSTRATION PURPOSES ONLY**_
+⚠️**_THIS DEPLOYMENT IS FOR DEMONSTRATION PURPOSES ONLY**_
 
 Platform 6 can run in failover mode where 2 Platform 6 nodes (one active and one passive), are started on top of the 
 same database and share many folders in common. To learn more about failover, checkout out that

@@ -1,4 +1,4 @@
-###Platform 6 deployment: standalone-server
+# Platform 6 deployment: standalone-server
 
 This deployment is for a single instance Platform 6 on a shared server either on a LAN or hosted in the cloud.
 

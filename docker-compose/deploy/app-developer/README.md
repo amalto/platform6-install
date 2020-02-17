@@ -1,4 +1,4 @@
-###Platform 6 deployment: app-developer
+# Platform 6 deployment: app-developer
 
 This deployment is for a typical Platform 6 App developer who runs entirely on their desktop computer; Windows, MacOS or Linux
 

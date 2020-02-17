@@ -17,7 +17,7 @@ Types of deployment technology used in his guide:
 
 Docker has long been the default deployment technology used for Platform 6.  It is a well used, well documented technology and allows straight forward deployment on everything from developers laptops to large cooperate servers.
 
-As Platform 6 scales beyond small group servers, SLAs and reliability become essential. When using Platform 6 in mission critical production environments we look to large cloud providers to deliver the services required.
+As Platform 6 scales beyond small group servers, SLAs and guaranteed reliability become essential. When using Platform 6 in mission critical production environments we look to large cloud providers to deliver the services required.
 Terraform allows us to provide you with predictable and repeatable deployment scripts to deliver Platform 6 infrastructure in the most common configurations on a variety of cloud service platforms. 
 
 The use of our docker and/or terraform scripts are by no means the only ways to deploy Platform 6.  We hope that this guide contains sufficient examples to aid and inspire you to solve problems you face in your chosen deployment environment.
