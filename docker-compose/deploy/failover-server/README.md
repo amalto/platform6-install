@@ -8,7 +8,7 @@ This is a simple deployment of an 'empty' Platform 6 for use by multiple users a
 
 Platform 6 can run in failover mode where 2 Platform 6 nodes (one active and one passive), are started on top of the 
 same database and share many folders in common. To learn more about failover, checkout out that
-[page](https://documentation.amalto.com/platform6/latest/install-platform6/failover-clustering/).
+[page](https://documentation.amalto.com/platform6/latest/reference/operations/failover-clustering/).
 
 As you can see in the Docker Compose file, 2 Platform 6 containers are created and share all folders except `logs` and
 `conf`. A load balancer ([NGINX](https://www.nginx.com/)) sits between the 2 
@@ -24,7 +24,7 @@ Edit the .env file and modify:
 - CLIENT_ID=[Console .env value]
 - CLIENT_SECRET=[Console .env value]
 
-Ensure $INSTANCE_DATA_PATH exists in your filesystem before you start and **check docker can access this filesystem**.
+Ensure $PLATFORM6_DATA_PATH exists in your filesystem before you start and **check docker can access this filesystem**.
 
 The contents of this directory and database will be initialised automatically the first time you run.
 

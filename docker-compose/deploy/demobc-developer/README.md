@@ -4,6 +4,8 @@ This deployment is for a typical Platform 6 App developer who runs entirely on t
 
 **This deployment includes a standalone Hyperledger Besu blockchain node and comes pre-installed with our Demo App.**
 
+See: https://documentation.amalto.com/platform6/latest/tutorials/get-started-with-p6/learn-with-the-demo-app/
+
 Edit the .env file and modify:
 
 - PLATFORM6_DATA_PATH=~/platform6 or c:\platform6
@@ -11,7 +13,7 @@ Edit the .env file and modify:
 - CLIENT_ID=[Console .env value]
 - CLIENT_SECRET=[Console .env value]
 
-Ensure $INSTANCE_DATA_PATH exists in your filesystem before you start and **check docker can access this filesystem**.
+Ensure $PLATFORM6_DATA_PATH exists in your filesystem before you start and **check docker can access this filesystem**.
 
 The contents of this directory and database will be initialised automatically the first time you run.
 

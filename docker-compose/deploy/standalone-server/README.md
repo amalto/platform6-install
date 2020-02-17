@@ -13,7 +13,7 @@ Edit the .env file and modify:
 - CLIENT_ID=[Console .env value]
 - CLIENT_SECRET=[Console .env value]
 
-Ensure $INSTANCE_DATA_PATH exists in your filesystem before you start and **check docker can access this filesystem**.
+Ensure $PLATFORM6_DATA_PATH exists in your filesystem before you start and **check docker can access this filesystem**.
 
 The contents of this directory and database will be initialised automatically the first time you run.
 
