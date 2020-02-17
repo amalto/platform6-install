@@ -43,3 +43,16 @@ to run in background.
 
 __Beware that this is only a prototype to demonstrate how failover mode works in Platform 6. In production, it is highly
 recommended to run the load balancer, each of the Platform 6 nodes and the database on separate machines.__
+
+To view the log files of the running node instance:
+
+```bash
+. .env
+tail -f $PLATFORM6_DATA_PATH/$INSTANCE_ID/p6core.data/logs/p6core_node1.log
+```
+or
+
+```bash
+. .env
+tail -f $PLATFORM6_DATA_PATH/$INSTANCE_ID/p6core.data/logs/p6core_node2.log
+```

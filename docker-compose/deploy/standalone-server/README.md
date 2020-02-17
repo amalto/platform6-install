@@ -17,7 +17,7 @@ Ensure $INSTANCE_DATA_PATH exists in your filesystem before you start and **chec
 
 The contents of this directory and database will be initialised automatically the first time you run.
 
-To auto initialise and start your cluster simply type:
+To auto initialise and start your cluster ensure this deploy folder is your current directory and simply type:
 
 ```bash
 docker-compose up
@@ -40,3 +40,10 @@ CONTAINER ID        IMAGE                       COMMAND                  CREATED
 34dda4e9991e        repo.amalto.com/b2box:dev   "/init"                  About a minute ago   Up About a minute (healthy)   5005/tcp, 0.0.0.0:2221-2222->2221-2222/tcp, 0.0.0.0:8080->8080/tcp, 5900/tcp   standalone-server_p6core_1
 054bf464f26a        postgres:11.3               "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   5432/tcp                                                                       standalone-server_pgsql_1
 ```  
+
+To view the log files of your running instance:
+
+```bash
+. .env
+tail -f $PLATFORM6_DATA_PATH/$INSTANCE_ID/p6core.data/logs/p6core.log 
+```

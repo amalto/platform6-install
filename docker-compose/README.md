@@ -40,7 +40,7 @@ The current installation of Platform 6 relies on [Docker Compose](https://docs.d
 
 In your P6 Console account navigate to the _Instances_ menu. Then click the _Add_ button.
 
-![Go to Instances Menu](images/go_to_instances_menu.png)
+![Go to Instances Menu](../_img/go_to_instances_menu.png)
 
 In the instance creation form, specify the following parameters:
 
@@ -55,7 +55,7 @@ the _P6 Core Server URL_ field with the URL (including port, default is 8080 unl
 an admin of the newly declared instance. But you can choose otherwise and set another user account as the first admin
 of the instance.
 
-![Create Instance](images/create_instance.png)
+![Create Instance](../_img/create_instance.png)
 
 Finally, press the _Create_ button to create your instance.
 
@@ -72,7 +72,7 @@ cd my-instance
 
 Download the `.env` file from your P6 Console interface, as you can see below:
 
-![Download .env File](images/download_dot_env_file.png)
+![Download .env File](../_img/download_dot_env_file.png)
 
 Please note that depending on the browser and/or OS, the downloaded file may be named `.env` or a `env.txt` or simple `env`.
 
@@ -107,7 +107,7 @@ __Windows__
 
 Share the local drive `C` with Docker using the __Shared Drives__ tab in the Docker settings menu.
 
-![Docker settings menu](images/docker_file_sharing_windows.png)
+![Docker settings menu](../_img/docker_file_sharing_windows.png)
 
 ### Step 6
 

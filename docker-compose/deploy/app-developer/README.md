@@ -13,7 +13,7 @@ Ensure $INSTANCE_DATA_PATH exists in your filesystem before you start and **chec
 
 The contents of this directory and database will be initialised automatically the first time you run.
 
-To auto initialise and start your cluster simply type:
+To auto initialise and start your cluster ensure this deploy folder is your current directory and simply type:
 
 ```bash
 docker-compose up
@@ -38,3 +38,10 @@ aca471d2b453        postgres:11.3               "docker-entrypoint.s…"   54 se
 7728aba51721        amalto/b2proxy              "/init"                  54 seconds ago      Up 53 seconds (healthy)   0.0.0.0:8480->8480/tcp, 8443/tcp, 0.0.0.0:8483->8483/tcp   app-developer_p6proxy_1
 
 ``` 
+
+To view the log files of your running instance:
+
+```bash
+. .env
+tail -f $PLATFORM6_DATA_PATH/$INSTANCE_ID/p6core.data/logs/p6core.log 
+```

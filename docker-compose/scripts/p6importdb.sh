@@ -25,7 +25,8 @@ confirm() {
 
 confirm "*** WARNING *** Are you sure?  This script will erase your database and recreate a new one from backup."
 
-// TODO - finish this
+// TODO - finish this and create a .log file locally to capture when it is run (this is a dangerous script)
+// Also check for any running conatiner matching the name *pgsql
 
 source .env
 
