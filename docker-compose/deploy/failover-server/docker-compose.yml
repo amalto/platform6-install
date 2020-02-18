@@ -80,7 +80,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./nginix/p6.conf:/etc/nginx/conf.d/p6.conf:ro
+      - ./nginx/p6.conf:/etc/nginx/conf.d/p6.conf:ro
     healthcheck:
       test: ["CMD", "service", "nginx", "status"]
       interval: 10s

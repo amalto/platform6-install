@@ -16,3 +16,11 @@ The database version is specified in the `.env` file. If you would like to chang
 * Run `p6importdb.sh` (Unix) / `p6importdb.bat` (Windows).
 * Start your instance by running `docker-compose up`
 
+## 2. Color your logs
+
+To add colour to your live log output on MacOS or Linux, ensure your current working directory is your chosen `deploy` folder and run:
+
+```bash
+../../scripts/p6logs.sh
+```
+ 
