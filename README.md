@@ -12,7 +12,7 @@ Whatever your needs, this guide provides our current 'best practice' deployment 
 
 **Use this [link](./docker-compose/README.md) and follow the simple instructions to deploy an instance on your desktop or laptop now.**
 
-Types of deployment technology used referenced in this guide:
+Types of deployment technology referenced in this guide:
 
 - Docker: https://www.docker.com/
 - Terraform: https://www.terraform.io/
