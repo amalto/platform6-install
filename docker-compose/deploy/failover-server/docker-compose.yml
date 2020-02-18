@@ -8,7 +8,7 @@ services:
     image: postgres:${PGSQL_VERSION}
     volumes:
       - pg-data:/var/lib/postgresql/data
-      - ../../reference/${P6CORE_VERSION_TAG}/p6init.sql:/docker-entrypoint-initdb.d/p6init.sql:ro
+      - ../../reference/${P6CORE_VERSION}/p6init.sql:/docker-entrypoint-initdb.d/p6init.sql:ro
     tmpfs:
       - /tmp
       - /run
@@ -23,13 +23,13 @@ services:
   p6core_node1:
 #   restart: always
     stop_grace_period: 40s
-    image: $P6CORE_IMAGE_ID
+    image: ${P6CORE_IMAGE_ID}:${P6CORE_VERSION}
     depends_on:
       - pgsql
     volumes:
       - ${PLATFORM6_DATA_PATH}/${INSTANCE_ID}/p6core.data:/opt/p6core.data:delegated
       # :delegated is a performance enhancement for MacOS bind mounts
-      - ../../reference/${P6CORE_VERSION_TAG}/p6core.data:/opt/p6template.data:ro
+      - ../../reference/${P6CORE_VERSION}/p6core.data:/opt/p6template.data:ro
       - ./node1_conf:/opt/p6node.data:ro
     tmpfs:
       - /tmp
@@ -49,13 +49,13 @@ services:
   p6core_node2:
 #   restart: always
     stop_grace_period: 40s
-    image: $P6CORE_IMAGE_ID
+    image: ${P6CORE_IMAGE_ID}:${P6CORE_VERSION}
     depends_on:
       - p6core_node1
     volumes:
       - ${PLATFORM6_DATA_PATH}/${INSTANCE_ID}/p6core.data:/opt/p6core.data:delegated
       # :delegated is a performance enhancement for MacOS bind mounts
-      - ../../reference/${P6CORE_VERSION_TAG}/p6core.data:/opt/p6template.data:ro
+      - ../../reference/${P6CORE_VERSION}/p6core.data:/opt/p6template.data:ro
       - ./node2_conf:/opt/p6node.data:ro
     tmpfs:
       - /tmp
