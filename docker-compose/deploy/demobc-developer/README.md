@@ -36,3 +36,7 @@ To view the log files of your running instance:
 . .env
 tail -f $PLATFORM6_DATA_PATH/$INSTANCE_ID/p6core.data/logs/p6core.log 
 ```
+
+### JVM Debug
+
+To debug the JVM you will have to add P6_DEBUG_ENABLE=true as an environment variable to the docker-compose.yml and also add “5005”:”5005” to the ports section of the yml.
