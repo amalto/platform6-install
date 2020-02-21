@@ -3,8 +3,8 @@
 This repository contains [Platform 6](https://documentation.amalto.com/platform6/latest/)'s deployment scripts.
 Before trying to install/deploy P6 instances, make sure you've signed up to Platform 6 [here](https://signup.console.platform6.io).
 
-This guide contains all the resources you need to start deploying Platform 6.  You can get up and running quickly using docker and deploy an instance to your laptop.
-In teh future you will be able to use the terraform scripts provided to deploy Platform 6 to a major cloud provider in a resilient and production ready configuration.
+This guide contains all the resources you need to start deploying Platform 6. You can get up and running quickly using Docker and deploy an instance to your laptop.
+In the future you will be able to use the [Terraform](https://www.terraform.io/) scripts provided to deploy Platform 6 to a major cloud provider in a resilient and production ready configuration.
 
 Whatever your needs, this guide provides our current 'best practice' deployment information and configuration details for Platform 6. 
 
@@ -17,7 +17,7 @@ Types of deployment technology referenced in this guide:
 - Docker: https://www.docker.com/
 - Terraform: https://www.terraform.io/
 
-Docker has long been the default deployment technology used for Platform 6.  It is a well used, well documented technology and allows straight forward deployment on everything from developers laptops to large cooperate servers.
+Docker has long been the default deployment technology used for Platform 6. It is a well used, well documented technology and allows straight forward deployment on everything from developer laptops to large cooperate servers.
 
 ## On The Road Map
 
@@ -26,6 +26,6 @@ Terraform will allow us to provide you with predictable and repeatable deploymen
 
 ## Alternatives
 
-The use of our docker and/or terraform scripts are by no means the only ways to deploy Platform 6.  We hope that this guide contains sufficient examples to aid and inspire you to solve problems you face in your chosen deployment environment.
+The use of our Docker and/or Terraform scripts are by no means the only ways to deploy Platform 6. We hope that this guide contains sufficient examples to aid and inspire you to solve problems you face in your chosen deployment environment.
 
 _Finally, if the prospect of managing and hosting Platform 6 instances is unattractive to you or your organisation then please contact us to discuss our managed services solutions; freeing you to concentrate 100% on the creation and delivery of great apps with Platform 6._    

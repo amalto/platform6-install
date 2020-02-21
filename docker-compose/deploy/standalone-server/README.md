@@ -8,7 +8,7 @@ This is a simple deployment of an 'empty' Platform 6 for use by multiple users a
 
 Edit the .env file and modify:
 
-- PLATFORM6_DATA_PATH=~/platform6 or c:\platform6
+- PLATFORM6_DATA_PATH=~/platform6/instances or c:\platform6\instances
 - INSTANCE_ID=[Console .env value]
 - CLIENT_ID=[Console .env value]
 - CLIENT_SECRET=[Console .env value]
