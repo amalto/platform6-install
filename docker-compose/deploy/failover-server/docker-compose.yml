@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   pgsql:
-#   restart: always
+    container_name: pgsql
     stop_grace_period: 1m
     image: postgres:${PGSQL_VERSION}
     volumes:
@@ -21,7 +21,7 @@ services:
       start_period: 30s
 
   p6core_node1:
-#   restart: always
+    container_name: p6core_node1
     stop_grace_period: 40s
     image: ${P6CORE_IMAGE_ID}:${P6CORE_VERSION}
     depends_on:
@@ -47,7 +47,7 @@ services:
       - p6auth_client_secret=${CLIENT_SECRET}
 
   p6core_node2:
-#   restart: always
+    container_name: p6core_node2
     stop_grace_period: 40s
     image: ${P6CORE_IMAGE_ID}:${P6CORE_VERSION}
     depends_on:
@@ -73,7 +73,7 @@ services:
       - p6auth_client_secret=${CLIENT_SECRET}
 
   nginx:
-#   restart: always
+    container_name: nginx
     image: nginx
     depends_on:
       - p6core_node2
@@ -90,5 +90,3 @@ services:
 volumes:
   pg-data:
     driver: local
-
-
