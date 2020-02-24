@@ -3,6 +3,7 @@ version: '3.7'
 services:
 
   pgsql:
+    container_name: pgsql
     stop_grace_period: 1m
     image: postgres:${PGSQL_VERSION}
     volumes:
@@ -20,6 +21,7 @@ services:
       start_period: 30s
 
   p6core:
+    container_name: p6core
     stop_grace_period: 40s
     image: ${P6CORE_IMAGE_ID}:${P6CORE_VERSION}
     depends_on:
@@ -54,7 +56,8 @@ services:
       start_period: 5m
 
   p6proxy:
-    image: amalto/b2proxy
+    container_name: p6proxy
+    image: amalto/p6proxy
     volumes:
       - ../../scripts/proxy_healthcheck.sh:/opt/proxy_healthcheck.sh:ro
     environment:
@@ -87,7 +90,7 @@ services:
       --miner-enabled
       --miner-coinbase fe3b557e8fb62b89f4916b721be55ceb828dbd73
     volumes:
-      - ${PLATFORM6_DATA_PATH}/${INSTANCE_ID}/p6core.data/demo/pantheon:/var/lib/pantheon
+      - ${PLATFORM6_DATA_PATH}/${INSTANCE_ID}/demo/pantheon:/var/lib/pantheon
 
 volumes:
   pg-data:
