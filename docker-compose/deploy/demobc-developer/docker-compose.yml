@@ -79,6 +79,7 @@ services:
       start_period: 1m
 
   demobc:
+    container_name: demobc
     image: pegasyseng/pantheon:1.2.2
     command:
       --network=dev
