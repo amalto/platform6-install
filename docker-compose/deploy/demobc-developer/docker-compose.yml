@@ -28,7 +28,7 @@ services:
       - pgsql
       - demobc
     volumes:
-      - ${PLATFORM6_DATA_PATH}/${INSTANCE_ID}/p6core.data:/opt/p6core.data:delegated
+      - ${PLATFORM6_DATA_PATH}/${INSTANCE_ID}/p6core.data:/opt/${P6CORE_DATA}:delegated
       # :delegated is a performance enhancement for MacOS bind mounts
       - ../../reference/${P6CORE_VERSION}/p6core.data:/opt/p6template.data:ro
     tmpfs:
