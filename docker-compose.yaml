@@ -42,11 +42,12 @@ services:
     environment:
       - S6_KILL_GRACETIME=300000
       - XMX=3g
+      - P6_DEBUG_ENABLE=true
 
   # Only for testing on a local machine, you don't need this container in production
   p6proxy:
     container_name: p6proxy
-    image: amalto/b2proxy
+    image: amalto/p6proxy
     depends_on:
       - p6core
     environment:
