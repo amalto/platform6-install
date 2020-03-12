@@ -7,9 +7,7 @@ You need to install [Docker](https://www.docker.com/) on your machine:
 - Windows: https://docs.docker.com/docker-for-windows/
 - Linux: https://docs.docker.com/engine/installation/
 
-⚠️ Please download only the stable channel! We recommend using a version of Docker newer than:
-- OSX: `18.03.1-ce-mac65`
-- Windows: `18.03.1-ce-win65`
+⚠️ Please download only the stable channel! We recommend using a version of Docker newer than: **19.03.2** (docker-compose version:1.23.1)
 
 Configure Docker to use at least 2 CPUs, 4 GiB of memory and 1 GiB of swap.
 You'll find in the __Getting Started__ page how to update your settings: 
@@ -19,7 +17,7 @@ You'll find in the __Getting Started__ page how to update your settings:
 The network ports we expose from our containers are:
 - `2222`: SFTP port.
 - `2221`: FTP port.
-- `8080`: P6 instance HTTP API port.
+- `8080`: P6 instance HTTP API port. (unless using 443 via nginx)
 - `8480`: Used by P6 Proxy to serve P6 Portal from a custom domain.
 
 ## Instructions
