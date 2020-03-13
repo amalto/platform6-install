@@ -36,7 +36,7 @@ In the instance creation form, specify the following parameters:
 will eventually incur usage fees (but not before July 2020).
 * Instance runs locally: Toggle this if you intend to run your instance locally on your machine, otherwise please fill in
 the _P6 Core Server URL_ field with the URL (including port, default is 8080 unless you change it in 
-[`docker-compose.yaml`](docker-compose.yaml) file).
+[`docker-compose.yaml`](docker-compose.yaml) file or choose to use 443 via a proxy like Nginx).
 * Instance Admin User Email: By default, this field is populated with your email address, so you would be declared as 
 an admin of the newly declared instance. But you can choose otherwise and set another user account as the first admin
 of the instance.
@@ -50,8 +50,7 @@ Finally, press the _Create_ button to create your instance.
 Once Docker is running, clone the Git repository into a new directory dedicated to your local instance.
 
 ```
-git clone git@github.com/amalto/platform6-install.git my-instance
-cd my-instance
+git clone git@github.com/amalto/platform6-install.git
 ```
 
 ### Step 3 - select a deployment
@@ -79,6 +78,20 @@ Edit the .env file in the `deploy` folder of your choice and cut/paste the envir
 Do not hesitate to edit this file to change the values of the variables to better suit your needs
 (such as version, instance data location...).
 
+###Setting Container Timezone
+
+To ensure the Date/Time inside the Platform 6 container is aligned with your chosen timezone please set the timezone variable in your .env file to a value listed here:
+
+https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+For example:
+
+```text
+TZ=America/New_York
+```
+
+----
+
 ### Step 5 - run docker-compose to start
 
 Follow the final instructions in your chosen `deploy` folder to start your instance.  Typically:
@@ -94,7 +107,7 @@ In case you receive a notification from Amalto for a new release of Platform 6, 
 
 For that, check that your instance is stopped, then:
 
-* Set the `P6CORE_VERSION_TAG` variables in the `.env` file to the desired version.
+* Set the `P6CORE_VERSION` variables in the `.env` file to the desired version.
 * Carefully read the [migration guide](https://documentation.amalto.com/platform6/latest/releases/migration/migration-troubleshooting/) for any additional steps to apply.
 * Start your instance.
 

@@ -65,6 +65,7 @@ services:
     environment:
       - P6_CLASSPATH_EXTRA=/opt/p6node.data
       - S6_KILL_GRACETIME=300000
+      - TZ=${TZ}
       - XMX=512m
       - P6_DATA_TEMPLATE=/opt/p6template.data
       - P6_DATA=/opt/p6core.data

@@ -43,6 +43,7 @@ services:
       - "2221:2221" # FTP
     environment:
       - S6_KILL_GRACETIME=300000
+      - TZ=${TZ}
       - XMX=3g
       - P6_DATA_TEMPLATE=/opt/p6template.data
       - P6_DATA=/opt/p6core.data

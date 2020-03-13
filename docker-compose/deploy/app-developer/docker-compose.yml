@@ -41,6 +41,7 @@ services:
       - "5005:5005" # DEBUG
     environment:
       - S6_KILL_GRACETIME=300000
+      - TZ=${TZ}
       - XMX=1g
       - P6_DATA_TEMPLATE=/opt/p6template.data
       - P6_DATA=/opt/p6core.data
