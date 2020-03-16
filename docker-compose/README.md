@@ -78,7 +78,7 @@ Edit the .env file in the `deploy` folder of your choice and cut/paste the envir
 Do not hesitate to edit this file to change the values of the variables to better suit your needs
 (such as version, instance data location...).
 
-###Setting Container Timezone
+### Setting Container Timezone
 
 To ensure the Date/Time inside the Platform 6 container is aligned with your chosen timezone please set the timezone variable in your .env file to a value listed here:
 
