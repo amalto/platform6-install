@@ -30,8 +30,6 @@ docker-compose up -d
 
 to run in background.
 
-
-
 Please wait until all containers are running and have a `healthy` status before attempting to use them:
 
 ```bash
@@ -45,5 +43,5 @@ To view the log files of your running instance:
 
 ```bash
 . .env
-tail -f $PLATFORM6_DATA_PATH/$INSTANCE_ID/p6core.data/logs/p6core.log 
+tail -f $PLATFORM6_DATA_PATH/$INSTANCE_ID/p6core.data/logs/p6core.log
 ```

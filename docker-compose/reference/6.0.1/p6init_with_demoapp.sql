@@ -42,8 +42,8 @@ ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.3 (Debian 11.3-1.pgdg90+1)
--- Dumped by pg_dump version 11.3 (Debian 11.3-1.pgdg90+1)
+-- Dumped from database version 11.3
+-- Dumped by pg_dump version 11.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -123,8 +123,8 @@ GRANT CONNECT ON DATABASE template1 TO PUBLIC;
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.3 (Debian 11.3-1.pgdg90+1)
--- Dumped by pg_dump version 11.3 (Debian 11.3-1.pgdg90+1)
+-- Dumped from database version 11.3
+-- Dumped by pg_dump version 11.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -273,6 +273,20 @@ CREATE TABLE p6core.flyway_schema_history (
 ALTER TABLE p6core.flyway_schema_history OWNER TO b2box;
 
 --
+-- Name: instancedata; Type: TABLE; Schema: p6core; Owner: b2box
+--
+
+CREATE TABLE p6core.instancedata (
+    application character varying(512) NOT NULL,
+    service character varying(512) NOT NULL,
+    type character varying(512) NOT NULL,
+    content jsonb NOT NULL
+);
+
+
+ALTER TABLE p6core.instancedata OWNER TO b2box;
+
+--
 -- Name: item; Type: TABLE; Schema: p6core; Owner: b2box
 --
 
@@ -410,6 +424,16 @@ COPY p6core.flyway_schema_history (installed_rank, version, description, type, s
 28	28	B2BOX5-2016 Migrate Variable Names	SQL	V28__B2BOX5-2016_Migrate_Variable_Names.sql	-548187125	b2box	2020-01-10 11:43:55.194265	39	t
 29	29	B2BOX5-2052-Remove enabled attribute	SQL	V29__B2BOX5-2052-Remove_enabled_attribute.sql	-278415559	b2box	2020-01-10 11:43:55.26231	183	t
 30	30	B2BOX5-2059 Remove p6rest registration	SQL	V30__B2BOX5-2059_Remove_p6rest_registration.sql	1031885722	b2box	2020-01-10 11:43:55.526183	8	t
+31	31	B2BOX5-2048 Create instancedata table	SQL	V31__B2BOX5-2048_Create_instancedata_table.sql	-2118184683	b2box	2020-02-20 18:14:02.649568	31	t
+32	32	B2BOX5-2100 Simplify table field	SQL	V32__B2BOX5-2100_Simplify_table_field.sql	1117258956	b2box	2020-02-20 18:14:02.696593	5	t
+\.
+
+
+--
+-- Data for Name: instancedata; Type: TABLE DATA; Schema: p6core; Owner: b2box
+--
+
+COPY p6core.instancedata (application, service, type, content) FROM stdin;
 \.
 
 
@@ -487,6 +511,14 @@ ALTER TABLE ONLY p6core.failedroutingorder
 
 ALTER TABLE ONLY p6core.flyway_schema_history
     ADD CONSTRAINT flyway_schema_history_pk PRIMARY KEY (installed_rank);
+
+
+--
+-- Name: instancedata instance_pkey; Type: CONSTRAINT; Schema: p6core; Owner: b2box
+--
+
+ALTER TABLE ONLY p6core.instancedata
+    ADD CONSTRAINT instance_pkey PRIMARY KEY (application, service, type);
 
 
 --
@@ -647,6 +679,20 @@ CREATE INDEX fts_fro_idx ON p6core.failedroutingorder USING gist (to_tsvector('e
 
 
 --
+-- Name: instance_idx_application_type; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX instance_idx_application_type ON p6core.instancedata USING btree (application, type);
+
+
+--
+-- Name: instance_idx_content; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX instance_idx_content ON p6core.instancedata USING btree (content);
+
+
+--
 -- Name: item_idx01; Type: INDEX; Schema: p6core; Owner: b2box
 --
 
@@ -773,8 +819,8 @@ GRANT ALL ON DATABASE b2box TO b2box;
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.3 (Debian 11.3-1.pgdg90+1)
--- Dumped by pg_dump version 11.3 (Debian 11.3-1.pgdg90+1)
+-- Dumped from database version 11.3
+-- Dumped by pg_dump version 11.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;

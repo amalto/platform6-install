@@ -34,7 +34,7 @@ To view the log files of your running instance:
 
 ```bash
 . .env
-tail -f $PLATFORM6_DATA_PATH/$INSTANCE_ID/p6core.data/logs/p6core.log 
+tail -f $PLATFORM6_DATA_PATH/$INSTANCE_ID/p6core.data/logs/p6core.log
 ```
 
 ### JVM Debug
