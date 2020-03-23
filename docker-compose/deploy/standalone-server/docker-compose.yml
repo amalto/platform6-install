@@ -7,6 +7,8 @@ services:
     restart: always
     stop_grace_period: 1m
     image: postgres:${PGSQL_VERSION}
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - pg-data:/var/lib/postgresql/data
       - ../../reference/${P6CORE_VERSION}/p6init.sql:/docker-entrypoint-initdb.d/p6init.sql:ro
