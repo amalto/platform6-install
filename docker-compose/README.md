@@ -50,7 +50,7 @@ Finally, press the _Create_ button to create your instance.
 Once Docker is running, clone the Git repository into a new directory dedicated to your local instance.
 
 ```
-git clone git@github.com/amalto/platform6-install.git
+git clone git@github.com:amalto/platform6-install.git
 ```
 
 ### Step 3 - select a deployment
