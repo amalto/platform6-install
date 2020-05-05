@@ -458,6 +458,8 @@ COPY p6core.flyway_schema_history (installed_rank, version, description, type, s
 35	35	P6CORE-126 b2box to p6core	SQL	V35__P6CORE-126_b2box_to_p6core.sql	338269797	b2box	2020-04-01 20:20:47.28884	15	t
 36	36	P6CORE-241 remove views type	SQL	V36__P6CORE-241_remove_views_type.sql	-1823806519	b2box	2020-04-01 20:20:47.318573	4	t
 37	37	P6CORE-245 ContentType from b2box to p6core	SQL	V37__P6CORE-245_ContentType_from_b2box_to_p6core.sql	432647329	b2box	2020-04-01 20:20:47.335151	37	t
+38	38	P6CORE-265 Clear rawbytes table	SQL	V38__P6CORE-265_Clear_rawbytes_table.sql	338269797	b2box	2020-05-05 16:55:10.629003	5	t
+39	39	B2BOX5-161 DSL migration	SQL	V39__B2BOX5-161_DSL_migration.sql	2019520162	b2box	2020-05-05 16:55:10.645318	2	t
 \.
 
 
