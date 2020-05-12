@@ -57,24 +57,19 @@ services:
       retries: 5
       start_period: 5m
 
-  p6proxy:
-    container_name: p6proxy
-    image: amalto/p6proxy
+  proxy:
+    container_name: proxy
+    image: nginx:1.18-alpine
+    depends_on:
+      - p6core
     volumes:
-      - ../../scripts/proxy_healthcheck.sh:/opt/proxy_healthcheck.sh:ro
-    environment:
-      - PROXY_PLAIN_PORT=8480
-      - PROXY_SSL_PORT=8483
-      - LOG_FORMAT=string
-      - LOG_LEVEL=5
-      - PROXY_NO_SSL=false
-      - PROXY_NO_CACHE=true
-      - PROXY_ENV=${PROXY_ENV}
+      - ../../reference/proxy.conf:/etc/nginx/conf.d/proxy.conf:ro
+      - ${PLATFORM6_DATA_PATH}/${INSTANCE_ID}/nginx/logs:/var/log/nginx:delegated
     ports:
       - "8480:8480"
       - "8483:8483"
     healthcheck:
-      test: ["CMD", "/opt/proxy_healthcheck.sh"]
+      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:8480"]
       interval: 10s
       timeout: 30s
       retries: 5
