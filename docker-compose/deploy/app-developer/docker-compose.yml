@@ -67,7 +67,6 @@ services:
       - ${PLATFORM6_DATA_PATH}/${INSTANCE_ID}/nginx/logs:/var/log/nginx:delegated
     ports:
       - "8480:8480"
-      - "8483:8483"
     healthcheck:
       test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:8480"]
       interval: 10s
