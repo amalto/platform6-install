@@ -15,6 +15,10 @@ services:
       - /tmp
       - /run
       - /run/postgresql
+    networks:
+      default:
+        aliases:
+          - database
     healthcheck:
       test: ["CMD", "pg_isready", "-d", "b2box", "-U", "b2box", "-q"]
       interval: 5s
@@ -36,8 +40,6 @@ services:
     tmpfs:
       - /tmp
       - /tmp/p6core
-    links:
-      - pgsql:database
     environment:
       - P6_CLASSPATH_EXTRA=/opt/p6node.data
       - S6_KILL_GRACETIME=300000

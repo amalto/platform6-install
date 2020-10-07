@@ -15,6 +15,10 @@ services:
       - /tmp
       - /run
       - /run/postgresql
+    networks:
+      default:
+        aliases:
+          - database
     healthcheck:
       test: ["CMD", "pg_isready", "-d", "b2box", "-U", "b2box", "-q"]
       interval: 5s
@@ -35,8 +39,6 @@ services:
     tmpfs:
       - /tmp
       - /tmp/p6core
-    links:
-      - pgsql:database
     ports:
       - "2222:2222" # SFTP
       - "2221:2221" # FTP
@@ -59,7 +61,7 @@ services:
 
   proxy:
     container_name: proxy
-    image: nginx:1.18-alpine
+    image: nginx:1.19-alpine
     depends_on:
       - p6core
     volumes:
