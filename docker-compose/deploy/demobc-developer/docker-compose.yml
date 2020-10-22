@@ -13,6 +13,8 @@ services:
       - /tmp
       - /run
       - /run/postgresql
+    ports:
+      - "5432:5432"
     networks:
       default:
         aliases:
@@ -49,6 +51,7 @@ services:
       - XMX=1g
       - P6_DATA_TEMPLATE=/opt/p6template.data
       - P6_DATA=/opt/p6core.data
+      - P6_DEBUG_ENABLE=1
       - p6core_instance_id=${INSTANCE_ID}
       - p6auth_client_id=${CLIENT_ID}
       - p6auth_client_secret=${CLIENT_SECRET}
