@@ -1,6 +1,10 @@
-# Platform 6 deployment: app-developer
+# Platform 6 deployment: demobc-developer-caddy
 
 This deployment is for a typical Platform 6 App developer who runs entirely on their desktop computer; Windows, MacOS or Linux
+
+**This deployment includes a standalone Hyperledger Besu blockchain node and comes pre-installed with our Demo App.**
+
+See: https://documentation.amalto.com/platform6/latest/tutorials/get-started-with-p6/learn-with-the-demo-app/
 
 Edit the .env file and modify:
 
@@ -25,17 +29,6 @@ docker-compose up -d
 ```
 
 to run in background.
-
-Please wait until all containers are running and have a `healthy` status before attempting to use them:
-
-```bash
-docker ps
-CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS                    PORTS                                                      NAMES
-6b295265dd08        repo.amalto.com/b2box:dev   "/init"                  53 seconds ago      Up 52 seconds (healthy)   5005/tcp, 5900/tcp, 8080/tcp                               app-developer_p6core_1
-aca471d2b453        postgres:11.3               "docker-entrypoint.s…"   54 seconds ago      Up 53 seconds (healthy)   0.0.0.0:5432->5432/tcp                                     app-developer_pgsql_1
-7728aba51721        amalto/p6proxy              "/init"                  54 seconds ago      Up 53 seconds (healthy)   0.0.0.0:8480->8480/tcp, 8443/tcp, 0.0.0.0:8483->8483/tcp   app-developer_p6proxy_1
-
-``` 
 
 To view the log files of your running instance:
 
