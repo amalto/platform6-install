@@ -76,8 +76,9 @@
         tls
         # Ignore bad certs on the targets
         tls_insecure_skip_verify
+        tls_timeout 3s
         dial_timeout 5s
-        response_header_timeout 3s
+        response_header_timeout 65s
       }
       header_up Host {http.reverse_proxy.upstream.hostport}
     }
@@ -85,7 +86,7 @@
     reverse_proxy @httpTarget {http.vars_regex.baseurl.host}:{http.vars_regex.default_port.match1} {
       transport http {
         dial_timeout 5s
-        response_header_timeout 3s
+        response_header_timeout 65s
       }
       header_up Host {http.reverse_proxy.upstream.hostport}
     }
