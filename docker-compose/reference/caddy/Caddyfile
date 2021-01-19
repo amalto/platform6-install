@@ -1,8 +1,6 @@
 {
   # debug
-  https_port  {$SITE_PORT}
-  auto_https  disable_redirects
-  default_sni {$DEFAULT_SNI}
+  http_port   {$SITE_PORT}
   admin       :{$ADMIN_PORT}
 }
 

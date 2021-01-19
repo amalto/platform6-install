@@ -67,15 +67,14 @@ services:
       - ../../reference/caddy/caddata:/data:delegated
     environment:
       - P6PROXY_VERSION=${P6PROXY_VERSION}
-      - DEFAULT_SNI=p6proxy
       - SITE_DOMAIN=localhost
-      - SITE_PORT=8483
+      - SITE_PORT=8480
       - ADMIN_PORT=8091
       - CERT_MANAGER_EMAIL=internal
       - P6AUTH_PUBLIC_KEY_FILE=${P6AUTH_PUBLIC_KEY_FILE}
       - RUNLOCAL_BUCKET_HOST=${RUNLOCAL_BUCKET_HOST}
     ports:
-      - 8483:8483
+      - 8480:8480
       - 8091:8091
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8091/metrics" ]
