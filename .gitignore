@@ -1,2 +1,3 @@
 .DS_Store
 .idea
+docker-compose/reference/caddy/caddata/logs

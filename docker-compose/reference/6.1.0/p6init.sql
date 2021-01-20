@@ -169,18 +169,31 @@ CREATE SCHEMA p6core;
 ALTER SCHEMA p6core OWNER TO b2box;
 
 --
--- Name: tablefunc; Type: EXTENSION; Schema: -; Owner:
+-- Name: tablefunc; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS tablefunc WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION tablefunc; Type: COMMENT; Schema: -; Owner:
+-- Name: EXTENSION tablefunc; Type: COMMENT; Schema: -; Owner: 
 --
 
 COMMENT ON EXTENSION tablefunc IS 'functions that manipulate whole tables, including crosstab';
 
+
+--
+-- Name: itempartitiontype; Type: TYPE; Schema: p6core; Owner: b2box
+--
+
+CREATE TYPE p6core.itempartitiontype AS ENUM (
+    'LOG',
+    'TABLE_DATA',
+    'TRANSACTION'
+);
+
+
+ALTER TYPE p6core.itempartitiontype OWNER TO b2box;
 
 --
 -- Name: array_to_string_i(text[], text); Type: FUNCTION; Schema: public; Owner: b2box
@@ -274,18 +287,39 @@ CREATE TABLE p6core.instancedata (
 ALTER TABLE p6core.instancedata OWNER TO b2box;
 
 --
+-- Name: item; Type: TABLE; Schema: p6core; Owner: b2box
+--
+
+CREATE TABLE p6core.item (
+    datapartition p6core.itempartitiontype NOT NULL,
+    datatype character varying(64) NOT NULL,
+    iid1 character varying(256) NOT NULL,
+    iid2 character varying(96) NOT NULL,
+    iid3 character varying(96) NOT NULL,
+    iid4 character varying(96) NOT NULL,
+    content xml NOT NULL,
+    inserttime bigint
+)
+PARTITION BY LIST (datapartition);
+
+
+ALTER TABLE p6core.item OWNER TO b2box;
+
+--
 -- Name: log; Type: TABLE; Schema: p6core; Owner: b2box
 --
 
 CREATE TABLE p6core.log (
+    datapartition p6core.itempartitiontype NOT NULL,
     datatype character varying(64) NOT NULL,
-    iid1 text NOT NULL,
-    iid2 text NOT NULL,
-    iid3 text NOT NULL,
-    iid4 text NOT NULL,
+    iid1 character varying(256) NOT NULL,
+    iid2 character varying(96) NOT NULL,
+    iid3 character varying(96) NOT NULL,
+    iid4 character varying(96) NOT NULL,
     content xml NOT NULL,
     inserttime bigint
 );
+ALTER TABLE ONLY p6core.item ATTACH PARTITION p6core.log FOR VALUES IN ('LOG');
 
 
 ALTER TABLE p6core.log OWNER TO b2box;
@@ -325,18 +359,16 @@ ALTER TABLE p6core.serviceconfig OWNER TO b2box;
 --
 
 CREATE TABLE p6core.table_data (
+    datapartition p6core.itempartitiontype NOT NULL,
     datatype character varying(64) NOT NULL,
-    iid1 text NOT NULL,
-    iid2 text NOT NULL,
-    iid3 text NOT NULL,
-    iid4 text NOT NULL,
+    iid1 character varying(256) NOT NULL,
+    iid2 character varying(96) NOT NULL,
+    iid3 character varying(96) NOT NULL,
+    iid4 character varying(96) NOT NULL,
     content xml NOT NULL,
-    inserttime bigint,
-    iid5 text NOT NULL,
-    iid6 text NOT NULL,
-    iid7 text NOT NULL,
-    iid8 text NOT NULL
+    inserttime bigint
 );
+ALTER TABLE ONLY p6core.item ATTACH PARTITION p6core.table_data FOR VALUES IN ('TABLE_DATA');
 
 
 ALTER TABLE p6core.table_data OWNER TO b2box;
@@ -346,14 +378,16 @@ ALTER TABLE p6core.table_data OWNER TO b2box;
 --
 
 CREATE TABLE p6core.transaction (
+    datapartition p6core.itempartitiontype NOT NULL,
     datatype character varying(64) NOT NULL,
-    iid1 text NOT NULL,
-    iid2 text NOT NULL,
-    iid3 text NOT NULL,
-    iid4 text NOT NULL,
+    iid1 character varying(256) NOT NULL,
+    iid2 character varying(96) NOT NULL,
+    iid3 character varying(96) NOT NULL,
+    iid4 character varying(96) NOT NULL,
     content xml NOT NULL,
     inserttime bigint
 );
+ALTER TABLE ONLY p6core.item ATTACH PARTITION p6core.transaction FOR VALUES IN ('TRANSACTION');
 
 
 ALTER TABLE p6core.transaction OWNER TO b2box;
@@ -426,11 +460,6 @@ COPY p6core.flyway_schema_history (installed_rank, version, description, type, s
 37	37	P6CORE-245 ContentType from b2box to p6core	SQL	V37__P6CORE-245_ContentType_from_b2box_to_p6core.sql	432647329	b2box	2020-04-01 20:20:47.335151	37	t
 38	38	P6CORE-265 Clear rawbytes table	SQL	V38__P6CORE-265_Clear_rawbytes_table.sql	338269797	b2box	2020-05-05 16:55:10.629003	5	t
 39	39	B2BOX5-161 DSL migration	SQL	V39__B2BOX5-161_DSL_migration.sql	2019520162	b2box	2020-05-05 16:55:10.645318	2	t
-40	40	P6CORE-296 workflowstep deprecated node	SQL	V40__P6CORE-296_workflowstep_deprecated_node.sql	-1096382652	b2box	2021-01-20 11:17:59.656316	12	t
-41	41	P6CORE-310 partitionning	SQL	V41__P6CORE-310_partitionning.sql	1716509906	b2box	2021-01-20 11:17:59.681567	16	t
-42	41.1	P6CORE-310 partitionning	SQL	V41_1__P6CORE-310_partitionning.sql	-896127728	b2box	2021-01-20 11:17:59.708193	7	t
-43	42	P6CORE-346 Searchable	SQL	V42__P6CORE-346_Searchable.sql	-649396117	b2box	2021-01-20 11:17:59.725372	5	t
-44	43	P6CORE-348 rename workItem to workflowTaskEnhancer	SQL	V43__P6CORE-348_rename_workItem_to_workflowTaskEnhancer.sql	-645742635	b2box	2021-01-20 11:17:59.739714	2	t
 \.
 
 
@@ -446,7 +475,7 @@ COPY p6core.instancedata (application, service, type, content) FROM stdin;
 -- Data for Name: log; Type: TABLE DATA; Schema: p6core; Owner: b2box
 --
 
-COPY p6core.log (datatype, iid1, iid2, iid3, iid4, content, inserttime) FROM stdin;
+COPY p6core.log (datapartition, datatype, iid1, iid2, iid3, iid4, content, inserttime) FROM stdin;
 \.
 
 
@@ -463,6 +492,9 @@ COPY p6core.rawbytes (id1, id2, content, inserttime) FROM stdin;
 --
 
 COPY p6core.serviceconfig (id1, id2, id3, content, bytes, inserttime) FROM stdin;
+Default		email	{"name": "Default", "type": "JAVAMAIL", "appKey": "", "revisionId": "edf7ea27e3c35e3c0071e669e34d1d98", "contentMode": "NONE", "description": {"EN": "Default email profile"}, "defaultProfile": true, "lastModifiedBy": "admin@amalto.com", "lastModifiedDate": 1548169368257, "configurationProperties": {}}	\N	1548169368271
+_logging_event		datamodels	{"name": "_logging_event", "appKey": "", "schema": "<xsd:schema xmlns:xsd=\\"http://www.w3.org/2001/XMLSchema\\" attributeFormDefault=\\"unqualified\\" blockDefault=\\"\\" elementFormDefault=\\"qualified\\" finalDefault=\\"\\">\\n\\n    <xsd:element abstract=\\"false\\" name=\\"logging_event\\" nillable=\\"false\\">\\n        <xsd:complexType mixed=\\"false\\">\\n            <xsd:sequence maxOccurs=\\"1\\" minOccurs=\\"1\\">\\n                <xsd:element maxOccurs=\\"1\\" minOccurs=\\"1\\" name=\\"id\\" nillable=\\"false\\" type=\\"xsd:string\\"/>\\n                <xsd:element maxOccurs=\\"1\\" minOccurs=\\"1\\" name=\\"time\\" nillable=\\"false\\" type=\\"xsd:string\\"/>\\n                <xsd:element maxOccurs=\\"1\\" minOccurs=\\"1\\" name=\\"level\\" nillable=\\"false\\" type=\\"xsd:string\\"/>\\n                <xsd:element maxOccurs=\\"1\\" minOccurs=\\"1\\" name=\\"logger\\" nillable=\\"false\\" type=\\"xsd:string\\"/>\\n                <xsd:element maxOccurs=\\"1\\" minOccurs=\\"1\\" name=\\"message\\" nillable=\\"false\\" type=\\"xsd:string\\"/>\\n                <xsd:element maxOccurs=\\"1\\" minOccurs=\\"1\\" name=\\"ndc\\" nillable=\\"false\\" type=\\"xsd:string\\"/>\\n                <xsd:element maxOccurs=\\"1\\" minOccurs=\\"1\\" name=\\"thread\\" nillable=\\"false\\" type=\\"xsd:string\\"/>\\n                <xsd:element maxOccurs=\\"1\\" minOccurs=\\"0\\" name=\\"throwable\\" nillable=\\"false\\" type=\\"xsd:string\\"/>\\n            </xsd:sequence>\\n        </xsd:complexType>\\n        <xsd:unique name=\\"logging_event\\">\\n            <xsd:selector xpath=\\".\\"/>\\n            <xsd:field xpath=\\"time\\"/>\\n        </xsd:unique>\\n    </xsd:element>\\n\\n\\n</xsd:schema>", "revisionId": "92330d48ae06ac2623bca161872d6cf0", "contentMode": "NONE", "description": {"EN": " Logging events (formerly named .logging_event)"}, "lastModifiedBy": "admin@amalto.com", "lastModifiedDate": 1538389926868}	\N	1538389926969
+Logging Event		views	{"name": "Logging Event", "appKey": "", "xmlView": "<View>\\n    <SmartTags/>\\n    <DataType>logging_event</DataType>\\n    <DataModel/>\\n    <DataPartition>LOG</DataPartition>\\n    <ReprocessRouteUri/>\\n    <ListOfKeys>\\n        <Key>\\n            <Name>ID</Name>\\n            <Description>\\n                <EN>Id</EN>\\n                <FR>Identifiant</FR>\\n            </Description>\\n            <XPath>logging_event/id</XPath>\\n        </Key>\\n    </ListOfKeys>\\n    <ListOfSearchables>\\n        <Searchable>\\n            <Name>Creation Date</Name>\\n            <Description>\\n                <EN>Creation Date</EN>\\n                <FR>Date de Création</FR>\\n            </Description>\\n            <XPath>logging_event/time</XPath>\\n            <Type>RangeOfDates(yyyy'-'MM'-'dd' 'HH:mm:ss.S z)</Type>\\n        </Searchable>\\n        <Searchable>\\n            <Name>ID</Name>\\n            <Description>\\n                <EN>ID</EN>\\n                <FR>Identifiant</FR>\\n            </Description>\\n            <XPath>logging_event/id</XPath>\\n            <Type>StringContains</Type>\\n        </Searchable>\\n        <Searchable>\\n            <Name>Logger</Name>\\n            <Description>\\n                <EN>Logger</EN>\\n                <FR>logger</FR>\\n            </Description>\\n            <XPath>logging_event/logger</XPath>\\n            <Type>StringContains</Type>\\n        </Searchable>\\n        <Searchable>\\n            <Name>Message</Name>\\n            <Description>\\n                <EN>Message</EN>\\n                <FR>Message</FR>\\n            </Description>\\n            <XPath>logging_event/message</XPath>\\n            <Type>StringContains</Type>\\n        </Searchable>\\n        <Searchable>\\n            <Name>AnyField</Name>\\n            <Description>\\n                <EN>Contains the words</EN>\\n                <FR>Contient les mots</FR>\\n            </Description>\\n            <XPath>logging_event</XPath>\\n            <Type>StringContains</Type>\\n        </Searchable>\\n    </ListOfSearchables>\\n    <ListOfViewables>\\n        <Viewable>\\n            <Name>Creation Date</Name>\\n            <Description>\\n                <EN>Creation Date</EN>\\n                <FR>Date de Création</FR>\\n            </Description>\\n            <XPath>logging_event/time</XPath>\\n            <Type>Date(yyyy'-'MM'-'dd' 'HH:mm:ss.S z)</Type>\\n        </Viewable>\\n        <Viewable>\\n            <Name>ID</Name>\\n            <Description>\\n                <EN>ID</EN>\\n                <FR>Identifiant</FR>\\n            </Description>\\n            <XPath>logging_event/id</XPath>\\n            <Type>String</Type>\\n        </Viewable>\\n        <Viewable>\\n            <Name>Logger</Name>\\n            <Description>\\n                <EN>Logger</EN>\\n                <FR>logger</FR>\\n            </Description>\\n            <XPath>logging_event/logger</XPath>\\n            <Type>String</Type>\\n        </Viewable>\\n        <Viewable>\\n            <Name>Message</Name>\\n            <Description>\\n                <EN>Message</EN>\\n                <FR>Message</FR>\\n            </Description>\\n            <XPath>logging_event/message</XPath>\\n            <Type>String</Type>\\n        </Viewable>\\n        <Viewable>\\n            <Name>Level</Name>\\n            <Description>\\n                <EN>Level</EN>\\n                <FR>Level</FR>\\n            </Description>\\n            <XPath>logging_event/level</XPath>\\n            <Type>String</Type>\\n        </Viewable>\\n    </ListOfViewables>\\n</View>\\n", "revisionId": "efe8acc7d4f399db36d7f501f3487c9c", "contentMode": "NONE", "description": {"EN": "Logging Event", "FR": "Evènement de log"}, "lastModifiedBy": "admin@amalto.com", "lastModifiedDate": 1548267162338}	\N	1548267162347
 \.
 
 
@@ -470,7 +502,7 @@ COPY p6core.serviceconfig (id1, id2, id3, content, bytes, inserttime) FROM stdin
 -- Data for Name: table_data; Type: TABLE DATA; Schema: p6core; Owner: b2box
 --
 
-COPY p6core.table_data (datatype, iid1, iid2, iid3, iid4, content, inserttime, iid5, iid6, iid7, iid8) FROM stdin;
+COPY p6core.table_data (datapartition, datatype, iid1, iid2, iid3, iid4, content, inserttime) FROM stdin;
 \.
 
 
@@ -478,7 +510,7 @@ COPY p6core.table_data (datatype, iid1, iid2, iid3, iid4, content, inserttime, i
 -- Data for Name: transaction; Type: TABLE DATA; Schema: p6core; Owner: b2box
 --
 
-COPY p6core.transaction (datatype, iid1, iid2, iid3, iid4, content, inserttime) FROM stdin;
+COPY p6core.transaction (datapartition, datatype, iid1, iid2, iid3, iid4, content, inserttime) FROM stdin;
 \.
 
 
@@ -520,6 +552,14 @@ ALTER TABLE ONLY p6core.flyway_schema_history
 
 ALTER TABLE ONLY p6core.instancedata
     ADD CONSTRAINT instance_pkey PRIMARY KEY (application, service, type);
+
+
+--
+-- Name: transaction item_pkey; Type: CONSTRAINT; Schema: p6core; Owner: b2box
+--
+
+ALTER TABLE ONLY p6core.transaction
+    ADD CONSTRAINT item_pkey PRIMARY KEY (datapartition, datatype, iid1, iid2, iid3, iid4);
 
 
 --
@@ -686,10 +726,80 @@ CREATE INDEX instance_idx_content ON p6core.instancedata USING btree (content);
 
 
 --
+-- Name: item_idx01; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX item_idx01 ON p6core.transaction USING btree (datapartition);
+
+
+--
 -- Name: item_idx02; Type: INDEX; Schema: p6core; Owner: b2box
 --
 
 CREATE INDEX item_idx02 ON p6core.transaction USING btree (datatype);
+
+
+--
+-- Name: item_mi_fts_idx01; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX item_mi_fts_idx01 ON p6core.transaction USING gist (to_tsvector('english'::regconfig, public.array_to_string_i((xpath('/MessageInfo//text()'::text, content))::text[], ' '::text))) WHERE ((datapartition = 'TRANSACTION'::p6core.itempartitiontype) AND ((datatype)::text = 'TransactionInfo'::text));
+
+
+--
+-- Name: item_mi_fts_idx02; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX item_mi_fts_idx02 ON p6core.transaction USING gist (to_tsvector('english'::regconfig, public.array_to_string_i((xpath('/MessageInfo/CreationDate//text()'::text, content))::text[], ' '::text))) WHERE ((datapartition = 'TRANSACTION'::p6core.itempartitiontype) AND ((datatype)::text = 'TransactionInfo'::text));
+
+
+--
+-- Name: item_mi_fts_idx03; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX item_mi_fts_idx03 ON p6core.transaction USING gist (to_tsvector('english'::regconfig, public.array_to_string_i((xpath('/MessageInfo/BusinessDocName//text()'::text, content))::text[], ' '::text))) WHERE ((datapartition = 'TRANSACTION'::p6core.itempartitiontype) AND ((datatype)::text = 'TransactionInfo'::text));
+
+
+--
+-- Name: item_mi_fts_idx04; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX item_mi_fts_idx04 ON p6core.transaction USING gist (to_tsvector('english'::regconfig, public.array_to_string_i((xpath('/MessageInfo/BusinessDocNumber//text()'::text, content))::text[], ' '::text))) WHERE ((datapartition = 'TRANSACTION'::p6core.itempartitiontype) AND ((datatype)::text = 'TransactionInfo'::text));
+
+
+--
+-- Name: item_mi_fts_idx05; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX item_mi_fts_idx05 ON p6core.transaction USING gist (to_tsvector('english'::regconfig, public.array_to_string_i((xpath('/MessageInfo/LastStatusCode//text()'::text, content))::text[], ' '::text))) WHERE ((datapartition = 'TRANSACTION'::p6core.itempartitiontype) AND ((datatype)::text = 'TransactionInfo'::text));
+
+
+--
+-- Name: item_mi_idx01; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX item_mi_idx01 ON p6core.transaction USING btree (((public.array_to_string_i((xpath('/MessageInfo/CreationDate//text()'::text, content))::text[], ' '::text))::character varying(256))) WHERE ((datapartition = 'TRANSACTION'::p6core.itempartitiontype) AND ((datatype)::text = 'TransactionInfo'::text));
+
+
+--
+-- Name: item_mi_idx02; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX item_mi_idx02 ON p6core.transaction USING btree (((public.array_to_string_i((xpath('/MessageInfo/BusinessDocName//text()'::text, content))::text[], ' '::text))::character varying(256))) WHERE ((datapartition = 'TRANSACTION'::p6core.itempartitiontype) AND ((datatype)::text = 'TransactionInfo'::text));
+
+
+--
+-- Name: item_mi_idx03; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX item_mi_idx03 ON p6core.transaction USING btree (((public.array_to_string_i((xpath('/MessageInfo/BusinessDocNumber//text()'::text, content))::text[], ' '::text))::character varying(256))) WHERE ((datapartition = 'TRANSACTION'::p6core.itempartitiontype) AND ((datatype)::text = 'TransactionInfo'::text));
+
+
+--
+-- Name: item_mi_idx04; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX item_mi_idx04 ON p6core.transaction USING btree (((public.array_to_string_i((xpath('/MessageInfo/LastStatusCode//text()'::text, content))::text[], ' '::text))::character varying(256))) WHERE ((datapartition = 'TRANSACTION'::p6core.itempartitiontype) AND ((datatype)::text = 'TransactionInfo'::text));
 
 
 --
@@ -777,6 +887,20 @@ CREATE INDEX table_data_datatype_idx ON p6core.table_data USING btree (datatype)
 
 
 --
+-- Name: xrocswyd3g5rejujxo; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX xrocswyd3g5rejujxo ON p6core.table_data USING btree (public.array_to_string_i((xpath('/DUNS_Internal/DUNSNumber//text()'::text, content))::text[], ' '::text)) WHERE ((datapartition = 'TABLE_DATA'::p6core.itempartitiontype) AND ((datatype)::text = 'DUNS_Internal'::text));
+
+
+--
+-- Name: xrvlaoi4elt5bbntlz; Type: INDEX; Schema: p6core; Owner: b2box
+--
+
+CREATE INDEX xrvlaoi4elt5bbntlz ON p6core.table_data USING btree (public.array_to_string_i((xpath('/DUNS_Customers/DUNSNumber//text()'::text, content))::text[], ' '::text)) WHERE ((datapartition = 'TABLE_DATA'::p6core.itempartitiontype) AND ((datatype)::text = 'DUNS_Customers'::text));
+
+
+--
 -- Name: DATABASE b2box; Type: ACL; Schema: -; Owner: postgres
 --
 
@@ -845,14 +969,14 @@ CREATE SCHEMA b2head;
 ALTER SCHEMA b2head OWNER TO postgres;
 
 --
--- Name: tablefunc; Type: EXTENSION; Schema: -; Owner:
+-- Name: tablefunc; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS tablefunc WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION tablefunc; Type: COMMENT; Schema: -; Owner:
+-- Name: EXTENSION tablefunc; Type: COMMENT; Schema: -; Owner: 
 --
 
 COMMENT ON EXTENSION tablefunc IS 'functions that manipulate whole tables, including crosstab';
