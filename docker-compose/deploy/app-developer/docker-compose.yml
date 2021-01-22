@@ -53,7 +53,7 @@ services:
       - p6auth_client_id=${CLIENT_ID}
       - p6auth_client_secret=${CLIENT_SECRET}
     healthcheck:
-      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:8080/p6/vmstats"]
+      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:8080/p6"]
       interval: 10s
       timeout: 30s
       retries: 5
