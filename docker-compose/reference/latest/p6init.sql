@@ -37,13 +37,20 @@ ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION
 
 
 
+--
+-- Databases
+--
+
+--
+-- Database "template1" dump
+--
 
 --
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.7
--- Dumped by pg_dump version 11.7
+-- Dumped from database version 13.1
+-- Dumped by pg_dump version 13.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -62,7 +69,7 @@ DROP DATABASE template1;
 -- Name: template1; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8';
+CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.utf8';
 
 
 ALTER DATABASE template1 OWNER TO postgres;
@@ -120,11 +127,15 @@ GRANT CONNECT ON DATABASE template1 TO PUBLIC;
 --
 
 --
+-- Database "b2box" dump
+--
+
+--
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.7
--- Dumped by pg_dump version 11.7
+-- Dumped from database version 13.1
+-- Dumped by pg_dump version 13.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -141,7 +152,7 @@ SET row_security = off;
 -- Name: b2box; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE b2box WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8';
+CREATE DATABASE b2box WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.utf8';
 
 
 ALTER DATABASE b2box OWNER TO postgres;
@@ -169,7 +180,7 @@ CREATE SCHEMA p6core;
 ALTER SCHEMA p6core OWNER TO b2box;
 
 --
--- Name: tablefunc; Type: EXTENSION; Schema: -; Owner:
+-- Name: tablefunc; Type: EXTENSION; Schema: -; Owner: -
 --
 
 CREATE EXTENSION IF NOT EXISTS tablefunc WITH SCHEMA public;
@@ -201,7 +212,7 @@ ALTER FUNCTION public.array_to_string_i(texts text[], sep text) OWNER TO b2box;
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: activeroutingorder; Type: TABLE; Schema: p6core; Owner: b2box
@@ -431,6 +442,7 @@ COPY p6core.flyway_schema_history (installed_rank, version, description, type, s
 42	41.1	P6CORE-310 partitionning	SQL	V41_1__P6CORE-310_partitionning.sql	-896127728	b2box	2021-01-20 11:17:59.708193	7	t
 43	42	P6CORE-346 Searchable	SQL	V42__P6CORE-346_Searchable.sql	-649396117	b2box	2021-01-20 11:17:59.725372	5	t
 44	43	P6CORE-348 rename workItem to workflowTaskEnhancer	SQL	V43__P6CORE-348_rename_workItem_to_workflowTaskEnhancer.sql	-645742635	b2box	2021-01-20 11:17:59.739714	2	t
+45	44	P6CORE-339 table data indexes	SQL	V44__P6CORE-339_table_data_indexes.sql	438532387	b2box	2021-02-15 15:51:19.723209	11	t
 \.
 
 
@@ -536,6 +548,14 @@ ALTER TABLE ONLY p6core.rawbytes
 
 ALTER TABLE ONLY p6core.serviceconfig
     ADD CONSTRAINT serviceconfig_pkey PRIMARY KEY (id1, id2, id3) WITH (fillfactor='100');
+
+
+--
+-- Name: table_data table_data_pkey; Type: CONSTRAINT; Schema: p6core; Owner: b2box
+--
+
+ALTER TABLE ONLY p6core.table_data
+    ADD CONSTRAINT table_data_pkey PRIMARY KEY (datatype, iid1, iid2, iid3, iid4, iid5, iid6, iid7, iid8);
 
 
 --
@@ -788,11 +808,15 @@ GRANT ALL ON DATABASE b2box TO b2box;
 --
 
 --
+-- Database "postgres" dump
+--
+
+--
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.7
--- Dumped by pg_dump version 11.7
+-- Dumped from database version 13.1
+-- Dumped by pg_dump version 13.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -810,7 +834,7 @@ DROP DATABASE postgres;
 -- Name: postgres; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE postgres WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8';
+CREATE DATABASE postgres WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.utf8';
 
 
 ALTER DATABASE postgres OWNER TO postgres;
@@ -845,7 +869,7 @@ CREATE SCHEMA b2head;
 ALTER SCHEMA b2head OWNER TO postgres;
 
 --
--- Name: tablefunc; Type: EXTENSION; Schema: -; Owner:
+-- Name: tablefunc; Type: EXTENSION; Schema: -; Owner: -
 --
 
 CREATE EXTENSION IF NOT EXISTS tablefunc WITH SCHEMA public;
