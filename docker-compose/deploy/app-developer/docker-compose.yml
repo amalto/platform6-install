@@ -43,6 +43,7 @@ services:
       - "2222:2222" # SFTP
       - "2221:2221" # FTP
       - "5005:5005" # DEBUG
+      - "9091:8091" # MONITORING (PROMETHEUS + HAWTIO)
     environment:
       - S6_KILL_GRACETIME=300000
       - TZ=${TZ}
