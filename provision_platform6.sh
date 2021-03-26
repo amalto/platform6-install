@@ -23,7 +23,7 @@ docker rm demobc
 docker rm demoexplorer
 
 # Set database version
-if [ $PLATFORM6_VERSION == '5.24.15' ]
+if [ $PLATFORM6_VERSION == '5.24.16' ]
 then
     export PGSQL_VERSION='9.6.1'
 elif [ $PLATFORM6_VERSION == '6.0.0-alpha-4' ]
@@ -40,7 +40,7 @@ if [[ "$PLATFORM6_VERSION" == *-SNAPSHOT ]]
 then
     export P6CORE_IMAGE_ID='repo.amalto.com/b2box:dev'
 else
-    export P6CORE_IMAGE_ID='amalto/platform6:'$PLATFORM6_VERSION
+    export P6CORE_IMAGE_ID='amalto/b2box:'$PLATFORM6_VERSION
 fi
 
 echo "P6CORE_IMAGE_ID=$P6CORE_IMAGE_ID" >> .env
@@ -61,7 +61,7 @@ else
 fi
 
 # Update application.conf
-if [ $PLATFORM6_VERSION == '5.24.15' ] ||
+if [ $PLATFORM6_VERSION == '5.24.16' ] ||
    [ $PLATFORM6_VERSION == '6.0.0-alpha-4' ] ||
    [ $PLATFORM6_VERSION == '6.0.0-alpha-5' ]
 then

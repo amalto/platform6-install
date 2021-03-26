@@ -38,7 +38,7 @@ if [[ "$PLATFORM6_VERSION" == *-SNAPSHOT ]]
 then
     export P6CORE_IMAGE_ID='repo.amalto.com/b2box:dev'
 else
-    export P6CORE_IMAGE_ID='amalto/platform6:'$PLATFORM6_VERSION
+    export P6CORE_IMAGE_ID='amalto/b2box:'$PLATFORM6_VERSION
 fi
 
 echo "P6CORE_IMAGE_ID=$P6CORE_IMAGE_ID" >> ../.env
