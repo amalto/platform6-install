@@ -6,7 +6,7 @@
 
 {$SITE_DOMAIN}:{$SITE_PORT} {
 
-  encode zstd gzip
+  encode gzip
   header /* Server "p6proxy/{$P6PROXY_VERSION}"
 
   @baseUrlParam {
