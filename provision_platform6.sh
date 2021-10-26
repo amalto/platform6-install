@@ -23,7 +23,7 @@ docker rm demobc
 docker rm demoexplorer
 
 # Set database version
-if [ $PLATFORM6_VERSION == '5.24.19' ]
+if [ $PLATFORM6_VERSION == '5.24.20' ]
 then
     export PGSQL_VERSION='9.6.1'
 elif [ $PLATFORM6_VERSION == '6.0.0-alpha-4' ]
@@ -61,7 +61,7 @@ else
 fi
 
 # Update application.conf
-if [ $PLATFORM6_VERSION == '5.24.19' ] ||
+if [ $PLATFORM6_VERSION == '5.24.20' ] ||
    [ $PLATFORM6_VERSION == '6.0.0-alpha-4' ] ||
    [ $PLATFORM6_VERSION == '6.0.0-alpha-5' ]
 then
