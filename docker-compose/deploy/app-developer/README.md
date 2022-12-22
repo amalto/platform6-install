@@ -32,8 +32,8 @@ Please wait until all containers are running and have a `healthy` status before 
 docker ps
 CONTAINER ID        IMAGE                             COMMAND                  CREATED             STATUS                             PORTS                                                                       NAMES
 b21c0a18d789        amalto/p6core:latest              "/opt/p6core/p6core-…"   37 seconds ago      Up 35 seconds (healthy)            0.0.0.0:2221-2222->2221-2222/tcp, 0.0.0.0:5005->5005/tcp                    p6core
-f4a17ca1ca41        amalto/caddy:2.3.0-amalto_1.0.4   "/entrypoint.sh"         38 seconds ago      Up 36 seconds (healthy)            80/tcp, 443/tcp, 0.0.0.0:8091->8091/tcp, 2019/tcp, 0.0.0.0:8483->8483/tcp   p6proxy
-6807093d530c        postgres:13.1-alpine              "docker-entrypoint.s…"   38 seconds ago      Up 36 seconds (healthy)            5432/tcp                                                                    pgsql
+f4a17ca1ca41        amalto/caddy:2.6.2-amalto_1.2.0   "/entrypoint.sh"         38 seconds ago      Up 36 seconds (healthy)            80/tcp, 443/tcp, 0.0.0.0:8091->8091/tcp, 2019/tcp, 0.0.0.0:8483->8483/tcp   p6proxy
+6807093d530c        postgres:15.1-alpine              "docker-entrypoint.s…"   38 seconds ago      Up 36 seconds (healthy)            5432/tcp                                                                    pgsql
 
 ``` 
 

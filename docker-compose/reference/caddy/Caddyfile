@@ -19,7 +19,7 @@
     jwt_valid {
       pem_keypath /data/conf.d/{$P6AUTH_PUBLIC_KEY_FILE}
       has_claim iss http://amalto.com
-      has_claim jti b2jwt-1.0.1
+      startsWith_claim jti b2jwt-1.0.1
       clockskew "3m"
       fail_header Access-Control-Allow-Origin *
     }
@@ -96,11 +96,10 @@
 
   log {
     # level debug
-      output file /data/logs/access.log {
+    output file /data/logs/access.log {
       roll_size 1gb
       roll_keep 5
       roll_keep_for 720h
     }
-    format single_field common_log
   }
 }

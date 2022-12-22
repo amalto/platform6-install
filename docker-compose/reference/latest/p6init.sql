@@ -29,7 +29,7 @@ SET standard_conforming_strings = on;
 --
 
 CREATE ROLE b2box;
-ALTER ROLE b2box WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'md556e436fe2c6d8a21cdd3d1313b6410e4';
+ALTER ROLE b2box WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:mTgLIgPGv2bdVY6WAX8Ieg==$tIzZ4qAigZL3IByUlWNY3OJpGS5n7k8z2UmwVi4/zpg=:ezE41lMapWulhx/duIw5yZiZS/NRJfycpZ7KxEghsQk=';
 --CREATE ROLE postgres;
 ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS;
 
@@ -49,8 +49,8 @@ ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.1
--- Dumped by pg_dump version 13.1
+-- Dumped from database version 15.1
+-- Dumped by pg_dump version 15.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -69,7 +69,7 @@ DROP DATABASE template1;
 -- Name: template1; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.utf8';
+CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
 
 
 ALTER DATABASE template1 OWNER TO postgres;
@@ -134,8 +134,8 @@ GRANT CONNECT ON DATABASE template1 TO PUBLIC;
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.1
--- Dumped by pg_dump version 13.1
+-- Dumped from database version 15.1
+-- Dumped by pg_dump version 15.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -152,7 +152,7 @@ SET row_security = off;
 -- Name: b2box; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE b2box WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.utf8';
+CREATE DATABASE b2box WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
 
 
 ALTER DATABASE b2box OWNER TO postgres;
@@ -535,6 +535,14 @@ ALTER TABLE ONLY p6core.instancedata
 
 
 --
+-- Name: log log_pkey; Type: CONSTRAINT; Schema: p6core; Owner: b2box
+--
+
+ALTER TABLE ONLY p6core.log
+    ADD CONSTRAINT log_pkey PRIMARY KEY (datatype, iid1, iid2, iid3, iid4);
+
+
+--
 -- Name: rawbytes rawbytes_pkey; Type: CONSTRAINT; Schema: p6core; Owner: b2box
 --
 
@@ -556,6 +564,14 @@ ALTER TABLE ONLY p6core.serviceconfig
 
 ALTER TABLE ONLY p6core.table_data
     ADD CONSTRAINT table_data_pkey PRIMARY KEY (datatype, iid1, iid2, iid3, iid4, iid5, iid6, iid7, iid8);
+
+
+--
+-- Name: transaction transaction_pkey; Type: CONSTRAINT; Schema: p6core; Owner: b2box
+--
+
+ALTER TABLE ONLY p6core.transaction
+    ADD CONSTRAINT transaction_pkey PRIMARY KEY (datatype, iid1, iid2, iid3, iid4);
 
 
 --
@@ -815,8 +831,8 @@ GRANT ALL ON DATABASE b2box TO b2box;
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.1
--- Dumped by pg_dump version 13.1
+-- Dumped from database version 15.1
+-- Dumped by pg_dump version 15.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -834,7 +850,7 @@ DROP DATABASE postgres;
 -- Name: postgres; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE postgres WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.utf8';
+CREATE DATABASE postgres WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
 
 
 ALTER DATABASE postgres OWNER TO postgres;

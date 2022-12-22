@@ -62,7 +62,7 @@ services:
 
   p6proxy:
     container_name: p6proxy
-    image: amalto/caddy:2.3.0-amalto_${P6PROXY_VERSION}
+    image: amalto/caddy:2.6.2-amalto_${P6PROXY_VERSION}
     volumes:
       - ../../reference/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - ../../reference/caddy/caddata:/data:delegated
@@ -78,7 +78,7 @@ services:
       - 8480:8480
       - 8091:8091
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8091/metrics" ]
+      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:8091/metrics"]
       interval: 40s
       timeout: 2s
       retries: 5
