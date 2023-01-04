@@ -13,13 +13,21 @@
     query baseUrl=*
   }
 
+  # Bypass token validation with the proxy `NoToken` query parameter or header
+  @validateToken {
+    not {
+      query p6proxyNoToken=*
+    }
+    header !X-P6Proxy-NoToken
+  }
+
   route @baseUrlParam {
 
     # Ensure we have a valid p6auth JWT
-    jwt_valid {
+    jwt_valid @validateToken {
       pem_keypath /data/conf.d/{$P6AUTH_PUBLIC_KEY_FILE}
       has_claim iss http://amalto.com
-      startsWith_claim jti b2jwt-1.0.1
+      startsWith_claim jti b2jwt
       clockskew "3m"
       fail_header Access-Control-Allow-Origin *
     }
