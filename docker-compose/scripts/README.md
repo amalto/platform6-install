@@ -11,10 +11,10 @@ A collection of useful scripts to assist admin operations.
 The database version is specified in the `.env` file. If you would like to change it, follow these steps:
 
 * First, export all your database data by running `p6exportdb.sh ${pgsql_conatiner_name}` (Unix) / `p6exportdb.bat ${pgsql_conatiner_name}` (Windows), while your database is still running with the old version. This will create a dump file in the `database_dumps` folder.
-* Stop your instance: Ctrl C or `docker-compose down`
+* Stop your instance: Ctrl C or `docker compose down`
 * Set the variable `PGSQL_VERSION` in the `.env` file to the desired version, minimum version is 11.3.
 * Run `p6importdb.sh` (Unix) / `p6importdb.bat` (Windows).
-* Start your instance by running `docker-compose up`
+* Start your instance by running `docke compose up -d`
 
 ## 2. Color your logs
 

@@ -4,7 +4,7 @@ This deployment is for a typical Platform 6 App developer who runs entirely on t
 
 **This deployment includes a standalone Hyperledger Besu blockchain node and comes pre-installed with our Demo App.**
 
-See: https://documentation.amalto.com/platform6/latest/tutorials/get-started-with-p6/learn-with-the-demo-app/
+See: https://doc.p6.sidetrade.io/latest/tutorials/get-started-with-p6/learn-with-the-demo-app/
 
 Edit the .env file and modify:
 
@@ -20,12 +20,12 @@ The contents of this directory and database will be initialised automatically th
 To auto initialise and start your cluster ensure this deploy folder is your current directory and simply type:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 or
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 to run in background.
@@ -36,7 +36,7 @@ Please wait until all containers are running and have a `healthy` status before 
 docker ps
 CONTAINER ID        IMAGE                             COMMAND                  CREATED             STATUS                             PORTS                                                                       NAMES
 b21c0a18d789        amalto/p6core:latest              "/opt/p6core/p6core-…"   37 seconds ago      Up 35 seconds (healthy)            0.0.0.0:2221-2222->2221-2222/tcp, 0.0.0.0:5005->5005/tcp                    p6core
-f4a17ca1ca41        amalto/caddy:2.6.2-amalto_1.2.0   "/entrypoint.sh"         38 seconds ago      Up 36 seconds (healthy)            80/tcp, 443/tcp, 0.0.0.0:8091->8091/tcp, 2019/tcp, 0.0.0.0:8483->8483/tcp   p6proxy
+f4a17ca1ca41        amalto/caddy:2.6.2-amalto_1.2.1   "/entrypoint.sh"         38 seconds ago      Up 36 seconds (healthy)            80/tcp, 443/tcp, 0.0.0.0:8091->8091/tcp, 2019/tcp, 0.0.0.0:8483->8483/tcp   p6proxy
 6807093d530c        postgres:15.1-alpine              "docker-entrypoint.s…"   38 seconds ago      Up 36 seconds (healthy)            5432/tcp                                                                    pgsql
 41e8658d3bc6        pegasyseng/pantheon:1.2.2         "/opt/pantheon/bin/p…"   2 minutes ago       Up 2 minutes                       8545-8547/tcp, 30303/tcp                                                    demobc
 ``` 

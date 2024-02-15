@@ -2,4 +2,4 @@
 
 https://docs.docker.com/compose/
 
-These folders contain the docker-compose files used to deploy Platform 6 in a variety of scenarios.
+These folders contain the Docker Compose files used to deploy Platform 6 in a variety of scenarios.

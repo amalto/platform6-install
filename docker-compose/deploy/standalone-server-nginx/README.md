@@ -28,12 +28,12 @@ The contents of this directory and database will be initialised automatically th
 To auto initialise and start your cluster ensure this deploy folder is your current directory and simply type:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 or
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 to run in background.

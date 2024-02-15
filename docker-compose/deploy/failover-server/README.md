@@ -8,7 +8,7 @@ This is a simple deployment of an 'empty' Platform 6 for use by multiple users a
 
 Platform 6 can run in failover mode where 2 Platform 6 nodes (one active and one passive), are started on top of the 
 same database and share many folders in common. To learn more about failover, checkout out that
-[page](https://documentation.amalto.com/platform6/latest/reference/operations/failover-clustering/).
+[page](https://doc.p6.sidetrade.io/latest/reference/operations/failover-clustering/).
 
 As you can see in the Docker Compose file, 2 Platform 6 containers are created and share all folders except `logs` and
 `conf`. A load balancer ([NGINX](https://www.nginx.com/)) sits between the 2 
@@ -31,12 +31,12 @@ The contents of this directory and database will be initialised automatically th
 To auto initialise and start your cluster simply type:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 or
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 to run in background.

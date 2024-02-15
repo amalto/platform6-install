@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
 
   pgsql:
@@ -75,8 +73,8 @@ services:
       - P6AUTH_PUBLIC_KEY_FILE=${P6AUTH_PUBLIC_KEY_FILE}
       - RUNLOCAL_BUCKET_HOST=${RUNLOCAL_BUCKET_HOST}
     ports:
-      - 8480:8480
-      - 8091:8091
+      - "8480:8480"
+      - "8091:8091"
     healthcheck:
       test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:8091/metrics"]
       interval: 40s

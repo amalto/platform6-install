@@ -32,11 +32,10 @@ In the instance creation form, specify the following parameters:
 
 * Name: Name of your instance.
 * Description: Optional.
-* Environment: You can change this at any time. The default value is _Development_. Please not that _Production_ instances
-will eventually incur usage fees (but not before July 2020).
+* Environment: You can change this at any time. The default value is _Development_.
 * Instance runs locally: Toggle this if you intend to run your instance locally on your machine, otherwise please fill in
 the _P6 Core Server URL_ field with the URL (including port, default is 8080 unless you change it in 
-[`docker-compose.yaml`](docker-compose.yaml) file or choose to use 443 via a proxy like Nginx).
+[`docker-compose.yml`](deploy/app-developer/docker-compose.yml) file or choose to use 443 via a proxy like Nginx).
 * Instance Admin User Email: By default, this field is populated with your email address, so you would be declared as 
 an admin of the newly declared instance. But you can choose otherwise and set another user account as the first admin
 of the instance.
@@ -57,12 +56,12 @@ git clone git@github.com:amalto/platform6-install.git
 
 Chose one the deployment scenarios which best suits your needs.
 
-⚠️**Start with demobc-developer if you are just getting started.**
+⚠️**Start with app-developer if you are just getting started.**
 
 Change directory into the chosen `deploy` folder:
 
 ```bash
-cd docker-compose/deploy/demobc-developer
+cd docker-compose/deploy/app-developer
 ```
  
 ### Step 4 - .env file merge and edit
@@ -92,23 +91,23 @@ TZ=America/New_York
 
 ----
 
-### Step 5 - run docker-compose to start
+### Step 5 - run docker compose to start
 
-Follow the final instructions in your chosen `deploy` folder to start your instance.  Typically:
+Follow the final instructions in your chosen `deploy` folder to start your instance. Typically:
 
 ```bash
-docker-compose up
+docker compose up -d
 ```
 
 
 ## Updating your instance's version
 
-In case you receive a notification from Amalto for a new release of Platform 6, you are advised to upgrade the version of your Platform 6 instance.
+In case you receive a notification from Sidetrade for a new release of Platform 6, you are advised to upgrade the version of your Platform 6 instance.
 
 For that, check that your instance is stopped, then:
 
 * Set the `P6CORE_VERSION` variables in the `.env` file to the desired version.
-* Carefully read the [migration guide](https://documentation.amalto.com/platform6/latest/releases/migration/migration-troubleshooting/) for any additional steps to apply.
+* Carefully read the [migration guide](https://doc.p6.sidetrade.io/latest/releases/migration/migration-troubleshooting/) for any additional steps to apply.
 * Start your instance.
 
 ## Troubleshooting
@@ -117,7 +116,7 @@ __Log Rotation__
 
 When you run out of disk space because of logs, consider using log rotation.
 This can be configured in your Docker Compose file.
-Check out this [page](https://docs.docker.com/compose/compose-file/#logging) and this [page](https://docs.docker.com/config/containers/logging/json-file/) for more info.
+Check out this [page](https://docs.docker.com/config/containers/logging/local/) and this [page](https://docs.docker.com/config/containers/logging/json-file/) for more info.
 
 __Windows__
 
