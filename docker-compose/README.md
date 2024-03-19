@@ -24,7 +24,7 @@ The network ports we expose from our containers are:
 
 ### Step 1
 
-In your P6 Console account navigate to the _Instances_ menu. Then click the _Add_ button.
+Go to [P6 Console](https://staging.console.sidetrade.io/) and in your P6 Console account navigate to the _Instances_ menu. Then click the _Add_ button.
 
 ![Go to Instances Menu](../_img/go_to_instances_menu.png)
 
